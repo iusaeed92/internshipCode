@@ -10,4 +10,25 @@
 
 @interface rshViewController : UIViewController
 
+
+@property (strong, nonatomic) IBOutlet UILabel *logoLabel;
+
+
+@property (strong, nonatomic) IBOutlet UITextField *usernameTextfield;
+
+
+@property (strong, nonatomic) IBOutlet UITextField *passwordTextfield;
+
+
+@property (strong, nonatomic) IBOutlet UIView *whiteView;
+
+
+- (IBAction)loginButton:(UIButton *)sender;
+
+
+
+- (IBAction)joinButton:(UIButton *)sender;
+
+
+
 @end
