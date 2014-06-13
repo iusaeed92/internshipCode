@@ -23,12 +23,10 @@
 @property (strong, nonatomic) IBOutlet UIView *whiteView;
 
 
-- (IBAction)loginButton:(UIButton *)sender;
-
-
 
 - (IBAction)joinButton:(UIButton *)sender;
 
 
+- (IBAction)loginButtonPressed:(UIButton *)sender;
 
 @end

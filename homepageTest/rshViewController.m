@@ -7,6 +7,7 @@
 //
 
 #import "rshViewController.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface rshViewController ()
 
@@ -20,7 +21,11 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     [self.navigationController setNavigationBarHidden:YES];
+    
   
+
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -170,22 +175,53 @@
 
 
 
-- (IBAction)loginButton:(UIButton *)sender { //when login button is pressed, everything in this function will be implemented
-
-    NSString *username = self.usernameTextfield.text;
-    NSLog(@"%@", username);
-    
-    
-
-
-}
-
-
 
 
 
 - (IBAction)joinButton:(UIButton *)sender { //when join button is pressed, everything in this button is pressed.
 }
+
+- (IBAction)loginButtonPressed:(UIButton *)sender {
+
+    NSString *username = self.usernameTextfield.text;
+    NSString *password = self.passwordTextfield.text;
+    
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.responseSerializer setAcceptableContentTypes:
+     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+    
+    NSDictionary *parameters = @{@"username": username, @"password" : password};
+    
+    [manager POST:@"http://54.80.47.207/api/user/login"
+       parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              
+              
+              NSLog(@"Session ID%@", responseObject[@"sessionID"]);
+              
+              NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+
+
 @end
 
 
