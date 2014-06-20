@@ -9,6 +9,9 @@
 #import "rshViewController.h"
 #import <AFNetworking/AFNetworking.h>
 
+
+
+
 @interface rshViewController ()
 
 @end
@@ -19,6 +22,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    
     
     [self.navigationController setNavigationBarHidden:YES];
     
@@ -35,40 +40,15 @@
 }
 
 
-//code borrowed from stackoverflow to convert a hexstring to a color.
-// http://stackoverflow.com/questions/3805177/how-to-convert-hex-rgb-color-codes-to-uicolor
-//
-//
 
 
-//
-//
-//-(UIColor *) colorFromHexString:(NSString *)hexString {
-//    NSString *cleanString = [hexString stringByReplacingOccurrencesOfString:@"#" withString:@""];
-//    if([cleanString length] == 3) {
-//        cleanString = [NSString stringWithFormat:@"%@%@%@%@%@%@",
-//                       [cleanString substringWithRange:NSMakeRange(0, 1)],[cleanString substringWithRange:NSMakeRange(0, 1)],
-//                       [cleanString substringWithRange:NSMakeRange(1, 1)],[cleanString substringWithRange:NSMakeRange(1, 1)],
-//                       [cleanString substringWithRange:NSMakeRange(2, 1)],[cleanString substringWithRange:NSMakeRange(2, 1)]];
-//    }
-//    if([cleanString length] == 6) {
-//        cleanString = [cleanString stringByAppendingString:@"ff"];
-//    }
-//    
-//    unsigned int baseValue;
-//    [[NSScanner scannerWithString:cleanString] scanHexInt:&baseValue];
-//    
-//    float red = ((baseValue >> 24) & 0xFF)/255.0f;
-//    float green = ((baseValue >> 16) & 0xFF)/255.0f;
-//    float blue = ((baseValue >> 8) & 0xFF)/255.0f;
-//    float alpha = ((baseValue >> 0) & 0xFF)/255.0f;
-//    
-//    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-
-
-
-//}
-
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    
+    
+    
+}
 //-------------------------------------------------------------
 ////////////*******This chunk provides the scroll up****------
 
@@ -185,15 +165,28 @@
 
     NSString *username = self.usernameTextfield.text;
     NSString *password = self.passwordTextfield.text;
+
+    
+    
+    
+    
+            
+    
+    
+    
+    
     
 
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    
     [manager.responseSerializer setAcceptableContentTypes:
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
     NSDictionary *parameters = @{@"username": username, @"password" : password};
     
-    [manager POST:@"http://54.80.47.207/api/user/login"
+    [manager POST:@"http://54.89.45.91/app/api/user/login"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               

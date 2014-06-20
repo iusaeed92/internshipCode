@@ -29,6 +29,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    UIColor *myGreen =
+    [UIColor colorWithRed:(40.0/255.0) green:(159.0/255.0) blue:(90.0/255.0) alpha:1.0];
+    self.navigationController.navigationBar.barTintColor = myGreen;
+    
+    
+    
+    [self.navigationController setNavigationBarHidden:NO];
     [self.passwordTextfield becomeFirstResponder]; 
 }
 
@@ -49,12 +56,12 @@
     
     NSDictionary *parameters = @{@"username": username, @"password" : password, @"email": email};
     
-    [manager POST:@"http://54.80.47.207/api/user/join"
+    [manager POST:@"http://54.89.45.91/app/api/user/join"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
               
-              NSLog(@"Session ID%@", responseObject[@"sessionID"]);
+              NSLog(@"Access Token%@", responseObject[@"accessToken"]);
               
               NSLog(@"JSON: %@", responseObject);
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
