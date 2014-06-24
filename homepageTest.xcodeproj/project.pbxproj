@@ -12,6 +12,8 @@
 		60DE418C1951E3D600F3E4A2 /* rshChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DE418B1951E3D600F3E4A2 /* rshChatViewController.m */; };
 		60DE418F1954831100F3E4A2 /* agentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DE418E1954831100F3E4A2 /* agentTableViewController.m */; };
 		60DE41941954C77A00F3E4A2 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DE41931954C77A00F3E4A2 /* User.m */; };
+		60DE41971958861000F3E4A2 /* AgentsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DE41961958861000F3E4A2 /* AgentsList.m */; };
+		60DE419A195898C500F3E4A2 /* Agent.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DE4199195898C500F3E4A2 /* Agent.m */; };
 		8E5F044B193FAB1D004018AB /* joinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5F044A193FAB1D004018AB /* joinViewController.m */; };
 		8EECB43A193CE7D2003BA82E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EECB439193CE7D2003BA82E /* Foundation.framework */; };
 		8EECB43C193CE7D2003BA82E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EECB43B193CE7D2003BA82E /* CoreGraphics.framework */; };
@@ -46,6 +48,10 @@
 		60DE418E1954831100F3E4A2 /* agentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = agentTableViewController.m; sourceTree = "<group>"; };
 		60DE41921954C77A00F3E4A2 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		60DE41931954C77A00F3E4A2 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		60DE41951958861000F3E4A2 /* AgentsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentsList.h; sourceTree = "<group>"; };
+		60DE41961958861000F3E4A2 /* AgentsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentsList.m; sourceTree = "<group>"; };
+		60DE4198195898C500F3E4A2 /* Agent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Agent.h; sourceTree = "<group>"; };
+		60DE4199195898C500F3E4A2 /* Agent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Agent.m; sourceTree = "<group>"; };
 		8E5F0449193FAB1D004018AB /* joinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = joinViewController.h; sourceTree = "<group>"; };
 		8E5F044A193FAB1D004018AB /* joinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = joinViewController.m; sourceTree = "<group>"; };
 		8EECB436193CE7D2003BA82E /* homepageTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = homepageTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +114,10 @@
 			children = (
 				60DE41921954C77A00F3E4A2 /* User.h */,
 				60DE41931954C77A00F3E4A2 /* User.m */,
+				60DE41951958861000F3E4A2 /* AgentsList.h */,
+				60DE41961958861000F3E4A2 /* AgentsList.m */,
+				60DE4198195898C500F3E4A2 /* Agent.h */,
+				60DE4199195898C500F3E4A2 /* Agent.m */,
 			);
 			name = Model;
 			path = ..;
@@ -329,11 +339,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60DE419A195898C500F3E4A2 /* Agent.m in Sources */,
 				8EECB44A193CE7D2003BA82E /* rshAppDelegate.m in Sources */,
 				60DE41941954C77A00F3E4A2 /* User.m in Sources */,
 				60DE418F1954831100F3E4A2 /* agentTableViewController.m in Sources */,
 				60DE418C1951E3D600F3E4A2 /* rshChatViewController.m in Sources */,
 				8EECB446193CE7D2003BA82E /* main.m in Sources */,
+				60DE41971958861000F3E4A2 /* AgentsList.m in Sources */,
 				60DE41891951E39D00F3E4A2 /* rshViewController.m in Sources */,
 				8E5F044B193FAB1D004018AB /* joinViewController.m in Sources */,
 			);

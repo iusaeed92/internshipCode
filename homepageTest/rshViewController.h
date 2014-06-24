@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "User.h"
+#import "agentTableViewController.h"
 
-@interface rshViewController : UIViewController
+@interface rshViewController : UIViewController 
 
 
 @property (strong, nonatomic) IBOutlet UILabel *logoLabel;
@@ -22,7 +24,9 @@
 
 @property (strong, nonatomic) IBOutlet UIView *whiteView;
 
+@property (strong, nonatomic) User *currentUser; //creating a current user object
 
+@property (strong, nonatomic) NSString *myAccessToken; //This is dangerous and uncalled for. 
 
 - (IBAction)joinButton:(UIButton *)sender;
 

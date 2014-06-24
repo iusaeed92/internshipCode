@@ -8,6 +8,8 @@
 
 #import "rshViewController.h"
 #import <AFNetworking/AFNetworking.h>
+#import "User.h"
+#import "agentTableViewController.h"
 
 
 
@@ -15,6 +17,8 @@
 @interface rshViewController ()
 
 @end
+
+int x = 1;
 
 @implementation rshViewController
 
@@ -24,12 +28,9 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     
-    
     [self.navigationController setNavigationBarHidden:YES];
     
-  
-
-    
+    self.currentUser = [[User alloc] init];
     
 }
 
@@ -45,7 +46,113 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    
+    if ([sender isKindOfClass:[UIButton class]]) {
+        if ([segue.destinationViewController isKindOfClass:[agentTableViewController class]]) {
+            
+            
+            
+            NSString *username = self.usernameTextfield.text;
+            NSString *password = self.passwordTextfield.text;
+            
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            
+            
+            [manager.responseSerializer setAcceptableContentTypes:
+             [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+            
+            NSDictionary *parameters = @{@"username": username, @"password" : password};
+            
+            [manager POST:@"http://54.89.45.91/app/api/user/login"
+               parameters:parameters
+                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                      
+                      
+                      self.currentUser.accessToken = responseObject[@"accessToken"];
+                      
+                      
+                      //
+                      
+                      self.myAccessToken = responseObject[@"accessToken"];
+                      
+                      
+                      NSLog(@" direct Access Token: %@", responseObject[@"accessToken"]);
+                      
+                      
+                      //   [self.currentUser.accessToken responseObject[@"accessToken"]];
+                      
+                      NSLog(@"property access Token:%@", self.myAccessToken);
+                      
+                      
+                      NSLog(@"the new access Token:%@", self.currentUser.accessToken);
+                      
+                      
+                      
+                      
+                      agentTableViewController *agentTableVC = segue.destinationViewController;
+                      agentTableVC.theAccessToken = self.myAccessToken;
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            [manager.responseSerializer setAcceptableContentTypes:
+             [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+                                            //
+                    
+                      
+            NSDictionary *parameters = @{@"accessToken": self.myAccessToken , @"isIn" : @1 };
+                      
+            [manager POST:@"http://54.89.45.91/app/api/user/agent"
+                             parameters:parameters
+                                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                      
+                                       NSLog(@"name  %@", responseObject[@"agents"]);
+                                    
+                                    
+                                    
+                                    
+                                   NSLog(@"JSON: %@", responseObject);
+                                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                    NSLog(@"Error: %@", error);
+                                }];
+                      
+                      
+                 
+                      
+                      
+                      // assuming jsonString is your JSON string...
+                      NSDictionary* myDict;
+                      
+                      
+                      NSLog(@"the Dictionary %@", myDict);
+                      
+                      NSLog(@"JSON: %@", responseObject);
+                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                      NSLog(@"Error: %@", error);
+                  }];
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        }
+    }
     
     
 }
@@ -147,9 +254,7 @@
 ////////////*******End of Scroll up block****---------------------------------------
 
 
-
-
-
+#pragma implementing delegate method 
 
 
 
@@ -163,47 +268,8 @@
 
 - (IBAction)loginButtonPressed:(UIButton *)sender {
 
-    NSString *username = self.usernameTextfield.text;
-    NSString *password = self.passwordTextfield.text;
-
-    
-    
-    
-    
-            
-    
-    
-    
-    
-    
 
 
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    
-    [manager.responseSerializer setAcceptableContentTypes:
-     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
-    
-    NSDictionary *parameters = @{@"username": username, @"password" : password};
-    
-    [manager POST:@"http://54.89.45.91/app/api/user/login"
-       parameters:parameters
-          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              
-              
-              NSLog(@"Session ID%@", responseObject[@"sessionID"]);
-              
-              NSLog(@"JSON: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
-    
-    
-    
-    
-    
-    
-    
     
     
     

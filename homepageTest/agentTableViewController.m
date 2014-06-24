@@ -31,6 +31,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     
+    NSLog(@"latest Test %@", self.theAccessToken);
     
     UIColor *myGreen =
     [UIColor colorWithRed:(40.0/255.0) green:(159.0/255.0) blue:(90.0/255.0) alpha:1.0];
@@ -40,9 +41,59 @@
     [self.navigationController setNavigationBarHidden:NO];
 
     
+    //lets try and play with the agents API route. 
+    
+    self.thisUser = [[User alloc] init];
+    
+    NSLog(@"latest Test %@", self.theAccessToken);
+    
+  //  NSLog(@"OBJECT access Token:%@", self.thisUser.accessToken);
+    
+//    
+//
+//        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    [manager.responseSerializer setAcceptableContentTypes:
+//     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+//    
+//    
+//    
+//    
+//    NSDictionary *parameters = @{@"accessToken": self.theAccessToken , @"inIn" : @"1"};
+//    
+//    [manager POST:@"http://54.89.45.91/app/api/user/agent"
+//       parameters:parameters
+//          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//              
+//              //   NSLog(@"Access Token%@", responseObject[@"accessToken"]);
+//              
+//             NSLog(@"JSON: %@", responseObject);
+//          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//              NSLog(@"Error: %@", error);
+//          }];
+//    
+//    
+//    
+//    
+//    
+    
+}
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -66,7 +117,7 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 3;
+    return 0;
 }
 
 
@@ -81,6 +132,9 @@
     
     
     cell.textLabel.text = @"@JaneDoe";
+    
+    NSLog(@"at Cell");
+    
     
     
     return cell;

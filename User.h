@@ -16,6 +16,8 @@
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *accessToken;
 @property (nonatomic) int tokenExpTime;
+@property (nonatomic) BOOL success;
+
 
 
 

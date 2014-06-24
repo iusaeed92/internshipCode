@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AFNetworking/AFNetworking.h> 
+#import "User.h"
+#import "rshViewController.h"
 
-@interface agentTableViewController : UITableViewController
+
+
+@interface agentTableViewController : UITableViewController <UITableViewDataSource>
+
+
+
+@property (nonatomic, strong) User *thisUser;
+
+@property (nonatomic, strong) NSString *theAccessToken;
 
 @end

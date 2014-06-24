@@ -8,6 +8,10 @@
 
 #import "JSMessagesViewController.h"
 
+
+
+
+
 @interface rshChatViewController : JSMessagesViewController <JSMessagesViewDataSource , JSMessagesViewDelegate>
 
 
