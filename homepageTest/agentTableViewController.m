@@ -45,6 +45,8 @@
     
     self.thisUser = [[User alloc] init];
     
+    
+    [self.tableView reloadData]; 
     NSLog(@"latest Test %@", self.theAccessToken);
     
   //  NSLog(@"OBJECT access Token:%@", self.thisUser.accessToken);
@@ -117,7 +119,7 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [self.agentArray count];
 }
 
 
@@ -131,9 +133,8 @@
     // Configure the cell...
     
     
-    cell.textLabel.text = @"@JaneDoe";
-    
-    NSLog(@"at Cell");
+    cell.textLabel.text = [[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"name"];
+   
     
     
     

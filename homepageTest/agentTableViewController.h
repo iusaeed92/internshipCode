@@ -21,4 +21,7 @@
 
 @property (nonatomic, strong) NSString *theAccessToken;
 
+@property (nonatomic, strong) NSArray *agentArray;
+
+
 @end

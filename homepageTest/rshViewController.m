@@ -68,93 +68,82 @@ int x = 1;
                       
                       
                       self.currentUser.accessToken = responseObject[@"accessToken"];
-                      
-                      
-                      //
-                      
                       self.myAccessToken = responseObject[@"accessToken"];
-                      
-                      
                       NSLog(@" direct Access Token: %@", responseObject[@"accessToken"]);
-                      
-                      
-                      //   [self.currentUser.accessToken responseObject[@"accessToken"]];
-                      
                       NSLog(@"property access Token:%@", self.myAccessToken);
-                      
-                      
                       NSLog(@"the new access Token:%@", self.currentUser.accessToken);
                       
                       
                       
                       
-                      agentTableViewController *agentTableVC = segue.destinationViewController;
-                      agentTableVC.theAccessToken = self.myAccessToken;
+           
                       
                       
+                          
+                          agentTableViewController *agentTableVC = segue.destinationViewController;
+                          
+                          agentTableVC.theAccessToken = self.myAccessToken;
+                    
+                      
+                    [agentTableVC.tableView reloadData];
                       
                       
-                      
-                      
-                      
+                      //Agents http reqyest.
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             [manager.responseSerializer setAcceptableContentTypes:
              [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
                                             //
                     
+                      NSDictionary *parameters = @{@"accessToken": self.myAccessToken , @"isIn" : @1 };
+                      [manager POST:@"http://54.89.45.91/app/api/user/agent"
+                         parameters:parameters
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                       
-            NSDictionary *parameters = @{@"accessToken": self.myAccessToken , @"isIn" : @1 };
-                      
-            [manager POST:@"http://54.89.45.91/app/api/user/agent"
-                             parameters:parameters
-                                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                      
-                                       NSLog(@"name  %@", responseObject[@"agents"]);
+                            NSLog(@"name  %@", responseObject[@"agents"]);
+    
+                                
+                                
+                                NSData *data = responseObject[@"agents"];
+                                NSLog(@"Take this Dictionary %@", data);
+                                
+                                NSError *jsonError = nil;
+                                
+                                
+                                if ([responseObject[@"agents"] isKindOfClass:[NSArray class]]) {
+                                    NSLog(@"its an array!");
+                                    NSArray *jsonArray = (NSArray *)responseObject[@"agents"];
+                                    NSLog(@"jsonArray - %@",jsonArray[0]);
                                     
-                                    
-                                    
-                                    
-                                   NSLog(@"JSON: %@", responseObject);
+                                    NSLog(@"Number of elements %i", [jsonArray count]);
+                                    agentTableVC.agentArray = jsonArray;
+                                }
+                                else {
+                                    NSLog(@"its probably a dictionary");
+                                    NSDictionary *jsonDictionary = (NSDictionary *)responseObject[@"agents"];
+                                    NSLog(@"jsonDictionary - %@",jsonDictionary);
+                                }
+                                
+                                
+                                
+                                [agentTableVC.tableView reloadData];
+                                
+                            NSLog(@"JSON: %@", responseObject);
                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                     NSLog(@"Error: %@", error);
                                 }];
                       
                       
-                 
                       
-                      
-                      // assuming jsonString is your JSON string...
-                      NSDictionary* myDict;
-                      
-                      
-                      NSLog(@"the Dictionary %@", myDict);
                       
                       NSLog(@"JSON: %@", responseObject);
                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                       NSLog(@"Error: %@", error);
                   }];
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
         }
     }
     
-    
+   NSLog(@"Last Test: %@", self.currentUser.accessToken);  
 }
 //-------------------------------------------------------------
 ////////////*******This chunk provides the scroll up****------
