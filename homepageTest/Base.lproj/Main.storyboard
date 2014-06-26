@@ -89,7 +89,7 @@
             </objects>
             <point key="canvasLocation" x="661" y="236"/>
         </scene>
-        <!--Agent Table View Controller-->
+        <!--Agent Table View Controller - Agents-->
         <scene sceneID="ohR-cN-yTA">
             <objects>
                 <tableViewController id="EoO-vS-MYx" customClass="agentTableViewController" sceneMemberID="viewController">
@@ -98,13 +98,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="54" id="dpk-WI-ulf">
-                                <rect key="frame" x="0.0" y="86" width="320" height="54"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="54" id="dpk-WI-ulf">
+                                <rect key="frame" x="0.0" y="22" width="320" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dpk-WI-ulf" id="cNI-nm-F1v">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="53"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="prk-ic-aFc" kind="push" identifier="toConvoView" id="nYU-K8-wIY"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -112,7 +115,7 @@
                             <outlet property="delegate" destination="EoO-vS-MYx" id="Xac-lf-QEb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="MUe-sr-7xf">
+                    <navigationItem key="navigationItem" title="Agents" id="MUe-sr-7xf">
                         <barButtonItem key="leftBarButtonItem" title="back" id="NeJ-M8-OOG">
                             <color key="tintColor" red="0.95363305332448101" green="0.94588429802806906" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -126,7 +129,36 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CfF-Ad-rbp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="666" y="-567"/>
+            <point key="canvasLocation" x="494" y="-563"/>
+        </scene>
+        <!--Conversation Table View Controller-->
+        <scene sceneID="Kuq-PK-1rE">
+            <objects>
+                <tableViewController id="prk-ic-aFc" customClass="conversationTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SCA-fG-9U7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell " id="MI5-hH-FAx">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MI5-hH-FAx" id="UME-Na-xki">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="prk-ic-aFc" id="SZe-Ci-3NC"/>
+                            <outlet property="delegate" destination="prk-ic-aFc" id="6QC-lV-DpY"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="p2Q-24-CfU"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NG9-rm-ulr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="965" y="-550"/>
         </scene>
         <!--Rsh Chat View Controller-->
         <scene sceneID="ieN-ey-mdd">
@@ -237,13 +269,13 @@
             <point key="canvasLocation" x="134" y="112"/>
         </scene>
     </scenes>
-    <color key="tintColor" red="0.99829182829999996" green="0.95972952830000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="fec-Mg-UjR"/>
+        <segue reference="VgP-xg-7az"/>
     </inferredMetricsTieBreakers>
 </document>

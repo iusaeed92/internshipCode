@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2EA98F10F9B14165B09E5587 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A04F3944E09F40609282EF7C /* libPods.a */; };
+		60D3D818195B64AE00BC70E8 /* conversationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D3D817195B64AE00BC70E8 /* conversationTableViewController.m */; };
 		60DE41891951E39D00F3E4A2 /* rshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DE41881951E39D00F3E4A2 /* rshViewController.m */; };
 		60DE418C1951E3D600F3E4A2 /* rshChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DE418B1951E3D600F3E4A2 /* rshChatViewController.m */; };
 		60DE418F1954831100F3E4A2 /* agentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DE418E1954831100F3E4A2 /* agentTableViewController.m */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		60D3D816195B64AD00BC70E8 /* conversationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conversationTableViewController.h; sourceTree = "<group>"; };
+		60D3D817195B64AE00BC70E8 /* conversationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = conversationTableViewController.m; sourceTree = "<group>"; };
 		60DE41881951E39D00F3E4A2 /* rshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rshViewController.m; sourceTree = "<group>"; };
 		60DE418A1951E3D600F3E4A2 /* rshChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rshChatViewController.h; sourceTree = "<group>"; };
 		60DE418B1951E3D600F3E4A2 /* rshChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rshChatViewController.m; sourceTree = "<group>"; };
@@ -161,6 +164,8 @@
 				8EECB448193CE7D2003BA82E /* rshAppDelegate.h */,
 				8EECB449193CE7D2003BA82E /* rshAppDelegate.m */,
 				8EECB44B193CE7D2003BA82E /* Main.storyboard */,
+				60D3D816195B64AD00BC70E8 /* conversationTableViewController.h */,
+				60D3D817195B64AE00BC70E8 /* conversationTableViewController.m */,
 				60DE418D1954831100F3E4A2 /* agentTableViewController.h */,
 				60DE418E1954831100F3E4A2 /* agentTableViewController.m */,
 				8E5F0449193FAB1D004018AB /* joinViewController.h */,
@@ -341,6 +346,7 @@
 			files = (
 				60DE419A195898C500F3E4A2 /* Agent.m in Sources */,
 				8EECB44A193CE7D2003BA82E /* rshAppDelegate.m in Sources */,
+				60D3D818195B64AE00BC70E8 /* conversationTableViewController.m in Sources */,
 				60DE41941954C77A00F3E4A2 /* User.m in Sources */,
 				60DE418F1954831100F3E4A2 /* agentTableViewController.m in Sources */,
 				60DE418C1951E3D600F3E4A2 /* rshChatViewController.m in Sources */,

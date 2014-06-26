@@ -7,6 +7,7 @@
 //
 
 #import "agentTableViewController.h"
+#import "conversationTableViewController.h"
 
 @interface agentTableViewController ()
 
@@ -37,7 +38,6 @@
     [UIColor colorWithRed:(40.0/255.0) green:(159.0/255.0) blue:(90.0/255.0) alpha:1.0];
     self.navigationController.navigationBar.barTintColor = myGreen;
     
-    
     [self.navigationController setNavigationBarHidden:NO];
 
     
@@ -47,8 +47,7 @@
     
     
     [self.tableView reloadData]; 
-    NSLog(@"latest Test %@", self.theAccessToken);
-    
+       
   //  NSLog(@"OBJECT access Token:%@", self.thisUser.accessToken);
     
 //    
@@ -131,15 +130,126 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    UIColor *myGreen =
+    [UIColor colorWithRed:(40.0/255.0) green:(159.0/255.0) blue:(90.0/255.0) alpha:1.0];
     
     
-    cell.textLabel.text = [[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"name"];
+    
+    
+    //if Mesh, display in green and display '<' before agent name.
    
+    if ([[[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"mind"]  isEqual: @"mesh"]) {
+        
+        cell.textLabel.textColor = myGreen;
+        NSString *meshSign = @"<";
+        NSString *meshName = [meshSign stringByAppendingString:[[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"name"]];
+
+        
+        NSLog(@"Agent: %@", self.agentArray[indexPath.row]);
+        
+        cell.textLabel.text = meshName;
+    }
+    else {
+         cell.textLabel.text = [[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"name"];
+        }
     
-    
+ 
     
     return cell;
 }
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([sender isKindOfClass:[UITableViewCell class]])//introspection, making sure what kind of class it is.
+    {
+        if ([segue.destinationViewController isKindOfClass:
+             [conversationTableViewController class]]) {
+            
+            conversationTableViewController *ConvoTableVC = segue.destinationViewController;
+            NSIndexPath *path = [self.tableView indexPathForCell:sender];
+            ConvoTableVC.currentAgent = self.agentArray[path.row];
+            
+            
+            
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            [manager.responseSerializer setAcceptableContentTypes:
+             [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+            NSDictionary *parameters = @{@"accessToken": self.theAccessToken, @"agentId" : [[self.agentArray objectAtIndex:path.row] objectForKey:@"id"]};
+            [manager POST:@"http://54.89.45.91/app/api/convos/agent" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
+                NSLog(@"Convos %@", responseObject[@"convos"]);
+                
+                if ([responseObject[@"convos"] isKindOfClass:[NSArray class]]) {
+                    NSLog(@"its an array!");
+                    NSArray *jsonArray = (NSArray *)responseObject[@"convos"];
+                    NSLog(@"jsonArray - %@",jsonArray[0]);
+                    
+                    NSLog(@"Number of elements %i", [jsonArray count]);
+                  ConvoTableVC.convosArray = jsonArray;
+                    [ConvoTableVC.tableView reloadData]; 
+                }
+                else {
+                    NSLog(@"its probably a dictionary");
+                    NSDictionary *jsonDictionary = (NSDictionary *)responseObject[@"convos"];
+                    NSLog(@"jsonDictionary - %@",jsonDictionary);
+                }
+                
+                
+                
+                //NSLog(@"JSON: %@", responseObject);
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error: %@", error);
+            }];
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            //All I need is the agent id of the cell selected.
+            
+            
+            
+            
+            
+            }
+    }
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    
+    UITableViewCell *selectedCell=[tableView cellForRowAtIndexPath:indexPath];
+    
+    
+    
+    
+}
+
+
+
+
+
+
+
 
 
 /*
@@ -180,15 +290,12 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
+
+
 
 @end

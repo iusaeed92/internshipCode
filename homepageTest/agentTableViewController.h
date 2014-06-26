@@ -16,7 +16,6 @@
 @interface agentTableViewController : UITableViewController <UITableViewDataSource>
 
 
-
 @property (nonatomic, strong) User *thisUser;
 
 @property (nonatomic, strong) NSString *theAccessToken;
