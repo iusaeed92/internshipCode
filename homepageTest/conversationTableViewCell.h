@@ -1,0 +1,23 @@
+//
+//  conversationTableViewCell.h
+//  homepageTest
+//
+//  Created by ibs on 6/30/14.
+//  Copyright (c) 2014 Ibrahim Saeed. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface conversationTableViewCell : UITableViewCell
+
+@property (strong, nonatomic) IBOutlet UILabel *customTimeLabel;
+
+
+@property (strong, nonatomic) IBOutlet UIImageView *customImageView;
+@property (strong, nonatomic) IBOutlet UILabel *customStoryTitleLabel;
+
+@property (strong, nonatomic) IBOutlet UITextView *customTextView;
+@property (strong, nonatomic) IBOutlet UILabel *customAgentNameLabel;
+
+
+@end

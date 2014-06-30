@@ -7,6 +7,7 @@
 //
 
 #import "conversationTableViewController.h"
+#import "conversationTableViewCell.h"
 
 @interface conversationTableViewController ()
 
@@ -66,15 +67,69 @@
     static NSString *CellIdentifier = @"Cell";
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    conversationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell   alloc] init];
+        cell = [[conversationTableViewCell alloc] init];
+    }
+    
+    UIImage *greenCircleImage = [UIImage imageNamed:@"GreenCircle.png"];
+    UIImage *redCircleImage = [UIImage imageNamed:@"RedCircle.png"];
+    
+    
+    
+    
+   
+    
+    
+    NSString *topicSign = @"#";
+    NSString *topicName = [topicSign stringByAppendingString:[[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"topic"]];
+    
+    cell.customStoryTitleLabel.text = topicName;
+    
+    NSDictionary *thisConvoDetails = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"lastMessage"];
+    
+    
+    
+    
+    
+    
+    NSDictionary *oponentData = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"opponent"];
+    
+    NSDictionary *senderData = thisConvoDetails[@"sender"];
+    
+    if ([senderData[@"name"] isEqual:oponentData[@"name"]]) {
+         cell.customImageView.image = greenCircleImage;
+    }
+    else {
+        cell.customImageView.image = redCircleImage;
     }
     
     
     
+    //determining if opponent is mesh or user.
+        if ([oponentData[@"mind"] isEqual: @"mesh"]) {
+            NSString *meshSign = @"<";
+            NSString *meshName = oponentData[@"name"];
+            cell.customAgentNameLabel.text = [meshSign stringByAppendingString:meshName];
+            }
+        else {
+            
+            NSString *userSign = @"@";
+            NSString *userName = oponentData[@"name"];
+            cell.customAgentNameLabel.text = [userSign stringByAppendingString:userName];
+            
+        }
     
-    cell.textLabel.text = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"topic"];
+    
+    
+    
+    cell.customTextView.text = thisConvoDetails[@"text"];
+    NSLog(@"Date %@",[NSDate new]);
+    
+    NSDate *currentTime = [NSDate new];
+    NSDate *lastMessaeTime = thisConvoDetails[@"timestamp"];
+    
+  
     
     return cell;
 }
