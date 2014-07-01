@@ -124,12 +124,39 @@
     
     
     cell.customTextView.text = thisConvoDetails[@"text"];
-    NSLog(@"Date %@",[NSDate new]);
+   // NSLog(@"Date %@",[NSDate new]);
     
-    NSDate *currentTime = [NSDate new];
-    NSDate *lastMessaeTime = thisConvoDetails[@"timestamp"];
+     NSTimeInterval deltaTime = [[[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"deltaT"] doubleValue];
+   
     
-  
+    
+    NSDate *currentTime = [NSDate date];
+    NSString *lastMessageTime = thisConvoDetails[@"timestamp"];
+    
+    
+    NSDateFormatter *objDateFormatter = [[NSDateFormatter alloc] init];
+    [objDateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"EST"]];
+    [objDateFormatter setDateFormat:@"yyyy - MM - dd HH:mm:ss Z"];
+  NSDate *tester = [objDateFormatter dateFromString:lastMessageTime];
+
+    [objDateFormatter stringFromDate:currentTime];
+    NSLog(@"Last Message time stamp string %@", lastMessageTime);
+    NSLog(@"Last message time stamp Date %@", tester);
+   
+    
+    //NSDate *currentActualDate = [objDateFormatter dateFromString:currentTime];
+    //NSLog(@"current time 2 %@", currentActualDate);
+ 
+    NSDate *lastPlusDelta = [tester dateByAddingTimeInterval:deltaTime];
+    
+    
+    NSLog(@"Delta Seconds %f", deltaTime);
+    NSLog(@"current time %@", currentTime);
+    NSLog(@"last plus delta %@", lastPlusDelta);
+    NSTimeInterval secondsBetween = [lastPlusDelta timeIntervalSinceNow];
+    NSLog(@"Time till next message %f", secondsBetween);
+    
+    
     
     return cell;
 }
