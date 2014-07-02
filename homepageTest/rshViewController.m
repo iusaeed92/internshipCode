@@ -10,7 +10,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "User.h"
 #import "agentTableViewController.h"
-
+#import <SSKeychain/SSKeychain.h>
 
 
 
@@ -50,95 +50,9 @@ int x = 1;
         if ([segue.destinationViewController isKindOfClass:[agentTableViewController class]]) {
             
             
-            
-            NSString *username = self.usernameTextfield.text;
-            NSString *password = self.passwordTextfield.text;
-            
-            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-            
-            
-            [manager.responseSerializer setAcceptableContentTypes:
-             [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
-            
-            NSDictionary *parameters = @{@"username": username, @"password" : password};
-            
-            [manager POST:@"http://54.89.45.91/app/api/user/login"
-               parameters:parameters
-                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                       
                       
-                      self.currentUser.accessToken = responseObject[@"accessToken"];
-                      self.myAccessToken = responseObject[@"accessToken"];
-                      NSLog(@" direct Access Token: %@", responseObject[@"accessToken"]);
-                      NSLog(@"property access Token:%@", self.myAccessToken);
-                      NSLog(@"the new access Token:%@", self.currentUser.accessToken);
-                      
-                      
-                      
-                      
-           
-                      
-                      
-                          
-                          agentTableViewController *agentTableVC = segue.destinationViewController;
-                          
-                          agentTableVC.theAccessToken = self.myAccessToken;
-                    
-                      
-                    [agentTableVC.tableView reloadData];
-                      
-                      
-                      //Agents http reqyest.
-            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-            [manager.responseSerializer setAcceptableContentTypes:
-             [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
-                                            //
-                    
-                      NSDictionary *parameters = @{@"accessToken": self.myAccessToken , @"isIn" : @1 };
-                      [manager POST:@"http://54.89.45.91/app/api/user/agent"
-                         parameters:parameters
-                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                      
-                            NSLog(@"name  %@", responseObject[@"agents"]);
-    
-                                
-                                
-                                NSData *data = responseObject[@"agents"];
-                                NSLog(@"Take this Dictionary %@", data);
-                                
-                                NSError *jsonError = nil;
-                                
-                                
-                                if ([responseObject[@"agents"] isKindOfClass:[NSArray class]]) {
-                                    NSLog(@"its an array!");
-                                    NSArray *jsonArray = (NSArray *)responseObject[@"agents"];
-                               //     NSLog(@"jsonArray - %@",jsonArray[0]);
-                                    
-                                    NSLog(@"Number of elements %i", [jsonArray count]);
-                                    agentTableVC.agentArray = jsonArray;
-                                }
-                                else {
-                                    NSLog(@"its probably a dictionary");
-                                    NSDictionary *jsonDictionary = (NSDictionary *)responseObject[@"agents"];
-                                    NSLog(@"jsonDictionary - %@",jsonDictionary);
-                                }
-                                
-                                
-                                
-                                [agentTableVC.tableView reloadData];
-                                
-                            NSLog(@"JSON: %@", responseObject);
-                                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                    NSLog(@"Error: %@", error);
-                                }];
-                      
-                      
-                      
-                      
-                      NSLog(@"JSON: %@", responseObject);
-                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                      NSLog(@"Error: %@", error);
-                  }];
+                 
             
         }
     }
@@ -258,11 +172,55 @@ int x = 1;
 - (IBAction)loginButtonPressed:(UIButton *)sender {
 
 
+    
+    NSString *username = self.usernameTextfield.text;
+    NSString *password = self.passwordTextfield.text;
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    
+    [manager.responseSerializer setAcceptableContentTypes:
+     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+    
+    NSDictionary *parameters = @{@"username": username, @"password" : password};
+    
+    [manager POST:@"http://54.89.45.91/app/api/user/login"
+       parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              
+              
+              self.currentUser.accessToken = responseObject[@"accessToken"];
+              self.myAccessToken = responseObject[@"accessToken"];
+              NSLog(@" direct Access Token: %@", responseObject[@"accessToken"]);
+              NSLog(@"property access Token:%@", self.myAccessToken);
+              NSLog(@"the new access Token:%@", self.currentUser.accessToken);
+              
+              
+              [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
+              
+[SSKeychain setPassword:self.myAccessToken forService:@"Remesh" account:username];
+              
+              
+              
+              
+              NSLog(@"User name: %@", username);
+              NSLog(@"Access Token %@", self.myAccessToken);
+
+              
+              
+              [self performSegueWithIdentifier:@"toAgentsList" sender:self];
+              
+              
+              NSLog(@"JSON: %@", responseObject);
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+          }];
+    
+    
 
     
     
-    
-}
+    }
 
 
 

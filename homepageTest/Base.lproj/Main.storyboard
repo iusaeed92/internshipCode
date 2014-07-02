@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="sUs-qb-TH5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ddW-wI-zcA">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -7,7 +7,7 @@
         <!--Rsh View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="rshViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginVC" id="vXZ-lx-hvc" customClass="rshViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3we-8H-IDW"/>
                         <viewControllerLayoutGuide type="bottom" id="bgw-x6-gU3"/>
@@ -70,7 +70,6 @@
                                         </state>
                                         <connections>
                                             <action selector="loginButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kzh-Mc-FQa"/>
-                                            <segue destination="EoO-vS-MYx" kind="push" identifier="toAgentList" id="Nn2-fa-ez4"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -83,23 +82,24 @@
                     <connections>
                         <outlet property="passwordTextfield" destination="Y9F-bb-igS" id="Tph-NI-nCZ"/>
                         <outlet property="usernameTextfield" destination="xDm-ka-pLg" id="9to-BK-O3k"/>
+                        <segue destination="EoO-vS-MYx" kind="push" identifier="toAgentsList" id="gMK-c7-E5c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="661" y="236"/>
+            <point key="canvasLocation" x="1573" y="218"/>
         </scene>
         <!--Agent Table View Controller - Agents-->
         <scene sceneID="ohR-cN-yTA">
             <objects>
-                <tableViewController id="EoO-vS-MYx" customClass="agentTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="agentVC" id="EoO-vS-MYx" customClass="agentTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="54" sectionHeaderHeight="22" sectionFooterHeight="22" id="dgD-hm-lYX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="54" id="dpk-WI-ulf">
-                                <rect key="frame" x="0.0" y="22" width="320" height="54"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dpk-WI-ulf" id="cNI-nm-F1v">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="53"/>
@@ -119,17 +119,20 @@
                         <barButtonItem key="leftBarButtonItem" title="back" id="NeJ-M8-OOG">
                             <color key="tintColor" red="0.95363305332448101" green="0.94588429802806906" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="vXZ-lx-hvc" kind="push" id="VgP-xg-7az"/>
+                                <action selector="backButton:" destination="EoO-vS-MYx" id="lQk-ow-AEE"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="bRc-8P-j0b">
                             <color key="tintColor" red="0.99829182829999996" green="0.95972952830000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="push" identifier="backToLogin" id="Xl7-AQ-E3w"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CfF-Ad-rbp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="494" y="-563"/>
+            <point key="canvasLocation" x="1092" y="-515"/>
         </scene>
         <!--Conversation Table View Controller-->
         <scene sceneID="Kuq-PK-1rE">
@@ -141,7 +144,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="64" id="MI5-hH-FAx" customClass="conversationTableViewCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="64"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MI5-hH-FAx" id="UME-Na-xki">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
@@ -197,7 +200,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NG9-rm-ulr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="965" y="-550"/>
+            <point key="canvasLocation" x="1597" y="-434"/>
         </scene>
         <!--Rsh Chat View Controller-->
         <scene sceneID="ieN-ey-mdd">
@@ -289,10 +292,28 @@
             </objects>
             <point key="canvasLocation" x="159" y="889"/>
         </scene>
+        <!--Root View Controller-->
+        <scene sceneID="17H-hg-hFY">
+            <objects>
+                <viewController id="ddW-wI-zcA" customClass="RootViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="i8q-vT-Mnc"/>
+                        <viewControllerLayoutGuide type="bottom" id="szN-oR-TIP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jwS-HQ-pdZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="16j-km-uuJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="641" y="-276"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="8Y8-wV-kbU">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sUs-qb-TH5" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navigationVC" automaticallyAdjustsScrollViewInsets="NO" id="sUs-qb-TH5" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YZD-VV-cUc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -305,7 +326,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jFc-KD-kBK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="134" y="112"/>
+            <point key="canvasLocation" x="138" y="104"/>
         </scene>
     </scenes>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -315,6 +336,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="VgP-xg-7az"/>
+        <segue reference="Xl7-AQ-E3w"/>
     </inferredMetricsTieBreakers>
 </document>

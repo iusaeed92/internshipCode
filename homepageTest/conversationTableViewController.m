@@ -8,6 +8,8 @@
 
 #import "conversationTableViewController.h"
 #import "conversationTableViewCell.h"
+#import <SSKeychain/SSKeychain.h>
+#import <AFNetworking/AFNetworking.h>
 
 @interface conversationTableViewController ()
 
@@ -33,6 +35,49 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+
+    
+    NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
+    NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.responseSerializer setAcceptableContentTypes:
+     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+    
+    
+    NSDictionary *parameters = @{@"accessToken": token, @"agentId" :self.agentID};
+    [manager POST:@"http://54.89.45.91/app/api/convos/agent" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Convos %@", responseObject[@"convos"]);
+        
+        if ([responseObject[@"convos"] isKindOfClass:[NSArray class]]) {
+            NSLog(@"its an array!");
+            NSArray *jsonArray = (NSArray *)responseObject[@"convos"];
+            NSLog(@"jsonArray - %@",jsonArray[0]);
+            
+            NSLog(@"Number of elements %i", [jsonArray count]);
+            self.convosArray = jsonArray;
+            [self.tableView reloadData];
+        }
+        else {
+            NSLog(@"its probably a dictionary");
+            NSDictionary *jsonDictionary = (NSDictionary *)responseObject[@"convos"];
+            NSLog(@"jsonDictionary - %@",jsonDictionary);
+        }
+        
+        
+        
+        //NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+
+
+
+
+
+
 }
 
 - (void)didReceiveMemoryWarning

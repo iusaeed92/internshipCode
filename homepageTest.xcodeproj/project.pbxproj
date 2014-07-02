@@ -18,6 +18,7 @@
 		60DE41941954C77A00F3E4A2 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DE41931954C77A00F3E4A2 /* User.m */; };
 		60DE41971958861000F3E4A2 /* AgentsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DE41961958861000F3E4A2 /* AgentsList.m */; };
 		60DE419A195898C500F3E4A2 /* Agent.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DE4199195898C500F3E4A2 /* Agent.m */; };
+		8E3CEFFD19637465001F3DB9 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3CEFFC19637465001F3DB9 /* RootViewController.m */; };
 		8E5F044B193FAB1D004018AB /* joinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5F044A193FAB1D004018AB /* joinViewController.m */; };
 		8EECB43A193CE7D2003BA82E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EECB439193CE7D2003BA82E /* Foundation.framework */; };
 		8EECB43C193CE7D2003BA82E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EECB43B193CE7D2003BA82E /* CoreGraphics.framework */; };
@@ -62,6 +63,8 @@
 		60DE41961958861000F3E4A2 /* AgentsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentsList.m; sourceTree = "<group>"; };
 		60DE4198195898C500F3E4A2 /* Agent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Agent.h; sourceTree = "<group>"; };
 		60DE4199195898C500F3E4A2 /* Agent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Agent.m; sourceTree = "<group>"; };
+		8E3CEFFB19637465001F3DB9 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		8E3CEFFC19637465001F3DB9 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		8E5F0449193FAB1D004018AB /* joinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = joinViewController.h; sourceTree = "<group>"; };
 		8E5F044A193FAB1D004018AB /* joinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = joinViewController.m; sourceTree = "<group>"; };
 		8EECB436193CE7D2003BA82E /* homepageTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = homepageTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,9 +183,11 @@
 				607EC9F21961B71A00E73FD0 /* Custom Cell */,
 				8EECB448193CE7D2003BA82E /* rshAppDelegate.h */,
 				8EECB449193CE7D2003BA82E /* rshAppDelegate.m */,
-				8EECB44B193CE7D2003BA82E /* Main.storyboard */,
+				8E3CEFFB19637465001F3DB9 /* RootViewController.h */,
+				8E3CEFFC19637465001F3DB9 /* RootViewController.m */,
 				60D3D816195B64AD00BC70E8 /* conversationTableViewController.h */,
 				60D3D817195B64AE00BC70E8 /* conversationTableViewController.m */,
+				8EECB44B193CE7D2003BA82E /* Main.storyboard */,
 				60DE418D1954831100F3E4A2 /* agentTableViewController.h */,
 				60DE418E1954831100F3E4A2 /* agentTableViewController.m */,
 				8E5F0449193FAB1D004018AB /* joinViewController.h */,
@@ -367,6 +372,7 @@
 			files = (
 				60DE419A195898C500F3E4A2 /* Agent.m in Sources */,
 				8EECB44A193CE7D2003BA82E /* rshAppDelegate.m in Sources */,
+				8E3CEFFD19637465001F3DB9 /* RootViewController.m in Sources */,
 				60D3D818195B64AE00BC70E8 /* conversationTableViewController.m in Sources */,
 				60DE41941954C77A00F3E4A2 /* User.m in Sources */,
 				60DE418F1954831100F3E4A2 /* agentTableViewController.m in Sources */,

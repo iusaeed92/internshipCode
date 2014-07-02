@@ -22,5 +22,6 @@
 
 @property (nonatomic, strong) NSArray *agentArray;
 
+- (IBAction)backButton:(id)sender;
 
 @end

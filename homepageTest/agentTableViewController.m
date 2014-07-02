@@ -8,6 +8,7 @@
 
 #import "agentTableViewController.h"
 #import "conversationTableViewController.h"
+#import <SSKeychain/SSKeychain.h>
 
 @interface agentTableViewController ()
 
@@ -50,32 +51,57 @@
        
   //  NSLog(@"OBJECT access Token:%@", self.thisUser.accessToken);
     
-//    
-//
-//        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    [manager.responseSerializer setAcceptableContentTypes:
-//     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
-//    
-//    
-//    
-//    
-//    NSDictionary *parameters = @{@"accessToken": self.theAccessToken , @"inIn" : @"1"};
-//    
-//    [manager POST:@"http://54.89.45.91/app/api/user/agent"
-//       parameters:parameters
-//          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//              
-//              //   NSLog(@"Access Token%@", responseObject[@"accessToken"]);
-//              
-//             NSLog(@"JSON: %@", responseObject);
-//          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//              NSLog(@"Error: %@", error);
-//          }];
-//    
-//    
-//    
-//    
-//    
+    
+
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.responseSerializer setAcceptableContentTypes:
+     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+    
+    NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
+    self.theAccessToken = [SSKeychain passwordForService:@"Remesh" account:userName];
+    
+    
+    NSLog(@"Username %@", userName);
+    
+   // NSLog(@"token ON DIFFERENT VIEW : %@", token);
+    
+    NSDictionary *parameters = @{@"accessToken": self.theAccessToken , @"isIn" : @"1"};
+    
+    [manager POST:@"http://54.89.45.91/app/api/user/agent"
+       parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              
+              //   NSLog(@"Access Token%@", responseObject[@"accessToken"]);
+              
+              
+              
+              if ([responseObject[@"agents"] isKindOfClass:[NSArray class]]) {
+                  NSLog(@"its an array!");
+                  NSArray *jsonArray = (NSArray *)responseObject[@"agents"];
+                  //     NSLog(@"jsonArray - %@",jsonArray[0]);
+                  
+                  NSLog(@"Number of elements %i", [jsonArray count]);
+                  self.agentArray = jsonArray;
+                  [self.tableView reloadData];
+              }
+              else {
+                  NSLog(@"its probably a dictionary");
+                  NSDictionary *jsonDictionary = (NSDictionary *)responseObject[@"agents"];
+                  NSLog(@"jsonDictionary - %@",jsonDictionary);
+              }
+              
+              
+              
+              
+             NSLog(@"JSON: %@", responseObject);
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+          }];
+    
+    
+    
+    
+    
     
 }
 
@@ -167,60 +193,17 @@
         if ([segue.destinationViewController isKindOfClass:
              [conversationTableViewController class]]) {
             
+            //passing details forward so AF call can be made in ConvoTableVC.
+            
             conversationTableViewController *ConvoTableVC = segue.destinationViewController;
-            NSIndexPath *path = [self.tableView indexPathForCell:sender];
-            ConvoTableVC.currentAgent = self.agentArray[path.row];
+            ConvoTableVC.path = [self.tableView indexPathForCell:sender];
+            ConvoTableVC.currentAgent = self.agentArray[ConvoTableVC.path.row];
+            ConvoTableVC.agentID =  [[self.agentArray objectAtIndex:ConvoTableVC.path.row] objectForKey:@"id"];
             
-            
-            
-            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-            [manager.responseSerializer setAcceptableContentTypes:
-             [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
-            NSDictionary *parameters = @{@"accessToken": self.theAccessToken, @"agentId" : [[self.agentArray objectAtIndex:path.row] objectForKey:@"id"]};
-            [manager POST:@"http://54.89.45.91/app/api/convos/agent" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                
-                NSLog(@"Convos %@", responseObject[@"convos"]);
-                
-                if ([responseObject[@"convos"] isKindOfClass:[NSArray class]]) {
-                    NSLog(@"its an array!");
-                    NSArray *jsonArray = (NSArray *)responseObject[@"convos"];
-                    NSLog(@"jsonArray - %@",jsonArray[0]);
-                    
-                    NSLog(@"Number of elements %i", [jsonArray count]);
-                  ConvoTableVC.convosArray = jsonArray;
-                    [ConvoTableVC.tableView reloadData]; 
-                }
-                else {
-                    NSLog(@"its probably a dictionary");
-                    NSDictionary *jsonDictionary = (NSDictionary *)responseObject[@"convos"];
-                    NSLog(@"jsonDictionary - %@",jsonDictionary);
-                }
-                
-                
-                
-                //NSLog(@"JSON: %@", responseObject);
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error: %@", error);
-            }];
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            //All I need is the agent id of the cell selected.
-            
-            
-            
-            
+    
             
             }
     }
-    
-    
     
 }
 
@@ -298,4 +281,44 @@
 
 
 
+- (IBAction)backButton:(id)sender {
+
+    NSDictionary *parameters = @{@"accessToken": self.theAccessToken};
+    
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.responseSerializer setAcceptableContentTypes:
+     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+    
+    [manager POST:@"http://54.89.45.91/app/api/user/logout"
+       parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              
+              NSLog(@"Success");
+              
+              NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
+              [SSKeychain deletePasswordForService:@"Remesh" account:userName];
+              
+             [self performSegueWithIdentifier:@"backToLogin" sender:self];
+              
+              
+              
+              
+              NSLog(@"JSON: %@", responseObject);
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+          }];
+    
+
+
+
+
+
+}
 @end
+
+
+
+
+

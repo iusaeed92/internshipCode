@@ -14,6 +14,9 @@
 
 @property (strong, nonatomic) NSArray *currentAgent;
 
+@property (strong, nonatomic) NSIndexPath *path; 
+
+@property (strong, nonatomic) NSString *agentID;
 
 
 
