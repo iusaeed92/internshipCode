@@ -18,6 +18,7 @@
 
 @property (strong, nonatomic) NSString *agentID;
 
+@property (nonatomic) double countDown; 
 
 
 @end

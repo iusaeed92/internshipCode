@@ -17,6 +17,11 @@
 
 @implementation conversationTableViewController
 
+
+
+NSTimer *timer;
+
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -37,6 +42,10 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
 
+    
+    
+    
+    
     
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
     NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];
@@ -102,6 +111,19 @@
     
    
     return [self.convosArray count];
+}
+
+
+
+
+-(void)tick {
+    
+    
+    
+    self.countDown++;
+    
+    
+    
 }
 
 
@@ -200,28 +222,34 @@
     NSLog(@"last plus delta %@", lastPlusDelta);
     NSTimeInterval secondsBetween = [lastPlusDelta timeIntervalSinceNow];
     NSLog(@"Time till next message %f", secondsBetween);
+    
+    self.countDown = secondsBetween;
+    timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+    
+    
     double hours = secondsBetween / 3600.0;
     double mins = secondsBetween / 60.0;
     NSLog(@"Seconds %f", secondsBetween);
     NSLog(@"Minutes: %f", mins);
     NSLog(@"Hours: %f", hours);
-    if (secondsBetween < 60.0) {
+    //if (self.countDown < 60.0) {
         NSLog(@"Seconds %f", secondsBetween);
-        NSString *secondString = [[NSString alloc] initWithFormat:@"%.2f", secondsBetween];
+        NSString *secondString = [[NSString alloc] initWithFormat:@"%.0f", self.countDown];
         cell.customTimeLabel.text =[secondString stringByAppendingString:@"s"];
-    }
-    else if (secondsBetween > 60.0 && secondsBetween < 3600.0){
-        NSLog(@"Minutes: %f", mins);
-        NSString *minuteString = [[NSString alloc] initWithFormat:@"%.2f", mins];
-        NSLog(@"Minute String: %@", minuteString);
-        cell.customTimeLabel.text =[minuteString stringByAppendingString:@"m"];
-    }
-    else {
-         NSLog(@"Hours %f", hours);
-        NSString *hourString = [[NSString alloc] initWithFormat:@"%.2f", hours];
-        cell.customTimeLabel.text = [hourString stringByAppendingString:@"h"];
-    }
     
+    //}
+//    else if (secondsBetween > 60.0 && secondsBetween < 3600.0){
+//        NSLog(@"Minutes: %f", mins);
+//        NSString *minuteString = [[NSString alloc] initWithFormat:@"%.2f", mins];
+//        NSLog(@"Minute String: %@", minuteString);
+//        cell.customTimeLabel.text =[minuteString stringByAppendingString:@"m"];
+//    }
+//    else {
+//         NSLog(@"Hours %f", hours);
+//        NSString *hourString = [[NSString alloc] initWithFormat:@"%.2f", hours];
+//        cell.customTimeLabel.text = [hourString stringByAppendingString:@"h"];
+//    }
+//    
     return cell;
 }
 
