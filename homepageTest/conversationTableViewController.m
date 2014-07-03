@@ -200,8 +200,27 @@
     NSLog(@"last plus delta %@", lastPlusDelta);
     NSTimeInterval secondsBetween = [lastPlusDelta timeIntervalSinceNow];
     NSLog(@"Time till next message %f", secondsBetween);
-    
-    
+    double hours = secondsBetween / 3600.0;
+    double mins = secondsBetween / 60.0;
+    NSLog(@"Seconds %f", secondsBetween);
+    NSLog(@"Minutes: %f", mins);
+    NSLog(@"Hours: %f", hours);
+    if (secondsBetween < 60.0) {
+        NSLog(@"Seconds %f", secondsBetween);
+        NSString *secondString = [[NSString alloc] initWithFormat:@"%.2f", secondsBetween];
+        cell.customTimeLabel.text =[secondString stringByAppendingString:@"s"];
+    }
+    else if (secondsBetween > 60.0 && secondsBetween < 3600.0){
+        NSLog(@"Minutes: %f", mins);
+        NSString *minuteString = [[NSString alloc] initWithFormat:@"%.2f", mins];
+        NSLog(@"Minute String: %@", minuteString);
+        cell.customTimeLabel.text =[minuteString stringByAppendingString:@"m"];
+    }
+    else {
+         NSLog(@"Hours %f", hours);
+        NSString *hourString = [[NSString alloc] initWithFormat:@"%.2f", hours];
+        cell.customTimeLabel.text = [hourString stringByAppendingString:@"h"];
+    }
     
     return cell;
 }
