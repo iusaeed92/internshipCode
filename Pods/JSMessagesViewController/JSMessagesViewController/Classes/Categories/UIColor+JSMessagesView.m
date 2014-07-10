@@ -54,6 +54,14 @@
                            alpha:1.0f];
 }
 
+
++ (UIColor *)remesh_GreenColor
+{
+    return [UIColor colorWithRed:(40.0/255.0) green:(159.0/255.0) blue:(90.0/255.0) alpha:1.0];
+
+}
+
+
 #pragma mark - Utilities
 
 - (UIColor *)js_darkenColorWithValue:(CGFloat)value

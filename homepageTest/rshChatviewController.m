@@ -84,6 +84,8 @@
         }
         
         
+        
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
@@ -144,8 +146,43 @@
 -(void)didSendText:(NSString *)text{
     
     
+    NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
+    NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.responseSerializer setAcceptableContentTypes:
+     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
-    
+    NSDictionary *parameters = @{@"accessToken": token, @"convoId" :self.thisConvoId, @"thought" : text};
+    [manager POST:@"http://54.89.45.91/app/api/convos/thoughts/send" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"The choices are...  %@", responseObject[@"choices"]);
+        
+        if ([responseObject isKindOfClass:[NSArray class]]) {
+            NSLog(@"its an array!");
+            NSArray *jsonArray = (NSArray *)responseObject[@"agents"];
+              NSLog(@"jsonArray - %@",jsonArray[0]);
+            
+//            NSLog(@"Number of elements %i", [jsonArray count]);
+//            self.agentArray = jsonArray;
+//            [self.tableView reloadData];
+        }
+        else {
+            NSLog(@"its probably a dictionary");
+            NSDictionary *jsonDictionary = (NSDictionary *)responseObject;
+            NSLog(@"jsonDictionary - %@",jsonDictionary);
+        }
+        
+        
+        
+        
+        NSLog(@"JSON: %@", responseObject);
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+
     
     
 }
@@ -192,7 +229,7 @@
       }
   
     else {
-        return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleGreenColor]];
+        return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor remesh_GreenColor]];
     }
     
 }

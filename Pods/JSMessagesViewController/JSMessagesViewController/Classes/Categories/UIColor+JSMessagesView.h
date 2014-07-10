@@ -40,6 +40,9 @@
  */
 + (UIColor *)js_bubbleBlueColor;
 
+
++ (UIColor *)remesh_GreenColor;
+
 /**
  *  @return A color object containing the HSB values iOS 7 messages app light gray bubble color.
  */

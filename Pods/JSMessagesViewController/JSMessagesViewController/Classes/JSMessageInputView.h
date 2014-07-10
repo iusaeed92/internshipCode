@@ -46,6 +46,10 @@ typedef NS_ENUM(NSUInteger, JSMessageInputViewStyle) {
  */
 @property (weak, nonatomic, readonly) JSMessageTextView *textView;
 
+
+
+
+
 /**
  *  The send button for the input view. The default value is an initialized `UIButton` whose appearance is styled according to the value of style during initialization. 
  *  @see JSMessageInputViewStyle.

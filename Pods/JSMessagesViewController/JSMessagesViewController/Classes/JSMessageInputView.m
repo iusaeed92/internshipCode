@@ -31,6 +31,8 @@
 
 @implementation JSMessageInputView
 
+
+
 #pragma mark - Initialization
 
 - (void)setup
@@ -39,7 +41,7 @@
     self.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin);
     self.opaque = YES;
     self.userInteractionEnabled = YES;
-}
+    }
 
 - (void)configureInputBarWithStyle:(JSMessageInputViewStyle)style
 {
@@ -74,7 +76,7 @@
         _textView.layer.borderColor = [UIColor colorWithWhite:0.8f alpha:1.0f].CGColor;
         _textView.layer.borderWidth = 0.65f;
         _textView.layer.cornerRadius = 6.0f;
-        
+        _textView.tintColor = [UIColor remesh_GreenColor]; // cursor color?
         self.image = [[UIImage imageNamed:@"input-bar-flat"] resizableImageWithCapInsets:UIEdgeInsetsMake(2.0f, 0.0f, 0.0f, 0.0f)
                                                                             resizingMode:UIImageResizingModeStretch];
     }
@@ -107,7 +109,7 @@
     }
     else {
         sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        sendButton.backgroundColor = [UIColor js_bubbleGreenColor];
+        sendButton.backgroundColor = [UIColor remesh_GreenColor];
         
         [sendButton setTitleColor:[UIColor js_bubbleBlueColor] forState:UIControlStateNormal];
         [sendButton setTitleColor:[UIColor js_bubbleBlueColor] forState:UIControlStateHighlighted];

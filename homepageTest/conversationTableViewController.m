@@ -229,7 +229,7 @@ NSTimer *timer;
     NSLog(@"Hours: %f", hours);
     //if (self.countDown < 60.0) {
         NSLog(@"Seconds %f", secondsBetween);
-        NSString *secondString = [[NSString alloc] initWithFormat:@"%.0f", self.countDown];
+        NSString *secondString = [[NSString alloc] initWithFormat:@"%.0f", self.countDown];//removes decimals
     //timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self.tableView selector:@selector(tick) userInfo:nil repeats:YES];
     
         cell.customTimeLabel.text =[secondString stringByAppendingString:@"s"];
@@ -304,8 +304,8 @@ NSTimer *timer;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    [self performSegueWithIdentifier:@"ConvosToChat" sender:indexPath];
+//    
+//    [self performSegueWithIdentifier:@"ConvosToChat" sender:indexPath];
 
     NSLog(@"Meow"); 
 }
