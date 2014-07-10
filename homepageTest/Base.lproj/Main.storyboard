@@ -87,7 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1573" y="218"/>
+            <point key="canvasLocation" x="1661" y="534"/>
         </scene>
         <!--Agent Table View Controller - Agents-->
         <scene sceneID="ohR-cN-yTA">
@@ -143,11 +143,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="64" id="MI5-hH-FAx" customClass="conversationTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="64" id="MI5-hH-FAx" customClass="conversationTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MI5-hH-FAx" id="UME-Na-xki">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="63"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Agent Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0t-OI-2uY">
@@ -188,6 +188,7 @@
                                     <outlet property="customStoryTitleLabel" destination="Zuu-vV-EXf" id="SsR-o1-ibC"/>
                                     <outlet property="customTextView" destination="3LM-WV-Ar3" id="BDJ-Yx-H52"/>
                                     <outlet property="customTimeLabel" destination="Ek0-EO-k13" id="fF2-D6-Frh"/>
+                                    <segue destination="ySU-Ei-of2" kind="push" identifier="ConvosToChat" id="zRr-Pz-f9B"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -200,7 +201,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NG9-rm-ulr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1597" y="-434"/>
+            <point key="canvasLocation" x="1613" y="-662"/>
         </scene>
         <!--Rsh Chat View Controller-->
         <scene sceneID="ieN-ey-mdd">
@@ -211,15 +212,16 @@
                         <viewControllerLayoutGuide type="bottom" id="oRW-DY-Aej"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gj1-KZ-5mh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="p1O-DY-NJu"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nBe-YI-992" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749" y="889"/>
+            <point key="canvasLocation" x="2077" y="-493"/>
         </scene>
         <!--Join View Controller-->
         <scene sceneID="0yg-TE-biH">

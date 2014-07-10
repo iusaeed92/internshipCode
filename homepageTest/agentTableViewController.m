@@ -200,9 +200,11 @@
             ConvoTableVC.currentAgent = self.agentArray[ConvoTableVC.path.row];
             ConvoTableVC.agentID =  [[self.agentArray objectAtIndex:ConvoTableVC.path.row] objectForKey:@"id"];
             
-    
+            ConvoTableVC.title = [[self.agentArray objectAtIndex:ConvoTableVC.path.row] objectForKey:@"name"];
             
-            }
+        
+        
+        }
     }
     
 }

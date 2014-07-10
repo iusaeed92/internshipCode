@@ -14,6 +14,14 @@
 
 @interface rshChatViewController : JSMessagesViewController <JSMessagesViewDataSource , JSMessagesViewDelegate>
 
+@property (strong, nonatomic) NSArray *thisConversation;
+
+@property (strong, nonatomic) NSString *thisConvoId;
+
+@property (strong, nonatomic) NSArray *Messages;
+
+
+@property (strong, nonatomic) NSString *OponentName; 
 
 
 

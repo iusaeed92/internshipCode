@@ -10,6 +10,7 @@
 #import "conversationTableViewCell.h"
 #import <SSKeychain/SSKeychain.h>
 #import <AFNetworking/AFNetworking.h>
+#import "rshChatViewController.h"
 
 @interface conversationTableViewController ()
 
@@ -54,6 +55,7 @@ NSTimer *timer;
     [manager.responseSerializer setAcceptableContentTypes:
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
+    //loads convos a given agent is in. 
     
     NSDictionary *parameters = @{@"accessToken": token, @"agentId" :self.agentID};
     [manager POST:@"http://54.89.45.91/app/api/convos/agent" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -99,14 +101,12 @@ NSTimer *timer;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     
    
@@ -116,15 +116,7 @@ NSTimer *timer;
 
 
 
--(void)tick {
-    
-    
-    
-    self.countDown++;
-    
-    
-    
-}
+
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -163,6 +155,9 @@ NSTimer *timer;
     NSDictionary *oponentData = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"opponent"];
     
     NSDictionary *senderData = thisConvoDetails[@"sender"];
+    
+    
+    
     
     if ([senderData[@"name"] isEqual:oponentData[@"name"]]) {
          cell.customImageView.image = greenCircleImage;
@@ -224,7 +219,7 @@ NSTimer *timer;
     NSLog(@"Time till next message %f", secondsBetween);
     
     self.countDown = secondsBetween;
-    timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+    //timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
     
     
     double hours = secondsBetween / 3600.0;
@@ -235,9 +230,10 @@ NSTimer *timer;
     //if (self.countDown < 60.0) {
         NSLog(@"Seconds %f", secondsBetween);
         NSString *secondString = [[NSString alloc] initWithFormat:@"%.0f", self.countDown];
-        cell.customTimeLabel.text =[secondString stringByAppendingString:@"s"];
+    //timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self.tableView selector:@selector(tick) userInfo:nil repeats:YES];
     
-    //}
+        cell.customTimeLabel.text =[secondString stringByAppendingString:@"s"];
+   //}
 //    else if (secondsBetween > 60.0 && secondsBetween < 3600.0){
 //        NSLog(@"Minutes: %f", mins);
 //        NSString *minuteString = [[NSString alloc] initWithFormat:@"%.2f", mins];
@@ -253,6 +249,18 @@ NSTimer *timer;
     return cell;
 }
 
+
+
+
+
+-(void)tick {
+    
+    
+    
+    self.countDown--;
+    
+    
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -292,15 +300,38 @@ NSTimer *timer;
 }
 */
 
-/*
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    [self performSegueWithIdentifier:@"ConvosToChat" sender:indexPath];
+
+    NSLog(@"Meow"); 
+}
+
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    rshChatViewController *chatVC = segue.destinationViewController;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+   chatVC.thisConversation = [self.convosArray objectAtIndex:indexPath.row];
+    chatVC.thisConvoId = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"convoId"];
+    NSLog(@"To chat: %@", chatVC.thisConversation);
+    NSDictionary *oponentData = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"opponent"];
+    chatVC.OponentName = oponentData[@"name"];
+    chatVC.title = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"topic"];
+    
+    NSLog(@"Convo ID is %@", chatVC.thisConvoId); 
+    
+    
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+
 
 @end
