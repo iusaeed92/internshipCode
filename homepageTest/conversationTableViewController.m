@@ -20,9 +20,6 @@
 
 
 
-NSTimer *timer;
-
-
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -218,22 +215,36 @@ NSTimer *timer;
     NSTimeInterval secondsBetween = [lastPlusDelta timeIntervalSinceNow];
     NSLog(@"Time till next message %f", secondsBetween);
     
-    self.countDown = secondsBetween;
+    countDown = secondsBetween;
     //timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
     
     
-    double hours = secondsBetween / 3600.0;
-    double mins = secondsBetween / 60.0;
+    int hours = countDown / 3600;
+    int mins = countDown / 60;
     NSLog(@"Seconds %f", secondsBetween);
-    NSLog(@"Minutes: %f", mins);
-    NSLog(@"Hours: %f", hours);
-    //if (self.countDown < 60.0) {
-        NSLog(@"Seconds %f", secondsBetween);
-        NSString *secondString = [[NSString alloc] initWithFormat:@"%.0f", self.countDown];//removes decimals
-    //timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self.tableView selector:@selector(tick) userInfo:nil repeats:YES];
+    NSLog(@"Minutes: %i", mins);
+    NSLog(@"Hours: %i", hours);
+       timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+    if (countDown < 60) {
+        //NSLog(@"Seconds %f", secondsBetween);
+//        NSString *secondString = [[NSString alloc] initWithFormat:@"%i", countDown];//removes decimal
     
-        cell.customTimeLabel.text =[secondString stringByAppendingString:@"s"];
-   //}
+        //cell.customTimeLabel.text =[secondString stringByAppendingString:@"s"];
+cell.customTimeLabel.text = [[NSString stringWithFormat:@"%i", countDown] stringByAppendingString:@"s"];
+   }
+    
+    else if (secondsBetween > 60.0 && secondsBetween < 3600.0){
+        
+        cell.customTimeLabel.text =
+        [[NSString stringWithFormat:@"%i", mins] stringByAppendingString:@"m"];
+        }
+    else {
+        
+        cell.customTimeLabel.text =
+        [[NSString stringWithFormat:@"%i", mins] stringByAppendingString:@"m"];
+    }
+    
+    
 //    else if (secondsBetween > 60.0 && secondsBetween < 3600.0){
 //        NSLog(@"Minutes: %f", mins);
 //        NSString *minuteString = [[NSString alloc] initWithFormat:@"%.2f", mins];
@@ -255,11 +266,11 @@ NSTimer *timer;
 
 -(void)tick {
     
-    
-    
-    self.countDown--;
-    
-    
+     countDown--;
+    [self.tableView reloadData];
+    if (countDown < 0)
+        [timer invalidate];
+
 }
 
 /*
@@ -325,6 +336,7 @@ NSTimer *timer;
     NSDictionary *oponentData = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"opponent"];
     chatVC.OponentName = oponentData[@"name"];
     chatVC.title = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"topic"];
+    chatVC.transportCountDown = countDown;
     
     NSLog(@"Convo ID is %@", chatVC.thisConvoId); 
     

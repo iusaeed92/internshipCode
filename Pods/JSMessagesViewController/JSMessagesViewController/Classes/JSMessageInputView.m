@@ -109,9 +109,9 @@
     }
     else {
         sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        sendButton.backgroundColor = [UIColor remesh_GreenColor];
+        sendButton.backgroundColor = [UIColor clearColor];
         
-        [sendButton setTitleColor:[UIColor js_bubbleBlueColor] forState:UIControlStateNormal];
+        [sendButton setTitleColor:[UIColor remesh_GreenColor] forState:UIControlStateNormal];
         [sendButton setTitleColor:[UIColor js_bubbleBlueColor] forState:UIControlStateHighlighted];
         [sendButton setTitleColor:[UIColor js_bubbleLightGrayColor] forState:UIControlStateDisabled];
         

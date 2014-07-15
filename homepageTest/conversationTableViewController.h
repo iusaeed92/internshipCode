@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface conversationTableViewController : UITableViewController
+@interface conversationTableViewController : UITableViewController {
+    
+    NSTimer *timer;
+    int countDown;
+}
 
 @property (strong, nonatomic) NSArray *convosArray;
 
@@ -18,7 +22,7 @@
 
 @property (strong, nonatomic) NSString *agentID;
 
-@property (nonatomic) double countDown; 
+
 
 
 @end

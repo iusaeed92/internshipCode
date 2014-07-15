@@ -16,7 +16,13 @@
 
 @end
 
+
+
+
+
 @implementation rshChatViewController
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,7 +39,7 @@
     self.delegate = self;
     self.dataSource = self;
     
-    
+    countDown = self.transportCountDown;
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -73,6 +79,7 @@
             self.Messages = (NSArray *)responseObject[@"messages"];
             NSLog(@"jsonArray - %@", self.Messages[0]);
             
+            
             NSLog(@"Number of elements are%i", [self.Messages count]);
             [self.tableView reloadData];
         }
@@ -89,9 +96,6 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
-    
-    
-    
     
     
     
@@ -158,12 +162,17 @@
         
         NSLog(@"The choices are...  %@", responseObject[@"choices"]);
         
-        if ([responseObject isKindOfClass:[NSArray class]]) {
+        if ([responseObject[@"choices"] isKindOfClass:[NSArray class]]) {
             NSLog(@"its an array!");
-            NSArray *jsonArray = (NSArray *)responseObject[@"agents"];
-              NSLog(@"jsonArray - %@",jsonArray[0]);
-            
-//            NSLog(@"Number of elements %i", [jsonArray count]);
+        self.Choices = (NSArray *)responseObject[@"choices"];
+            NSLog(@"jsonArray - %@",self.Choices[0]);
+            self.ChoicePair = self.Choices[0];
+            self.ChoiceOne = self.ChoicePair[@"choiceOne"];
+            self.ChoiceTwo = self.ChoicePair[@"choiceTwo"];
+           // self.numberOfChoices = [self.Choices count];
+            self.numberOfChoices = 1;            
+            NSLog(@"Choice Pair %@", self.ChoicePair);
+                NSLog(@"Number of elements %i", [self.Choices count]);
 //            self.agentArray = jsonArray;
 //            [self.tableView reloadData];
         }
@@ -173,6 +182,40 @@
             NSLog(@"jsonDictionary - %@",jsonDictionary);
         }
         
+        
+        [self.messageInputView resignFirstResponder];
+        
+        
+   [self.tableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 245)];
+        
+        
+ // [self.tableView setTableViewInsetsWithBottomValue:0.0f];
+        
+        
+        
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 245, self.view.frame.size.width, 260)];
+
+        
+        
+        self.choiceOneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.choiceOneButton addTarget:self action:@selector(choiceOneButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.choiceOneButton setFrame:CGRectMake(0, 0, 320, 130)];
+        self.choiceOneButton.backgroundColor = [UIColor remesh_GreenColor];
+        self.choiceOneButton.titleLabel.numberOfLines = 3;
+        [self.choiceOneButton setTitle:self.ChoiceOne[@"text"] forState:UIControlStateNormal];
+        [headerView addSubview:self.choiceOneButton];
+        
+        
+      self.choiceTwoButton= [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.choiceTwoButton addTarget:self action:@selector(choiceTwoButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.choiceTwoButton setFrame:CGRectMake(0, 134, 320, 130)];
+        self.choiceTwoButton.backgroundColor = [UIColor remesh_GreenColor];
+        self.choiceTwoButton.titleLabel.numberOfLines = 3;
+        [self.choiceTwoButton setTitle:self.ChoiceTwo[@"text"] forState:UIControlStateNormal];
+        headerView.backgroundColor = [UIColor whiteColor];
+       [headerView addSubview:self.choiceTwoButton];
+        
+        [self.view addSubview:headerView];
         
         
         
@@ -270,6 +313,12 @@
 
 -(void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     
+    if (indexPath.row == (1 + [self.Messages count])) {
+        cell.bubbleView.textView.textColor = [UIColor whiteColor];
+    }
+    
+    
+    
     if ([cell messageType] == JSBubbleMessageTypeOutgoing) {
         cell.bubbleView.textView.textColor = [UIColor whiteColor];
     
@@ -288,9 +337,19 @@
 
 -(NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+   
+    
+//    if (indexPath.row == (1 + [self.Messages count])) {
+//        
+//        message = [@".." stringByAppendingString:[NSString stringWithFormat:@"%i", countDown]];
+//    }
+//    else {
+     NSString *message; message = [[self.Messages objectAtIndex:indexPath.row] objectForKey:@"text"];
+    
+//    }
 
-    NSString *message = [[self.Messages objectAtIndex:indexPath.row] objectForKey:@"text"];
-
+    
+    
     //[self.Messages objectForKey:@"text"];
     return message;
 }
@@ -312,6 +371,172 @@
     return nil; 
 }
 
+
+
+
+
+
+#pragma mark - button functions
+
+
+-(void) choiceOneButtonClicked: (UIButton*)sender
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.responseSerializer setAcceptableContentTypes:
+     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+    
+    NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
+   NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];
+    
+    
+    NSLog(@"Username %@", userName);
+    
+    // NSLog(@"token ON DIFFERENT VIEW : %@", token);
+    
+    NSDictionary *parameters = @{@"accessToken": token, @"convoId" :self.thisConvoId, @"acceptId" : self.ChoiceOne[@"id"], @"rejectId" : self.ChoiceTwo[@"id"]};
+    
+    [manager POST:@"http://54.89.45.91/app/api/convos/thoughts/choose"
+       parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSLog(@"JSON: %@", responseObject);
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+          }];
+    
+    
+    
+    
+    if ([self.Choices count] != self.numberOfChoices) {
+        self.ChoicePair = self.Choices[self.numberOfChoices];
+        self.ChoiceOne = self.ChoicePair[@"choiceOne"];
+        self.ChoiceTwo = self.ChoicePair[@"choiceTwo"];
+        [self.choiceOneButton setTitle:self.ChoiceOne[@"text"] forState:UIControlStateNormal];
+        [self.choiceTwoButton setTitle:self.ChoiceTwo[@"text"] forState:UIControlStateNormal];
+        self.numberOfChoices++;
+       
+        NSLog(@"Hello");
+    }
+    
+    else {
+    
+    
+    
+    NSDictionary *parametersTwo = @{@"accessToken": token, @"convoId" :self.thisConvoId };
+    
+    [manager POST:@"http://54.89.45.91/app/api/convos/thoughts"
+       parameters:parametersTwo
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              
+               self.numberOfChoices = 1;
+              
+              self.Choices = (NSArray *)responseObject[@"choices"];
+              self.ChoicePair = self.Choices[0];
+              self.ChoiceOne = self.ChoicePair[@"choiceOne"];
+              self.ChoiceTwo = self.ChoicePair[@"choiceTwo"];
+              
+              NSLog(@"New thoughts are in with numPairs: %i", [self.Choices count]);
+              
+              [self.choiceOneButton setTitle:self.ChoiceOne[@"text"] forState:UIControlStateNormal];
+              [self.choiceTwoButton setTitle:self.ChoiceTwo[@"text"] forState:UIControlStateNormal];
+              
+              
+              
+              
+              NSLog(@"New thoughts!  %@", responseObject);
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+          }];
+    
+    
+    }
+
+
+}
+
+
+-(void) choiceTwoButtonClicked: (UIButton*)sender
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.responseSerializer setAcceptableContentTypes:
+     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+    
+    NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
+    NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];
+    
+    // NSLog(@"token ON DIFFERENT VIEW : %@", token);
+    
+    NSDictionary *parameters = @{@"accessToken": token, @"convoId" :self.thisConvoId, @"acceptId" : self.ChoiceTwo[@"id"], @"rejectId" : self.ChoiceOne[@"id"]};
+    
+    [manager POST:@"http://54.89.45.91/app/api/convos/thoughts/choose"
+       parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSLog(@"JSON: %@", responseObject);
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+          }];
+    
+    
+    
+    
+    
+    if ([self.Choices count] != self.numberOfChoices) {
+        self.ChoicePair = self.Choices[self.numberOfChoices];
+        self.ChoiceOne = self.ChoicePair[@"choiceOne"];
+        self.ChoiceTwo = self.ChoicePair[@"choiceTwo"];
+        [self.choiceOneButton setTitle:self.ChoiceOne[@"text"] forState:UIControlStateNormal];
+        [self.choiceTwoButton setTitle:self.ChoiceTwo[@"text"] forState:UIControlStateNormal];
+        self.numberOfChoices++;
+        
+        NSLog(@"Hello");
+    }
+    
+    else {
+        
+    
+    NSDictionary *parametersTwo = @{@"accessToken": token, @"convoId" :self.thisConvoId };
+    
+    [manager POST:@"http://54.89.45.91/app/api/convos/thoughts"
+       parameters:parametersTwo
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              self.numberOfChoices = 1;
+              
+            //  if ([responseObject[@"pairExists"] isEqualToString:@"1"])
+              
+              NSLog(@"Pair Exists %@", responseObject[@"pairExists"]); 
+              
+              self.Choices = (NSArray *)responseObject[@"choices"];
+              
+              NSLog(@"New thoughts are in with numPairs: %i", [self.Choices count]);
+              self.ChoicePair = self.Choices[0];
+              self.ChoiceOne = self.ChoicePair[@"choiceOne"];
+              self.ChoiceTwo = self.ChoicePair[@"choiceTwo"];
+              
+              
+              [self.choiceOneButton setTitle:self.ChoiceOne[@"text"] forState:UIControlStateNormal];
+              [self.choiceTwoButton setTitle:self.ChoiceTwo[@"text"] forState:UIControlStateNormal];
+              
+              
+              
+//              
+//              else{
+//                  NSLog(@"it failed");
+//              }
+//
+          
+     
+              NSLog(@"New thoughts!  %@", responseObject);
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+          }];
+
+    }
+    
+}
+
+
+
+
+
 /*
 #pragma mark - Navigation
 
@@ -325,7 +550,45 @@
 
 
 
-@end
+
+//- (void)showWaitingView {
+//    
+//    CGRect frame = CGRectMake(90, 190, 32, 32);
+//    UIActivityIndicatorView* progressInd = [[UIActivityIndicatorView alloc] initWithFrame:frame];
+//    [progressInd startAnimating];
+//    progressInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+//    
+//    frame = CGRectMake(130, 193, 140, 30);
+//    UILabel *waitingLable = [[UILabel alloc] initWithFrame:frame];
+//    waitingLable.text = @"Processing...";
+//    waitingLable.textColor = [UIColor whiteColor];
+//    waitingLable.font = [UIFont systemFontOfSize:20];;
+//    waitingLable.backgroundColor = [UIColor clearColor];
+//    frame = [[UIScreen mainScreen] applicationFrame];
+//    UIView *theView = [[UIView alloc] initWithFrame:frame];
+//    theView.backgroundColor = [UIColor blackColor];
+//    theView.alpha = 0.7;
+//    theView.tag = 999;
+//    [theView addSubview:progressInd];
+//    [theView addSubview:waitingLable];
+//    
+//    [progressInd release];
+//    [waitingLable release];
+//    
+//    [window addSubview:[theView autorelease]];
+//    [window bringSubviewToFront:theView];
+//}
+//
+//- (void)removeWaitingView {
+//    UIView *v = [window viewWithTag:999];
+//    if(v) [v removeFromSuperview];
+//    
+//}
+//
+//
+//
+
+
 
 
 
@@ -341,3 +604,4 @@
 
 
 
+@end

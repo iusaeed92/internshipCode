@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		2EA98F10F9B14165B09E5587 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A04F3944E09F40609282EF7C /* libPods.a */; };
+		600D130A1970337100CEB59C /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 600D13091970337100CEB59C /* Icon-60@2x.png */; };
 		607EC9F51961B78B00E73FD0 /* conversationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 607EC9F41961B78B00E73FD0 /* conversationTableViewCell.m */; };
 		607EC9F71961DEDD00E73FD0 /* GreenCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 607EC9F61961DEDD00E73FD0 /* GreenCircle.png */; };
 		607EC9F91961DEE600E73FD0 /* RedCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 607EC9F81961DEE600E73FD0 /* RedCircle.png */; };
+		60BF65A619705F920095E43C /* Icon-Small-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60BF65A419705F920095E43C /* Icon-Small-40@2x.png */; };
+		60BF65A719705F920095E43C /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60BF65A519705F920095E43C /* Icon-Small@2x.png */; };
 		60D3D818195B64AE00BC70E8 /* conversationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D3D817195B64AE00BC70E8 /* conversationTableViewController.m */; };
 		60DE41891951E39D00F3E4A2 /* rshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DE41881951E39D00F3E4A2 /* rshViewController.m */; };
 		60DE418C1951E3D600F3E4A2 /* rshChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DE418B1951E3D600F3E4A2 /* rshChatViewController.m */; };
@@ -46,10 +49,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		600D13091970337100CEB59C /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 		607EC9F31961B78B00E73FD0 /* conversationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conversationTableViewCell.h; sourceTree = "<group>"; };
 		607EC9F41961B78B00E73FD0 /* conversationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = conversationTableViewCell.m; sourceTree = "<group>"; };
 		607EC9F61961DEDD00E73FD0 /* GreenCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenCircle.png; sourceTree = "<group>"; };
 		607EC9F81961DEE600E73FD0 /* RedCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedCircle.png; sourceTree = "<group>"; };
+		60BF65A419705F920095E43C /* Icon-Small-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-40@2x.png"; sourceTree = "<group>"; };
+		60BF65A519705F920095E43C /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		60D3D816195B64AD00BC70E8 /* conversationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conversationTableViewController.h; sourceTree = "<group>"; };
 		60D3D817195B64AE00BC70E8 /* conversationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = conversationTableViewController.m; sourceTree = "<group>"; };
 		60DE41881951E39D00F3E4A2 /* rshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rshViewController.m; sourceTree = "<group>"; };
@@ -207,6 +213,9 @@
 		8EECB440193CE7D2003BA82E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				600D13091970337100CEB59C /* Icon-60@2x.png */,
+				60BF65A419705F920095E43C /* Icon-Small-40@2x.png */,
+				60BF65A519705F920095E43C /* Icon-Small@2x.png */,
 				607EC9F81961DEE600E73FD0 /* RedCircle.png */,
 				607EC9F61961DEDD00E73FD0 /* GreenCircle.png */,
 				8EECB441193CE7D2003BA82E /* homepageTest-Info.plist */,
@@ -317,8 +326,11 @@
 				8EECB452193CE7D2003BA82E /* Images.xcassets in Resources */,
 				607EC9F91961DEE600E73FD0 /* RedCircle.png in Resources */,
 				607EC9F71961DEDD00E73FD0 /* GreenCircle.png in Resources */,
+				60BF65A619705F920095E43C /* Icon-Small-40@2x.png in Resources */,
 				8EECB444193CE7D2003BA82E /* InfoPlist.strings in Resources */,
+				60BF65A719705F920095E43C /* Icon-Small@2x.png in Resources */,
 				8EECB44D193CE7D2003BA82E /* Main.storyboard in Resources */,
+				600D130A1970337100CEB59C /* Icon-60@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
