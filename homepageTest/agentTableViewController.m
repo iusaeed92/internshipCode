@@ -29,25 +29,39 @@
 {
     [super viewDidLoad];
     
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
+    
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+   // self.tableView.separatorColor = [UIColor clearColor];
+    [self.tableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 245)];
+    
+    
+    self.tableViewFooter = [[UIView alloc] initWithFrame:CGRectMake(0, 430, self.view.frame.size.width, 80)];
+    [self.tableViewFooter setBackgroundColor:[UIColor whiteColor]];
+    
+    [self.view addSubview:self.tableViewFooter];
     
     
     NSLog(@"latest Test %@", self.theAccessToken);
     
     UIColor *myGreen =
-    [UIColor colorWithRed:(40.0/255.0) green:(159.0/255.0) blue:(90.0/255.0) alpha:1.0];
+    [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
     self.navigationController.navigationBar.barTintColor = myGreen;
-    
-    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];    [self.navigationController setNavigationBarHidden:NO];
 
+    [self.tableView setBackgroundColor:myGreen];
     
     //lets try and play with the agents API route. 
     
     self.thisUser = [[User alloc] init];
     
     
-    [self.tableView reloadData]; 
+    [self.tableView reloadData];
+    
+    
        
   //  NSLog(@"OBJECT access Token:%@", self.thisUser.accessToken);
     
@@ -111,8 +125,7 @@
     
     
     
-    
-    
+
     
     
     
@@ -152,40 +165,57 @@
 {
     
     
-     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
+    
+    static NSString *CellIdentifier = @"Cell";
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    agentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[agentTableViewCell alloc] init];
+    }
     // Configure the cell...
     UIColor *myGreen =
-    [UIColor colorWithRed:(40.0/255.0) green:(159.0/255.0) blue:(90.0/255.0) alpha:1.0];
+    [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
     
     
     
+    
+    
+    
+    
+    cell.customMaskImageView.image = [UIImage imageNamed:@"mask_white_22x22-01.png"];
+    [cell setBackgroundColor:myGreen];
     
     //if Mesh, display in green and display '<' before agent name.
    
     if ([[[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"mind"]  isEqual: @"mesh"]) {
         
-        cell.textLabel.textColor = myGreen;
+        cell.customMeshNameLabel.textColor = [UIColor whiteColor];
         NSString *meshSign = @"<";
         NSString *meshName = [meshSign stringByAppendingString:[[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"name"]];
 
+        cell.customCountMeshLabel.textColor = [UIColor whiteColor];
+        cell.customMeshNameLabel.text = meshName;
+        NSString *meshSize = [[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"size"];
         
+        NSLog(@"Size :%@", meshSize);
+        // cell.customCountMeshLabel.text = ;
         NSLog(@"Agent: %@", self.agentArray[indexPath.row]);
         
-        cell.textLabel.text = meshName;
+        
     }
     else {
-         cell.textLabel.text = [[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"name"];
-        }
+        cell.customMeshNameLabel.text = [@"@" stringByAppendingString:[[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"name"]];
+        cell.customMeshNameLabel.textColor = [UIColor whiteColor];
+        cell.customCountMeshLabel.text = nil;
+    }
     
- 
-    
-    return cell;
+     return cell;
 }
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
     if ([sender isKindOfClass:[UITableViewCell class]])//introspection, making sure what kind of class it is.
@@ -209,12 +239,15 @@
     
 }
 
-
-
-
-
-
-
+//
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+//
+//    
+//    return self.tableViewFooter;
+//}
+//
+//
 
 
 

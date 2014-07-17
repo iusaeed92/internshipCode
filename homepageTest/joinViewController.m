@@ -8,6 +8,7 @@
 
 #import "joinViewController.h"
 #import <AFNetworking/AFNetworking.h>
+#import <SSKeychain/SSKeychain.h>
 
 @interface joinViewController ()
 
@@ -30,7 +31,7 @@
 	// Do any additional setup after loading the view.
     
     UIColor *myGreen =
-    [UIColor colorWithRed:(40.0/255.0) green:(159.0/255.0) blue:(90.0/255.0) alpha:1.0];
+    [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
     self.navigationController.navigationBar.barTintColor = myGreen;
     
     
@@ -49,6 +50,8 @@
     NSString *username = self.usernameTextField.text;
     NSString *password = self.passwordTextfield.text;
     NSString *email = self.emailTextfield.text;
+
+    
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.responseSerializer setAcceptableContentTypes:
@@ -61,7 +64,13 @@
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
               
-              NSLog(@"Access Token%@", responseObject[@"accessToken"]);
+            NSString *accessToken = responseObject[@"accessToken"];
+              
+              
+              [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
+              
+              [SSKeychain setPassword:accessToken forService:@"Remesh" account:username];
+              [self performSegueWithIdentifier:@"joinToAgent" sender:self];
               
               NSLog(@"JSON: %@", responseObject);
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

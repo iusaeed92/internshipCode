@@ -1,0 +1,5 @@
+#include "Pods-KAProgressLabel.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/KAProgressLabel" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/JSMessagesViewController" "${PODS_ROOT}/Headers/JSQSystemSoundPlayer" "${PODS_ROOT}/Headers/KAProgressLabel" "${PODS_ROOT}/Headers/SSKeychain"
+OTHER_LDFLAGS = -ObjC ${PODS_KAPROGRESSLABEL_OTHER_LDFLAGS}
+PODS_ROOT = ${SRCROOT}

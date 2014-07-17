@@ -60,6 +60,12 @@
 #define COCOAPODS_VERSION_MINOR_JSQSystemSoundPlayer 5
 #define COCOAPODS_VERSION_PATCH_JSQSystemSoundPlayer 2
 
+// KAProgressLabel
+#define COCOAPODS_POD_AVAILABLE_KAProgressLabel
+#define COCOAPODS_VERSION_MAJOR_KAProgressLabel 1
+#define COCOAPODS_VERSION_MINOR_KAProgressLabel 2
+#define COCOAPODS_VERSION_PATCH_KAProgressLabel 0
+
 // SSKeychain
 #define COCOAPODS_POD_AVAILABLE_SSKeychain
 #define COCOAPODS_VERSION_MAJOR_SSKeychain 1

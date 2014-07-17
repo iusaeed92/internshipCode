@@ -28,6 +28,13 @@ int x = 1;
 	// Do any additional setup after loading the view, typically from a nib.
     
     
+    
+    UIColor *myGreen =
+    [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
+    
+    
+    
+    
     [self.navigationController setNavigationBarHidden:YES];
     
     self.currentUser = [[User alloc] init];
@@ -188,32 +195,49 @@ int x = 1;
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
+              NSNumber *errorCode = [responseObject objectForKey:@"errorCode"];
               
-              self.currentUser.accessToken = responseObject[@"accessToken"];
-              self.myAccessToken = responseObject[@"accessToken"];
-              NSLog(@" direct Access Token: %@", responseObject[@"accessToken"]);
-              NSLog(@"property access Token:%@", self.myAccessToken);
-              NSLog(@"the new access Token:%@", self.currentUser.accessToken);
+              NSLog(@"error:%@", errorCode);
               
+        
+              if ([errorCode isEqual:[[NSNumber alloc] initWithInt:1]])
+         
+              {
+                  
+                  
+                  [[[UIAlertView alloc]
+                    initWithTitle:NSLocalizedString(@"Login Failed", @"")
+                    message:NSLocalizedString(@"Username and or Password incorrect", @"")
+                    delegate:nil
+                    cancelButtonTitle:NSLocalizedString(@"Retry", @"")
+                    otherButtonTitles: nil] show];
+                  
+              }
               
-              [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
-              
-[SSKeychain setPassword:self.myAccessToken forService:@"Remesh" account:username];
-              
-              
-              
-              
+                    else{
+                  self.currentUser.accessToken = responseObject[@"accessToken"];
+                  self.myAccessToken = responseObject[@"accessToken"];
+                  NSLog(@" direct Access Token: %@", responseObject[@"accessToken"]);
+                  NSLog(@"property access Token:%@", self.myAccessToken);
+                  NSLog(@"the new access Token:%@", self.currentUser.accessToken);
+                  
+                  
+                  [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
+                  
+                  [SSKeychain setPassword:self.myAccessToken forService:@"Remesh" account:username];
               NSLog(@"User name: %@", username);
               NSLog(@"Access Token %@", self.myAccessToken);
-
-              
-              
-              [self performSegueWithIdentifier:@"toAgentsList" sender:self];
-              
+            [self performSegueWithIdentifier:@"toAgentsList" sender:self];
+              }
               
               NSLog(@"JSON: %@", responseObject);
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
+              
+             
+             
+              
+              
           }];
     
     

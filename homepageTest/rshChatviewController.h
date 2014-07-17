@@ -44,6 +44,7 @@
 
 @property (strong, nonatomic) UIButton *choiceTwoButton;
 
+@property (strong, nonatomic) UIView *headerView;
 
 
 @end

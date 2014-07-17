@@ -193,7 +193,7 @@
         
         
         
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 245, self.view.frame.size.width, 260)];
+    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 245, self.view.frame.size.width, 260)];
 
         
         
@@ -203,7 +203,7 @@
         self.choiceOneButton.backgroundColor = [UIColor remesh_GreenColor];
         self.choiceOneButton.titleLabel.numberOfLines = 3;
         [self.choiceOneButton setTitle:self.ChoiceOne[@"text"] forState:UIControlStateNormal];
-        [headerView addSubview:self.choiceOneButton];
+        [self.headerView addSubview:self.choiceOneButton];
         
         
       self.choiceTwoButton= [UIButton buttonWithType:UIButtonTypeCustom];
@@ -212,10 +212,10 @@
         self.choiceTwoButton.backgroundColor = [UIColor remesh_GreenColor];
         self.choiceTwoButton.titleLabel.numberOfLines = 3;
         [self.choiceTwoButton setTitle:self.ChoiceTwo[@"text"] forState:UIControlStateNormal];
-        headerView.backgroundColor = [UIColor whiteColor];
-       [headerView addSubview:self.choiceTwoButton];
+        self.headerView.backgroundColor = [UIColor whiteColor];
+       [self.headerView addSubview:self.choiceTwoButton];
         
-        [self.view addSubview:headerView];
+        [self.view addSubview:self.headerView];
         
         
         
@@ -427,6 +427,16 @@
        parameters:parametersTwo
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
+              
+              
+              NSNumber *pairs = responseObject[@"pairExists"];
+              
+              if([pairs isEqualToNumber:[[NSNumber alloc] initWithInt:1]]) {
+                  [self reloadInputViews];
+              }
+              
+              
+              
                self.numberOfChoices = 1;
               
               self.Choices = (NSArray *)responseObject[@"choices"];
@@ -456,6 +466,10 @@
 
 -(void) choiceTwoButtonClicked: (UIButton*)sender
 {
+    
+    [self reloadInputViews];
+    
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.responseSerializer setAcceptableContentTypes:
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
@@ -502,7 +516,16 @@
               
             //  if ([responseObject[@"pairExists"] isEqualToString:@"1"])
               
-              NSLog(@"Pair Exists %@", responseObject[@"pairExists"]); 
+              NSLog(@"Pair Exists %@", responseObject[@"pairExists"]);
+              
+              
+              NSNumber *pairs = responseObject[@"pairExists"];
+              
+              if([pairs isEqualToNumber:[[NSNumber alloc] initWithInt:1]]) {
+                  [self reloadInputViews];
+              }
+              
+              
               
               self.Choices = (NSArray *)responseObject[@"choices"];
               

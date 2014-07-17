@@ -120,6 +120,7 @@
 {
     
     
+    
     static NSString *CellIdentifier = @"Cell";
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
@@ -132,6 +133,11 @@
     UIImage *redCircleImage = [UIImage imageNamed:@"RedCircle.png"];
     
     
+    UIColor *myGreen =
+    [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
+    
+    UIColor *myRed =
+    [UIColor colorWithRed:(238.0/255.0) green:(61.0/255.0) blue:(14.0/255.0) alpha:1.0];
     
     
    
@@ -149,6 +155,23 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     NSDictionary *oponentData = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"opponent"];
     
     NSDictionary *senderData = thisConvoDetails[@"sender"];
@@ -158,9 +181,11 @@
     
     if ([senderData[@"name"] isEqual:oponentData[@"name"]]) {
          cell.customImageView.image = greenCircleImage;
+        cell.customTimeLabel.textColor = myGreen;
     }
     else {
         cell.customImageView.image = redCircleImage;
+        cell.customTimeLabel.textColor = myRed;
     }
     
     
@@ -180,9 +205,7 @@
         }
     
     
-    
-    
-    cell.customTextView.text = thisConvoDetails[@"text"];
+    cell.customTextLabelView.text = thisConvoDetails[@"text"];
    // NSLog(@"Date %@",[NSDate new]);
     
      NSTimeInterval deltaTime = [[[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"deltaT"] doubleValue];
@@ -225,6 +248,10 @@
     NSLog(@"Minutes: %i", mins);
     NSLog(@"Hours: %i", hours);
        timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+    
+    if (countDown > 0) {
+    
+        
     if (countDown < 60) {
         //NSLog(@"Seconds %f", secondsBetween);
 //        NSString *secondString = [[NSString alloc] initWithFormat:@"%i", countDown];//removes decimal
@@ -243,7 +270,11 @@ cell.customTimeLabel.text = [[NSString stringWithFormat:@"%i", countDown] string
         cell.customTimeLabel.text =
         [[NSString stringWithFormat:@"%i", mins] stringByAppendingString:@"m"];
     }
-    
+    }
+    else {
+        
+        cell.customTimeLabel.text = nil; 
+    }
     
 //    else if (secondsBetween > 60.0 && secondsBetween < 3600.0){
 //        NSLog(@"Minutes: %f", mins);

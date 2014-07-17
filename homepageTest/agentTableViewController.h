@@ -10,7 +10,7 @@
 #import <AFNetworking/AFNetworking.h> 
 #import "User.h"
 #import "rshViewController.h"
-
+#import "agentTableViewCell.h"
 
 
 @interface agentTableViewController : UITableViewController <UITableViewDataSource>
@@ -21,6 +21,10 @@
 @property (nonatomic, strong) NSString *theAccessToken;
 
 @property (nonatomic, strong) NSArray *agentArray;
+
+@property(nonatomic, strong) UIView *tableViewFooter;
+
+
 
 - (IBAction)backButton:(id)sender;
 

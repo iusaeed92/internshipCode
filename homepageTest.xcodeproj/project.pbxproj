@@ -9,9 +9,18 @@
 /* Begin PBXBuildFile section */
 		2EA98F10F9B14165B09E5587 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A04F3944E09F40609282EF7C /* libPods.a */; };
 		600D130A1970337100CEB59C /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 600D13091970337100CEB59C /* Icon-60@2x.png */; };
+		600F71B01976C22500DA77EE /* mask_green_60x60-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 600F71AF1976C22500DA77EE /* mask_green_60x60-01.png */; };
+		600F71B21976C45200DA77EE /* mask_white_60x60-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 600F71B11976C45200DA77EE /* mask_white_60x60-01.png */; };
+		600F71B61976CCF200DA77EE /* mask_white_40x40.ai in Resources */ = {isa = PBXBuildFile; fileRef = 600F71B51976CCF200DA77EE /* mask_white_40x40.ai */; };
+		600F71B81976CD9F00DA77EE /* mask_white_40x40-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 600F71B71976CD9F00DA77EE /* mask_white_40x40-01.png */; };
+		600F71BA1976CF2700DA77EE /* mask_white_32x32-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 600F71B91976CF2700DA77EE /* mask_white_32x32-01.png */; };
+		600F71BE1976D12000DA77EE /* mask_white_28x28-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 600F71BD1976D12000DA77EE /* mask_white_28x28-01.png */; };
+		600F71C01976D42400DA77EE /* mask_white_22x22-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 600F71BF1976D42400DA77EE /* mask_white_22x22-01.png */; };
+		600F71C31976D6B900DA77EE /* agentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 600F71C21976D6B900DA77EE /* agentTableViewCell.m */; };
 		607EC9F51961B78B00E73FD0 /* conversationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 607EC9F41961B78B00E73FD0 /* conversationTableViewCell.m */; };
 		607EC9F71961DEDD00E73FD0 /* GreenCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 607EC9F61961DEDD00E73FD0 /* GreenCircle.png */; };
 		607EC9F91961DEE600E73FD0 /* RedCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 607EC9F81961DEE600E73FD0 /* RedCircle.png */; };
+		60A18A191978156A00C7D990 /* testingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A18A181978156A00C7D990 /* testingViewController.m */; };
 		60BF65A619705F920095E43C /* Icon-Small-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60BF65A419705F920095E43C /* Icon-Small-40@2x.png */; };
 		60BF65A719705F920095E43C /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60BF65A519705F920095E43C /* Icon-Small@2x.png */; };
 		60D3D818195B64AE00BC70E8 /* conversationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D3D817195B64AE00BC70E8 /* conversationTableViewController.m */; };
@@ -50,10 +59,21 @@
 
 /* Begin PBXFileReference section */
 		600D13091970337100CEB59C /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		600F71AF1976C22500DA77EE /* mask_green_60x60-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask_green_60x60-01.png"; sourceTree = "<group>"; };
+		600F71B11976C45200DA77EE /* mask_white_60x60-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask_white_60x60-01.png"; sourceTree = "<group>"; };
+		600F71B51976CCF200DA77EE /* mask_white_40x40.ai */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mask_white_40x40.ai; sourceTree = "<group>"; };
+		600F71B71976CD9F00DA77EE /* mask_white_40x40-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask_white_40x40-01.png"; sourceTree = "<group>"; };
+		600F71B91976CF2700DA77EE /* mask_white_32x32-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask_white_32x32-01.png"; sourceTree = "<group>"; };
+		600F71BD1976D12000DA77EE /* mask_white_28x28-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask_white_28x28-01.png"; sourceTree = "<group>"; };
+		600F71BF1976D42400DA77EE /* mask_white_22x22-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask_white_22x22-01.png"; sourceTree = "<group>"; };
+		600F71C11976D6B900DA77EE /* agentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = agentTableViewCell.h; sourceTree = "<group>"; };
+		600F71C21976D6B900DA77EE /* agentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = agentTableViewCell.m; sourceTree = "<group>"; };
 		607EC9F31961B78B00E73FD0 /* conversationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conversationTableViewCell.h; sourceTree = "<group>"; };
 		607EC9F41961B78B00E73FD0 /* conversationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = conversationTableViewCell.m; sourceTree = "<group>"; };
 		607EC9F61961DEDD00E73FD0 /* GreenCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenCircle.png; sourceTree = "<group>"; };
 		607EC9F81961DEE600E73FD0 /* RedCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedCircle.png; sourceTree = "<group>"; };
+		60A18A171978156A00C7D990 /* testingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testingViewController.h; sourceTree = "<group>"; };
+		60A18A181978156A00C7D990 /* testingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testingViewController.m; sourceTree = "<group>"; };
 		60BF65A419705F920095E43C /* Icon-Small-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-40@2x.png"; sourceTree = "<group>"; };
 		60BF65A519705F920095E43C /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		60D3D816195B64AD00BC70E8 /* conversationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conversationTableViewController.h; sourceTree = "<group>"; };
@@ -73,7 +93,7 @@
 		8E3CEFFC19637465001F3DB9 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		8E5F0449193FAB1D004018AB /* joinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = joinViewController.h; sourceTree = "<group>"; };
 		8E5F044A193FAB1D004018AB /* joinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = joinViewController.m; sourceTree = "<group>"; };
-		8EECB436193CE7D2003BA82E /* homepageTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = homepageTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EECB436193CE7D2003BA82E /* Remesh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remesh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EECB439193CE7D2003BA82E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8EECB43B193CE7D2003BA82E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		8EECB43D193CE7D2003BA82E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -125,6 +145,10 @@
 			children = (
 				607EC9F31961B78B00E73FD0 /* conversationTableViewCell.h */,
 				607EC9F41961B78B00E73FD0 /* conversationTableViewCell.m */,
+				600F71C11976D6B900DA77EE /* agentTableViewCell.h */,
+				600F71C21976D6B900DA77EE /* agentTableViewCell.m */,
+				60A18A171978156A00C7D990 /* testingViewController.h */,
+				60A18A181978156A00C7D990 /* testingViewController.m */,
 			);
 			name = "Custom Cell";
 			sourceTree = "<group>";
@@ -165,7 +189,7 @@
 		8EECB437193CE7D2003BA82E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8EECB436193CE7D2003BA82E /* homepageTest.app */,
+				8EECB436193CE7D2003BA82E /* Remesh.app */,
 				8EECB457193CE7D2003BA82E /* homepageTestTests.xctest */,
 			);
 			name = Products;
@@ -213,6 +237,13 @@
 		8EECB440193CE7D2003BA82E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				600F71AF1976C22500DA77EE /* mask_green_60x60-01.png */,
+				600F71B51976CCF200DA77EE /* mask_white_40x40.ai */,
+				600F71B11976C45200DA77EE /* mask_white_60x60-01.png */,
+				600F71BD1976D12000DA77EE /* mask_white_28x28-01.png */,
+				600F71BF1976D42400DA77EE /* mask_white_22x22-01.png */,
+				600F71B91976CF2700DA77EE /* mask_white_32x32-01.png */,
+				600F71B71976CD9F00DA77EE /* mask_white_40x40-01.png */,
 				600D13091970337100CEB59C /* Icon-60@2x.png */,
 				60BF65A419705F920095E43C /* Icon-Small-40@2x.png */,
 				60BF65A519705F920095E43C /* Icon-Small@2x.png */,
@@ -263,7 +294,7 @@
 			);
 			name = homepageTest;
 			productName = homepageTest;
-			productReference = 8EECB436193CE7D2003BA82E /* homepageTest.app */;
+			productReference = 8EECB436193CE7D2003BA82E /* Remesh.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8EECB456193CE7D2003BA82E /* homepageTestTests */ = {
@@ -294,6 +325,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Ibrahim Saeed";
 				TargetAttributes = {
+					8EECB435193CE7D2003BA82E = {
+						DevelopmentTeam = S79ZH842CG;
+					};
 					8EECB456193CE7D2003BA82E = {
 						TestTargetID = 8EECB435193CE7D2003BA82E;
 					};
@@ -324,12 +358,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EECB452193CE7D2003BA82E /* Images.xcassets in Resources */,
+				600F71C01976D42400DA77EE /* mask_white_22x22-01.png in Resources */,
+				600F71B01976C22500DA77EE /* mask_green_60x60-01.png in Resources */,
 				607EC9F91961DEE600E73FD0 /* RedCircle.png in Resources */,
+				600F71BE1976D12000DA77EE /* mask_white_28x28-01.png in Resources */,
 				607EC9F71961DEDD00E73FD0 /* GreenCircle.png in Resources */,
 				60BF65A619705F920095E43C /* Icon-Small-40@2x.png in Resources */,
 				8EECB444193CE7D2003BA82E /* InfoPlist.strings in Resources */,
 				60BF65A719705F920095E43C /* Icon-Small@2x.png in Resources */,
+				600F71B81976CD9F00DA77EE /* mask_white_40x40-01.png in Resources */,
+				600F71BA1976CF2700DA77EE /* mask_white_32x32-01.png in Resources */,
+				600F71B21976C45200DA77EE /* mask_white_60x60-01.png in Resources */,
 				8EECB44D193CE7D2003BA82E /* Main.storyboard in Resources */,
+				600F71B61976CCF200DA77EE /* mask_white_40x40.ai in Resources */,
 				600D130A1970337100CEB59C /* Icon-60@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,10 +426,12 @@
 				60DE419A195898C500F3E4A2 /* Agent.m in Sources */,
 				8EECB44A193CE7D2003BA82E /* rshAppDelegate.m in Sources */,
 				8E3CEFFD19637465001F3DB9 /* RootViewController.m in Sources */,
+				60A18A191978156A00C7D990 /* testingViewController.m in Sources */,
 				60D3D818195B64AE00BC70E8 /* conversationTableViewController.m in Sources */,
 				60DE41941954C77A00F3E4A2 /* User.m in Sources */,
 				60DE418F1954831100F3E4A2 /* agentTableViewController.m in Sources */,
 				607EC9F51961B78B00E73FD0 /* conversationTableViewCell.m in Sources */,
+				600F71C31976D6B900DA77EE /* agentTableViewCell.m in Sources */,
 				60DE418C1951E3D600F3E4A2 /* rshChatViewController.m in Sources */,
 				8EECB446193CE7D2003BA82E /* main.m in Sources */,
 				60DE41971958861000F3E4A2 /* AgentsList.m in Sources */,
@@ -517,12 +560,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CA24CCF295E64C418A292E2F /* Pods.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "homepageTest/homepageTest-Prefix.pch";
 				INFOPLIST_FILE = "homepageTest/homepageTest-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Remesh;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -531,12 +576,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CA24CCF295E64C418A292E2F /* Pods.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "homepageTest/homepageTest-Prefix.pch";
 				INFOPLIST_FILE = "homepageTest/homepageTest-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Remesh;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
