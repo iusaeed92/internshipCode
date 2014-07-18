@@ -24,6 +24,10 @@
 
 @property(nonatomic, strong) UIView *tableViewFooter;
 
+- (IBAction)buttonToAddAgent:(UIBarButtonItem *)sender;
+
+
+
 
 
 - (IBAction)backButton:(id)sender;

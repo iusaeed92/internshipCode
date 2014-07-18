@@ -62,7 +62,7 @@
         if ([responseObject[@"convos"] isKindOfClass:[NSArray class]]) {
             NSLog(@"its an array!");
             NSArray *jsonArray = (NSArray *)responseObject[@"convos"];
-            NSLog(@"jsonArray - %@",jsonArray[0]);
+          //  NSLog(@"jsonArray - %@",jsonArray[0]);
             
             NSLog(@"Number of elements %i", [jsonArray count]);
             self.convosArray = jsonArray;

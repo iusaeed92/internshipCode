@@ -95,20 +95,20 @@
         <scene sceneID="ohR-cN-yTA">
             <objects>
                 <tableViewController storyboardIdentifier="agentVC" id="EoO-vS-MYx" customClass="agentTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="54" sectionHeaderHeight="22" sectionFooterHeight="22" id="dgD-hm-lYX">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" id="dgD-hm-lYX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="54" id="dpk-WI-ulf" customClass="agentTableViewCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="54"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="67" id="dpk-WI-ulf" customClass="agentTableViewCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="67"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dpk-WI-ulf" id="cNI-nm-F1v">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="53"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="imd-sG-pLC">
-                                            <rect key="frame" x="8" y="6" width="35" height="37"/>
+                                            <rect key="frame" x="8" y="6" width="49" height="50"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZK-XD-u04">
@@ -140,6 +140,16 @@
                             <outlet property="delegate" destination="EoO-vS-MYx" id="Xac-lf-QEb"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem width="139" style="plain" systemItem="fixedSpace" id="toq-qU-wNw"/>
+                        <barButtonItem title="Item" width="39" systemItem="add" id="Lj9-LH-70N">
+                            <color key="tintColor" red="0.22352941179999999" green="0.70980392160000005" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="buttonToAddAgent:" destination="EoO-vS-MYx" id="8D0-Ar-Cis"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem width="141" style="plain" systemItem="fixedSpace" id="zKS-NW-QSR"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Chat As" id="MUe-sr-7xf">
                         <barButtonItem key="leftBarButtonItem" title="back" id="NeJ-M8-OOG">
                             <color key="tintColor" red="0.95363305332448101" green="0.94588429802806906" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -151,6 +161,7 @@
                             <color key="tintColor" red="0.99829182829999996" green="0.95972952830000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="vXZ-lx-hvc" kind="push" identifier="backToLogin" id="Xl7-AQ-E3w"/>
                     </connections>
@@ -199,7 +210,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pxi-e9-n3s">
-                                            <rect key="frame" x="65" y="37" width="150" height="16"/>
+                                            <rect key="frame" x="65" y="37" width="150" height="19"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -339,6 +350,20 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kbC-Qp-Oad">
+                                <rect key="frame" x="-9" y="501" width="329" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="add" id="ddf-dO-Fbv"/>
+                                </items>
+                            </toolbar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IgW-kp-FNf">
+                                <rect key="frame" x="52" y="347" width="60" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -379,6 +404,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="JBG-Ox-xNp">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </toolbar>
                     <connections>
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="fec-Mg-UjR"/>
                     </connections>
@@ -395,7 +425,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Xl7-AQ-E3w"/>
         <segue reference="cn7-Ok-05d"/>
+        <segue reference="Xl7-AQ-E3w"/>
     </inferredMetricsTieBreakers>
 </document>

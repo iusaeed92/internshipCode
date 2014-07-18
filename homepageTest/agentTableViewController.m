@@ -29,8 +29,9 @@
 {
     [super viewDidLoad];
     
-    
-    
+    UIColor *myGreen =
+    [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
+    self.navigationController.navigationBar.barTintColor = myGreen;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -41,16 +42,43 @@
     
     self.tableViewFooter = [[UIView alloc] initWithFrame:CGRectMake(0, 430, self.view.frame.size.width, 80)];
     [self.tableViewFooter setBackgroundColor:[UIColor whiteColor]];
+    ;
     
-    [self.view addSubview:self.tableViewFooter];
+    
+    
+    //[self.view addSubview:self.tableViewFooter];
+//    
+self.navigationController.toolbarHidden = NO;
+//
+//    
+//   
+//    
+//    
+////    UIBarButtonItem *addAgent = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAgentButton)];
+//
+//  //  [addAgent setTitleTextAttributes:@{NSForegroundColorAttributeName : myGreen} forState:UIControlStateNormal];
+//    
+//    
+//    [self.navigationController.toolbar setBackgroundColor:[UIColor whiteColor]];
+//    
+//    NSArray *toolbarItems = [NSArray arrayWithObjects:addAgent, nil];
+//    
+//    
+//    self.toolbarItems = toolbarItems;
+    
+    
+    
+    
+    
+    
+    
     
     
     NSLog(@"latest Test %@", self.theAccessToken);
     
-    UIColor *myGreen =
-    [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
     self.navigationController.navigationBar.barTintColor = myGreen;
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    [self.navigationController setNavigationBarHidden:NO];
 
     [self.tableView setBackgroundColor:myGreen];
     
@@ -118,18 +146,30 @@
     
     
 }
+//
+//    
+//-(void)addAgentButton {
+//    
+//    NSLog(@"helloooo"); 
+//    
+//    
+//}
+//    
+//    
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setToolbarHidden:NO animated:YES];
+}
 
-    
-    
-    
-    
-    
-    
 
-    
-    
-    
-    
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController setToolbarHidden:YES animated:YES];
+}
+
+
+
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -316,6 +356,16 @@
 
 
 
+
+
+
+- (IBAction)buttonToAddAgent:(UIBarButtonItem *)sender {
+
+    NSLog(@"Hello"); 
+
+
+}
+
 - (IBAction)backButton:(id)sender {
 
     NSDictionary *parameters = @{@"accessToken": self.theAccessToken};
@@ -345,12 +395,10 @@
               NSLog(@"Error: %@", error);
           }];
     
-
-
-
-
-
 }
+
+
+
 @end
 
 
