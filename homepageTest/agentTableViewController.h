@@ -11,9 +11,12 @@
 #import "User.h"
 #import "rshViewController.h"
 #import "agentTableViewCell.h"
+#import "PageContentViewController.h"
 
 
 @interface agentTableViewController : UITableViewController <UITableViewDataSource>
+
+
 
 
 @property (nonatomic, strong) User *thisUser;

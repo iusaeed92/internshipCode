@@ -29,6 +29,11 @@
 {
     [super viewDidLoad];
     
+
+    
+    
+    //------------------------------------------------------------------------------------------------------------------
+    
     UIColor *myGreen =
     [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
     self.navigationController.navigationBar.barTintColor = myGreen;
@@ -135,7 +140,7 @@ self.navigationController.toolbarHidden = NO;
               
               
               
-             NSLog(@"JSON: %@", responseObject);
+             NSLog(@"JSON:  %@", responseObject);
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
           }];
@@ -237,10 +242,12 @@ self.navigationController.toolbarHidden = NO;
 
         cell.customCountMeshLabel.textColor = [UIColor whiteColor];
         cell.customMeshNameLabel.text = meshName;
-        NSString *meshSize = [[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"size"];
+        NSNumber *meshSize = [[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"size"];
         
+        
+        NSString *textForSize = [NSString stringWithFormat:@"%@", meshSize, nil];
         NSLog(@"Size :%@", meshSize);
-        // cell.customCountMeshLabel.text = ;
+        cell.customCountMeshLabel.text = textForSize; 
         NSLog(@"Agent: %@", self.agentArray[indexPath.row]);
         
         
@@ -304,12 +311,6 @@ self.navigationController.toolbarHidden = NO;
 
 
 
-
-
-
-
-
-
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -361,7 +362,7 @@ self.navigationController.toolbarHidden = NO;
 
 - (IBAction)buttonToAddAgent:(UIBarButtonItem *)sender {
 
-    NSLog(@"Hello"); 
+    [self performSegueWithIdentifier:@"toAddAgentsView" sender:self]; 
 
 
 }
@@ -399,6 +400,12 @@ self.navigationController.toolbarHidden = NO;
 
 
 
+- (IBAction)HelpButtonPressed:(UIBarButtonItem *)sender {
+
+   // [self performSegueWithIdentifier:@"help" sender:self];
+    
+    
+}
 @end
 
 

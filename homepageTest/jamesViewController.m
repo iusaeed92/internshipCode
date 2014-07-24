@@ -1,28 +1,18 @@
 //
-//  testingViewController.m
+//  jamesViewController.m
 //  homepageTest
 //
-//  Created by ibs on 7/17/14.
+//  Created by ibs on 7/22/14.
 //  Copyright (c) 2014 Ibrahim Saeed. All rights reserved.
 //
 
-#import "testingViewController.h"
-#import <KAProgressLabel/KAProgressLabel.h>
+#import "jamesViewController.h"
 
-
-
-@interface testingViewController ()   {
-    CGFloat startAngle;
-    CGFloat endAngle;
-}
+@interface jamesViewController ()
 
 @end
 
-@implementation testingViewController
-
-
-
-
+@implementation jamesViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,13 +26,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
-  
-        
-    [self.pLabel setProgress:(50/100)];
-
     // Do any additional setup after loading the view.
+    self.jamesImageView.image = [UIImage imageNamed:@"how_to_iOs_forIbs-06.png"];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning

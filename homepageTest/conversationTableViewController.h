@@ -10,7 +10,7 @@
 
 @interface conversationTableViewController : UITableViewController {
     
-    NSTimer *timer;
+   NSTimer *timer;
     int countDown;
 }
 
@@ -23,6 +23,11 @@
 @property (strong, nonatomic) NSString *agentID;
 
 
+@property (strong, nonatomic) NSDate *serverCurrentDate;
+
+@property (nonatomic) NSTimeInterval offset; 
+
+@property (nonatomic) BOOL turnToSpeak;
 
 
 @end

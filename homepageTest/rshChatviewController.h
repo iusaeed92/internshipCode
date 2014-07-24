@@ -37,6 +37,7 @@
 
 @property (nonatomic) int numberOfChoices;
 
+@property (nonatomic) BOOL turnToSpeak;
 
 @property (nonatomic) int transportCountDown;
 
@@ -45,6 +46,17 @@
 @property (strong, nonatomic) UIButton *choiceTwoButton;
 
 @property (strong, nonatomic) UIView *headerView;
+
+@property (strong, nonatomic) NSNumber *speakingStatus; 
+
+@property (nonatomic) id cellFromAgent;
+
+@property (strong, nonatomic) NSString *agentSign;
+
+@property (strong, nonatomic) NSString *agentNameForLabel;
+
+
+@property (strong, nonatomic) UILabel *yourLabel;
 
 
 @end

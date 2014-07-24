@@ -9,7 +9,7 @@
 #import "rshChatViewController.h"
 #import <SSKeychain/SSKeychain.h>
 #import <AFNetworking/AFNetworking.h>
-
+#import "agentTableViewController.h"
 
 
 @interface rshChatViewController ()
@@ -39,23 +39,47 @@
     self.delegate = self;
     self.dataSource = self;
     
-    countDown = self.transportCountDown;
+   countDown = self.transportCountDown;
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-  
-
+ 
+    NSLog(@"Speaking Status :%@", self.speakingStatus);
+    
+    self.agentNameForLabel = [self.agentSign stringByAppendingString:self.OponentName];
     
     
+    
+    
+   if (self.turnToSpeak == FALSE) {
+        NSLog(@"It's not your turn to speak right now");
+        UIView *blockUser = [[UIView alloc] initWithFrame:CGRectMake(0, 430, self.view.frame.size.width, 260)];
+        
+        blockUser.backgroundColor = [UIColor remesh_GreenColor];
+        [self.view addSubview:blockUser];
+        
+        [self.messageInputView resignFirstResponder];
+        self.yourLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, self.view.frame.size.width, 60)];
+        [self.yourLabel setTextColor:[UIColor whiteColor]];
+        [self.yourLabel setBackgroundColor:[UIColor clearColor]];
+        [self.yourLabel setFont:[UIFont fontWithName: @"Trebuchet MS" size: 18.0f]];
+        [blockUser addSubview:self.yourLabel];
+       timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+       // yourLabel.text = [@"Awaiting response from " stringByAppendingString:self.OponentName];
+       self.yourLabel.numberOfLines = 0;
+       [self.tableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 490)];
+    }
+    
+   
     
     
     
     [[JSBubbleView appearance] setFont:[UIFont systemFontOfSize:16.0f]];
-    self.messageInputView.textView.placeHolder = @"Mesh!";
-    
+    self.messageInputView.textView.placeHolder = @"post thought...";
+
     [self setBackgroundColor:[UIColor whiteColor]]; 
  
     
@@ -70,7 +94,7 @@
     //loads convos a given agent is in.
     
     NSDictionary *parameters = @{@"accessToken": token, @"convoId" :self.thisConvoId, @"limit" : @"10"};
-    [manager POST:@"http://54.89.45.91/app/api/convos/messages" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:@"http://54.89.45.91/app/api/convos/messages/real" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"messages %@", responseObject[@"messages"]);
         
@@ -98,14 +122,46 @@
     }];
     
     
+    }
     
     
+-(void)tick {
+
+    countDown--;
     
+       if (countDown > 0) {
+           if (countDown < 60) {
+               self.yourLabel.text = [self.agentNameForLabel stringByAppendingString:
+               [[NSString stringWithFormat:@ " has %i", countDown]
+                stringByAppendingString:@"s to respond"]];
+           }
+           else if (countDown > 60.0 && countDown < 3600.0){
+               int mins = countDown / 60;
+               self.yourLabel.text = [self.agentNameForLabel stringByAppendingString:
+               [[NSString stringWithFormat:@" has %i", mins]
+                stringByAppendingString:@"m to respond"]];
+           }
+           else {
+               int hours = countDown / 3600;
+               self.yourLabel.text =
+               [self.agentNameForLabel stringByAppendingString:
+               [[NSString stringWithFormat:@" has %i", hours]
+                stringByAppendingString:@"h to respond"]];
+           }
+       }
+        
+    if (countDown == 0){
+            [timer invalidate];
+        self.turnToSpeak = TRUE; 
+        [self viewDidLoad];
+        [self viewDidAppear:YES];
+        [self.headerView removeFromSuperview];
+    }
+        if (countDown < 0) {
+            self.yourLabel.text = @"Loading"; 
+        }
     
-    
-    
-    
-    
+    }
     //you can set user here
     
     //nav bar title, so you'd put who you are currently chatting with..
@@ -117,7 +173,7 @@
     //number of rows in previous table would be the number of conversations. 
     
     
-}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -149,6 +205,11 @@
 
 -(void)didSendText:(NSString *)text{
     
+    
+    
+    
+
+        
     
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
     NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];
@@ -228,6 +289,7 @@
 
     
     
+    
 }
 
 
@@ -280,6 +342,12 @@
 
 -(JSMessagesViewTimestampPolicy)timestampPolicy{
     
+    
+    
+    
+    
+    
+    
     return JSMessagesViewTimestampPolicyAll;
 }
 
@@ -291,6 +359,7 @@
     
 
 }
+
 
 
 
@@ -467,8 +536,6 @@
 -(void) choiceTwoButtonClicked: (UIButton*)sender
 {
     
-    [self reloadInputViews];
-    
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.responseSerializer setAcceptableContentTypes:
@@ -538,14 +605,6 @@
               [self.choiceOneButton setTitle:self.ChoiceOne[@"text"] forState:UIControlStateNormal];
               [self.choiceTwoButton setTitle:self.ChoiceTwo[@"text"] forState:UIControlStateNormal];
               
-              
-              
-//              
-//              else{
-//                  NSLog(@"it failed");
-//              }
-//
-          
      
               NSLog(@"New thoughts!  %@", responseObject);
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

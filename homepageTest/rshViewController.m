@@ -50,6 +50,7 @@ int x = 1;
 
 
 
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
@@ -134,6 +135,12 @@ int x = 1;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    
+    
+    [self.navigationController setNavigationBarHidden:YES];
+    
+    
+    
     // register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow)
