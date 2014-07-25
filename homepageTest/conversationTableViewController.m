@@ -240,7 +240,7 @@
     
     timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
     
-    if (countDown > 0) {
+    if (countDown >  0) {
         if (countDown < 60) {
             cell.customTimeLabel.text = [[NSString stringWithFormat:@"%i", countDown] stringByAppendingString:@"s"];
             }
@@ -258,7 +258,7 @@ int mins = countDown / 60;
     }
     else {
         cell.customTimeLabel.text = nil;
-    }
+        }
     
         return cell;
     
@@ -272,9 +272,6 @@ int mins = countDown / 60;
     
        countDown--;
     [self.tableView reloadData];
-   
-    
-    
     if (countDown < 0)
         [timer invalidate];
 
@@ -350,6 +347,19 @@ int mins = countDown / 60;
     {
         chatVC.agentSign = @"@";
     }
+    
+    
+    NSNumber *speakingStatus = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"speaking"];
+    if ([speakingStatus isEqual:[[NSNumber alloc] initWithInt:1]]) {
+ 
+        self.turnToSpeak = TRUE;
+    }
+    else {
+        self.turnToSpeak = FALSE;
+    }
+
+    
+    
         
     chatVC.title = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"topic"];
     chatVC.transportCountDown = countDown;

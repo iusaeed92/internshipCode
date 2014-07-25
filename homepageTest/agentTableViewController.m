@@ -402,7 +402,7 @@ self.navigationController.toolbarHidden = NO;
 
 - (IBAction)HelpButtonPressed:(UIBarButtonItem *)sender {
 
-   // [self performSegueWithIdentifier:@"help" sender:self];
+    [self performSegueWithIdentifier:@"toHelpView" sender:self];
     
     
 }
