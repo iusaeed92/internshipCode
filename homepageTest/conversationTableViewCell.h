@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *customStoryTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *customTextLabelView;
 @property (strong, nonatomic) IBOutlet UILabel *customAgentNameLabel;
+@property (nonatomic) int customCellCountdown;
 
 
 @end

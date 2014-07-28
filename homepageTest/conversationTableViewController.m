@@ -225,7 +225,7 @@
     [nextMessageDate dateByAddingTimeInterval:(-1*self.offset)];
     NSTimeInterval secondsBetween = [newNextMessageDate timeIntervalSinceNow];
     countDown = secondsBetween;
-    
+    cell.customCellCountdown = secondsBetween;
     
     timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
     
@@ -308,8 +308,9 @@ int mins = countDown / 60;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    
-//    [self performSegueWithIdentifier:@"ConvosToChat" sender:indexPath];
+    
+    
+  //[self performSegueWithIdentifier:@"ConvosToChat" sender:indexPath];
 
     NSLog(@"Meow"); 
 }
@@ -321,6 +322,11 @@ int mins = countDown / 60;
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    
+    conversationTableViewCell *CellForSegue = sender;
+
+    
+    
     rshChatViewController *chatVC = segue.destinationViewController;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
    chatVC.thisConversation = [self.convosArray objectAtIndex:indexPath.row];
@@ -328,6 +334,7 @@ int mins = countDown / 60;
     NSLog(@"To chat: %@", chatVC.thisConversation);
     NSDictionary *oponentData = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"opponent"];
     chatVC.OponentName = oponentData[@"name"];
+    chatVC.transportCountDown = CellForSegue.customCellCountdown;
     
     if ([oponentData[@"mind"] isEqual: @"mesh"]) {
         chatVC.agentSign = @"<";
@@ -347,15 +354,10 @@ int mins = countDown / 60;
         self.turnToSpeak = FALSE;
     }
 
-    
-    
-        
     chatVC.title = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"topic"];
-    chatVC.transportCountDown = countDown;
     chatVC.turnToSpeak = self.turnToSpeak; 
     chatVC.speakingStatus = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"speaking"] ;
-    
-    NSLog(@"Convo ID is %@", chatVC.thisConvoId); 
+    NSLog(@"Convo ID is %@", chatVC.thisConvoId);
     
     
     // Get the new view controller using [segue destinationViewController].

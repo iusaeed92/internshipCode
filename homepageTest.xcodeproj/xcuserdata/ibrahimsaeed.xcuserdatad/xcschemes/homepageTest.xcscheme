@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8EECB435193CE7D2003BA82E"
-               BuildableName = "homepageTest.app"
+               BuildableName = "Remesh.app"
                BlueprintName = "homepageTest"
                ReferencedContainer = "container:homepageTest.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8EECB435193CE7D2003BA82E"
-            BuildableName = "homepageTest.app"
+            BuildableName = "Remesh.app"
             BlueprintName = "homepageTest"
             ReferencedContainer = "container:homepageTest.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8EECB435193CE7D2003BA82E"
-            BuildableName = "homepageTest.app"
+            BuildableName = "Remesh.app"
             BlueprintName = "homepageTest"
             ReferencedContainer = "container:homepageTest.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8EECB435193CE7D2003BA82E"
-            BuildableName = "homepageTest.app"
+            BuildableName = "Remesh.app"
             BlueprintName = "homepageTest"
             ReferencedContainer = "container:homepageTest.xcodeproj">
          </BuildableReference>
