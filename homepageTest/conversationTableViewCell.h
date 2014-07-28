@@ -10,17 +10,13 @@
 
 @interface conversationTableViewCell : UITableViewCell
 
+
+//conversation cell
+
 @property (strong, nonatomic) IBOutlet UILabel *customTimeLabel;
-
-
 @property (strong, nonatomic) IBOutlet UIImageView *customImageView;
 @property (strong, nonatomic) IBOutlet UILabel *customStoryTitleLabel;
-
-
-
 @property (strong, nonatomic) IBOutlet UILabel *customTextLabelView;
-
-
 @property (strong, nonatomic) IBOutlet UILabel *customAgentNameLabel;
 
 

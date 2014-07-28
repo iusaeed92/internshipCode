@@ -11,10 +11,7 @@
 @interface agentTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *customCountMeshLabel;
-
 @property (strong, nonatomic) IBOutlet UILabel *customMeshNameLabel;
-
-
 @property (strong, nonatomic) IBOutlet UIImageView *customMaskImageView;
 
 

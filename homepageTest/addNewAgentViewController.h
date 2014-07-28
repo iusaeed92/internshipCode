@@ -11,17 +11,9 @@
 @interface addNewAgentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UILabel *publicMeshesLabel;
-
-
 @property (strong, nonatomic) IBOutlet UITextField *meshCodeTextField;
-
 @property (strong, nonatomic) IBOutlet UITableView *suggestedMeshTableView;
-
-
 @property (strong, nonatomic) NSArray *suggestedMeshesArray;
-
-
-
 
 - (IBAction)addButton:(UIButton *)sender;
 

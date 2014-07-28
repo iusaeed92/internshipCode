@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "homepageTest/rshViewController.m"
-            timestampString = "427658955.697051"
+            timestampString = "428264216.045932"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "-loginButtonPressed:"
             landmarkType = "5">
          </BreakpointContent>

@@ -32,7 +32,8 @@
     // Do any additional setup after loading the view.
     
     
-   
+   // this is to display login page if there's no access token available.
+    // 
  
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
     NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];

@@ -56,14 +56,13 @@
         
         NSLog(@"Convos %@", responseObject[@"convos"]);
         
+        //checking if it's an array or dictionary
         if ([responseObject[@"convos"] isKindOfClass:[NSArray class]]) {
             NSLog(@"its an array!");
             NSArray *jsonArray = (NSArray *)responseObject[@"convos"];
-          //  NSLog(@"jsonArray - %@",jsonArray[0]);
-            
             NSLog(@"Number of elements %i", [jsonArray count]);
             self.convosArray = jsonArray;
-       [self.tableView reloadData];
+            [self.tableView reloadData];
         }
         else {
             NSLog(@"its probably a dictionary");
@@ -76,28 +75,22 @@
     }];
 
     
+    //getting server time from API
     
     AFHTTPRequestOperationManager *manage = [AFHTTPRequestOperationManager manager];
     [manage.responseSerializer setAcceptableContentTypes:
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
-    //loads convos a given agent is in.
-    
     NSDictionary *parameter = @{};
     [manage POST:@"http://54.89.45.91/app/api/time/sync" parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        
-        
-        
-        NSString *serverTime = [[responseObject objectForKey:@"serverTime"] stringByAppendingString:@" +0300"];
+        NSString *serverTime =
+        [[responseObject objectForKey:@"serverTime"] stringByAppendingString:@" +0300"];
         NSLog(@"serveTime : %@", serverTime);
-        
-        
         NSDateFormatter *oDateFormatter = [[NSDateFormatter alloc] init];
         [oDateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"EST"]];
         [oDateFormatter setDateFormat:@"yyyy - MM - dd HH:mm:ss Z"];
         self.serverCurrentDate = [oDateFormatter dateFromString:serverTime];
-    
         self.offset = [self.serverCurrentDate timeIntervalSinceNow];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -106,10 +99,6 @@
     
 
 }
-
-
-
-
 
 
 -(void)viewWillAppear:(BOOL)animated

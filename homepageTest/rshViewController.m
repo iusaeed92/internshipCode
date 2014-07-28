@@ -138,9 +138,6 @@ int x = 1;
     
     
     [self.navigationController setNavigationBarHidden:YES];
-    
-    
-    
     // register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow)
@@ -180,7 +177,7 @@ int x = 1;
 
 
 
-- (IBAction)joinButton:(UIButton *)sender { //when join button is pressed, everything in this button is pressed.
+- (IBAction)joinButton:(UIButton *)sender { //segue's to Join page through storyboard
 }
 
 - (IBAction)loginButtonPressed:(UIButton *)sender {
@@ -189,29 +186,18 @@ int x = 1;
     
     NSString *username = self.usernameTextfield.text;
     NSString *password = self.passwordTextfield.text;
-    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    
     [manager.responseSerializer setAcceptableContentTypes:
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
     NSDictionary *parameters = @{@"username": username, @"password" : password};
-    
     [manager POST:@"http://54.89.45.91/app/api/user/login"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
               NSNumber *errorCode = [responseObject objectForKey:@"errorCode"];
-              
               NSLog(@"error:%@", errorCode);
-              
-        
-              if ([errorCode isEqual:[[NSNumber alloc] initWithInt:1]])
-         
-              {
-                  
-                  
+              if ([errorCode isEqual:[[NSNumber alloc] initWithInt:1]]) {
                   [[[UIAlertView alloc]
                     initWithTitle:NSLocalizedString(@"Login Failed", @"")
                     message:NSLocalizedString(@"Username and or Password incorrect", @"")
@@ -220,37 +206,20 @@ int x = 1;
                     otherButtonTitles: nil] show];
                   
               }
-              
-                    else{
+              else{
                   self.currentUser.accessToken = responseObject[@"accessToken"];
                   self.myAccessToken = responseObject[@"accessToken"];
-                  NSLog(@" direct Access Token: %@", responseObject[@"accessToken"]);
-                  NSLog(@"property access Token:%@", self.myAccessToken);
-                  NSLog(@"the new access Token:%@", self.currentUser.accessToken);
-                  
-                  
                   [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
-                  
                   [SSKeychain setPassword:self.myAccessToken forService:@"Remesh" account:username];
               NSLog(@"User name: %@", username);
               NSLog(@"Access Token %@", self.myAccessToken);
-            [self performSegueWithIdentifier:@"toAgentsList" sender:self];
+                  [self performSegueWithIdentifier:@"toAgentsList" sender:self];
               }
               
               NSLog(@"JSON: %@", responseObject);
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
-              
-             
-             
-              
-              
-          }];
-    
-    
-
-    
-    
+              }];
     }
 
 

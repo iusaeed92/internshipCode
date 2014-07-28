@@ -37,69 +37,29 @@
     UIColor *myGreen =
     [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
     self.navigationController.navigationBar.barTintColor = myGreen;
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    // Uncomment the following line to preserve selection between presentations
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-   // self.tableView.separatorColor = [UIColor clearColor];
     [self.tableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 245)];
     
     
     self.tableViewFooter = [[UIView alloc] initWithFrame:CGRectMake(0, 430, self.view.frame.size.width, 80)];
     [self.tableViewFooter setBackgroundColor:[UIColor whiteColor]];
-    ;
     
     
-    
-    //[self.view addSubview:self.tableViewFooter];
-//    
-self.navigationController.toolbarHidden = NO;
-//
-//    
-//   
-//    
-//    
-////    UIBarButtonItem *addAgent = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAgentButton)];
-//
-//  //  [addAgent setTitleTextAttributes:@{NSForegroundColorAttributeName : myGreen} forState:UIControlStateNormal];
-//    
-//    
-//    [self.navigationController.toolbar setBackgroundColor:[UIColor whiteColor]];
-//    
-//    NSArray *toolbarItems = [NSArray arrayWithObjects:addAgent, nil];
-//    
-//    
-//    self.toolbarItems = toolbarItems;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    NSLog(@"latest Test %@", self.theAccessToken);
-    
+    self.navigationController.toolbarHidden = NO;
     self.navigationController.navigationBar.barTintColor = myGreen;
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-    [self.navigationController setNavigationBarHidden:NO];
-
-    [self.tableView setBackgroundColor:myGreen];
     
-    //lets try and play with the agents API route. 
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.tableView setBackgroundColor:myGreen];
     
     self.thisUser = [[User alloc] init];
     
-    
     [self.tableView reloadData];
     
-    
-       
-  //  NSLog(@"OBJECT access Token:%@", self.thisUser.accessToken);
-    
-    
-
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.responseSerializer setAcceptableContentTypes:
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
@@ -109,24 +69,14 @@ self.navigationController.toolbarHidden = NO;
     
     
     NSLog(@"Username %@", userName);
-    
-   // NSLog(@"token ON DIFFERENT VIEW : %@", token);
-    
     NSDictionary *parameters = @{@"accessToken": self.theAccessToken , @"isIn" : @"1"};
-    
     [manager POST:@"http://54.89.45.91/app/api/user/agent"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
-              //   NSLog(@"Access Token%@", responseObject[@"accessToken"]);
-              
-              
-              
               if ([responseObject[@"agents"] isKindOfClass:[NSArray class]]) {
                   NSLog(@"its an array!");
                   NSArray *jsonArray = (NSArray *)responseObject[@"agents"];
-                  //     NSLog(@"jsonArray - %@",jsonArray[0]);
-                  
                   NSLog(@"Number of elements %i", [jsonArray count]);
                   self.agentArray = jsonArray;
                   [self.tableView reloadData];
@@ -137,36 +87,17 @@ self.navigationController.toolbarHidden = NO;
                   NSLog(@"jsonDictionary - %@",jsonDictionary);
               }
               
-              
-              
-              
-             NSLog(@"JSON:  %@", responseObject);
+              NSLog(@"JSON:  %@", responseObject);
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
           }];
-    
-    
-    
-    
-    
-    
-}
-//
-//    
-//-(void)addAgentButton {
-//    
-//    NSLog(@"helloooo"); 
-//    
-//    
-//}
-//    
-//    
+    }
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.navigationController setToolbarHidden:NO animated:YES];
 }
-
-
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -185,9 +116,7 @@ self.navigationController.toolbarHidden = NO;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
-    
-    
-}
+    }
 
 #pragma mark - Table view data source
 
@@ -208,10 +137,7 @@ self.navigationController.toolbarHidden = NO;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-    
-    
+
     static NSString *CellIdentifier = @"Cell";
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
@@ -222,13 +148,6 @@ self.navigationController.toolbarHidden = NO;
     // Configure the cell...
     UIColor *myGreen =
     [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
-    
-    
-    
-    
-    
-    
-    
     cell.customMaskImageView.image = [UIImage imageNamed:@"mask_white_22x22-01.png"];
     [cell setBackgroundColor:myGreen];
     
@@ -271,20 +190,19 @@ self.navigationController.toolbarHidden = NO;
              [conversationTableViewController class]]) {
             
             //passing details forward so AF call can be made in ConvoTableVC.
-            
             conversationTableViewController *ConvoTableVC = segue.destinationViewController;
             ConvoTableVC.path = [self.tableView indexPathForCell:sender];
             ConvoTableVC.currentAgent = self.agentArray[ConvoTableVC.path.row];
-            ConvoTableVC.agentID =  [[self.agentArray objectAtIndex:ConvoTableVC.path.row] objectForKey:@"id"];
+            ConvoTableVC.agentID =
+            [[self.agentArray objectAtIndex:ConvoTableVC.path.row] objectForKey:@"id"];
             
-            ConvoTableVC.title = [[self.agentArray objectAtIndex:ConvoTableVC.path.row] objectForKey:@"name"];
-            
-        
-        
+            ConvoTableVC.title =
+            [[self.agentArray objectAtIndex:ConvoTableVC.path.row] objectForKey:@"name"];
         }
     }
     
 }
+
 
 //
 //
@@ -301,11 +219,6 @@ self.navigationController.toolbarHidden = NO;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    
-    UITableViewCell *selectedCell=[tableView cellForRowAtIndexPath:indexPath];
-    
-    
-    
     
 }
 
@@ -367,11 +280,11 @@ self.navigationController.toolbarHidden = NO;
 
 }
 
+
+//this method is basically logout button for now 
 - (IBAction)backButton:(id)sender {
 
     NSDictionary *parameters = @{@"accessToken": self.theAccessToken};
-    
-    
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.responseSerializer setAcceptableContentTypes:
@@ -403,7 +316,6 @@ self.navigationController.toolbarHidden = NO;
 - (IBAction)HelpButtonPressed:(UIBarButtonItem *)sender {
 
     [self performSegueWithIdentifier:@"toHelpView" sender:self];
-    
     
 }
 @end

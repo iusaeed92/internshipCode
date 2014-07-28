@@ -109,21 +109,22 @@
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//this function adds a mesh to the meshes an agents is in if they select row. 
 {
     UIColor *myGreen =
     [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
-
-
-            static NSString *CellIdentifier = @"Cell";
-UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-
+    
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell =
+    
+    [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.textLabel.textColor = myGreen;
-            cell.textLabel.text = [@"<" stringByAppendingString:[[self.suggestedMeshesArray objectAtIndex:indexPath.row] objectForKey:@"name"]];
+    cell.textLabel.text =
+    [@"<" stringByAppendingString:[[self.suggestedMeshesArray objectAtIndex:indexPath.row] objectForKey:@"name"]];
+    
     return cell;
-    
-    
 }
 
 
@@ -140,7 +141,6 @@ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentif
     
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
     NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];
-    
     NSString *code = [[self.suggestedMeshesArray objectAtIndex:indexPath.row] objectForKey:@"code"];
     
     
@@ -151,22 +151,11 @@ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentif
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
-              
               NSNumber *errorCode = [responseObject objectForKey:@"success"];
-              
               NSLog(@"error:%@", errorCode);
-              
-              
-              if ([errorCode isEqual:[[NSNumber alloc] initWithInt:1]])
-                  
-              {
-                  
-                  
+              if ([errorCode isEqual:[[NSNumber alloc] initWithInt:1]]) {
                   [self.suggestedMeshTableView reloadData];
-                 
-                  
-              }
-              
+                 }
               
               else {
                   [[[UIAlertView alloc]
@@ -175,24 +164,12 @@ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentif
                     delegate:nil
                     cancelButtonTitle:NSLocalizedString(@"Retry", @"")
                     otherButtonTitles: nil] show];
-                  
-              }
-              
-              
-              
+                  }
               
               NSLog(@"JSON Loaded: %@", responseObject);
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
           }];
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
 
@@ -202,7 +179,7 @@ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentif
 - (IBAction)addButton:(UIButton *)sender {
 
 
-
+    
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.responseSerializer setAcceptableContentTypes:
@@ -210,34 +187,18 @@ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentif
     
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
     NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];
-    
-    NSString *code = self.meshCodeTextField.text; 
-    
-    
-    
+    NSString *code = self.meshCodeTextField.text;
     NSDictionary *parameters = @{@"accessToken": token , @"code" : code};
-    
     [manager POST:@"http://54.89.45.91/app/api/user/agent/join"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
-              
               NSNumber *errorCode = [responseObject objectForKey:@"success"];
-              
               NSLog(@"error:%@", errorCode);
               
-              
-            if ([errorCode isEqual:[[NSNumber alloc] initWithInt:1]])
-                  
-              {
-                  
-              
+              if ([errorCode isEqual:[[NSNumber alloc] initWithInt:1]]) {
                   [self.suggestedMeshTableView reloadData];
-                  
-              
                   }
-
-              
               else {
                   [[[UIAlertView alloc]
                     initWithTitle:NSLocalizedString(@"Agent Join Failed", @"")
@@ -245,22 +206,14 @@ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentif
                     delegate:nil
                     cancelButtonTitle:NSLocalizedString(@"Retry", @"")
                     otherButtonTitles: nil] show];
-
-              }
+                    }
               
-              
-              
-              
-             NSLog(@"JSON Loaded: %@", responseObject);
+              NSLog(@"JSON Loaded: %@", responseObject);
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
           }];
-
-
-
-
-
-
-
 }
+
+
+
 @end

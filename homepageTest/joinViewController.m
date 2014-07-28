@@ -33,9 +33,6 @@
     UIColor *myGreen =
     [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
     self.navigationController.navigationBar.barTintColor = myGreen;
-    
-    
-    
     [self.navigationController setNavigationBarHidden:NO];
     [self.passwordTextfield becomeFirstResponder]; 
 }
@@ -51,7 +48,7 @@
     NSString *password = self.passwordTextfield.text;
     NSString *email = self.emailTextfield.text;
 
-    
+    //user join API call
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.responseSerializer setAcceptableContentTypes:
