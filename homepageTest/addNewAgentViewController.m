@@ -155,6 +155,7 @@
               NSLog(@"error:%@", errorCode);
               if ([errorCode isEqual:[[NSNumber alloc] initWithInt:1]]) {
                   [self.suggestedMeshTableView reloadData];
+                  [self viewDidLoad];
                  }
               
               else {
@@ -198,6 +199,7 @@
               
               if ([errorCode isEqual:[[NSNumber alloc] initWithInt:1]]) {
                   [self.suggestedMeshTableView reloadData];
+                
                   }
               else {
                   [[[UIAlertView alloc]

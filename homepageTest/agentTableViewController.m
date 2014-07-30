@@ -97,6 +97,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.navigationController setToolbarHidden:NO animated:YES];
+    [self viewDidLoad];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
