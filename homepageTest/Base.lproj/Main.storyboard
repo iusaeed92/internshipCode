@@ -167,6 +167,7 @@
                                 <rect key="frame" x="0.0" y="195" width="320" height="373"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Rav-q4-tZa">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -177,6 +178,9 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="7jF-Aa-AUG" appends="YES" id="jHk-D3-nuY"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yut-BH-OxP">
                                 <rect key="frame" x="256" y="74" width="30" height="30"/>
@@ -201,6 +205,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bGr-pH-A8k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="7jF-Aa-AUG">
+                    <connections>
+                        <action selector="tapGestureOnTableView:" destination="PMg-Uy-UyX" id="oRZ-hj-3fP"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="392" y="-1610"/>
         </scene>

@@ -172,8 +172,10 @@
     
 }
 
+- (IBAction)tapGestureOnTableView:(UITapGestureRecognizer *)sender {
 
-
+    [self.meshCodeTextField resignFirstResponder];
+}
 
 - (IBAction)addButton:(UIButton *)sender {
 
