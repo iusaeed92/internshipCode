@@ -290,7 +290,7 @@ self.navigationItem.hidesBackButton = YES;    //--------------------------------
 
 - (IBAction)HelpButtonPressed:(UIBarButtonItem *)sender {
 
-    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:@"Select Sharing option:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:
+    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:@"Options:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:
                             @"Help",
                             @"Logout",
                             nil];

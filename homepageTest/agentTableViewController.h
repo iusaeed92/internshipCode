@@ -16,16 +16,10 @@
 
 @interface agentTableViewController : UITableViewController <UITableViewDataSource, UIActionSheetDelegate>
 
-
-
-
 @property (nonatomic, strong) User *thisUser;
 @property (nonatomic, strong) NSString *theAccessToken;
 @property (nonatomic, strong) NSArray *agentArray;
 @property(nonatomic, strong) UIView *tableViewFooter;
-
-
-
 
 - (IBAction)buttonToAddAgent:(UIBarButtonItem *)sender;
 

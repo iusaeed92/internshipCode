@@ -172,11 +172,28 @@
     
 }
 
-- (IBAction)tapGestureOnTableView:(UITapGestureRecognizer *)sender {
+//- (IBAction)tapGestureOnTableView:(UITapGestureRecognizer *)sender {
+//
+//    
+//    
+//    [self.meshCodeTextField resignFirstResponder];
+//    
+//    CGPoint location = [sender locationInView:self.view];
+//    
+//    if (CGRectContainsPoint([self.view convertRect:self.suggestedMeshTableView.frame fromView:self.suggestedMeshTableView.superview], location))
+//    {
+//        CGPoint locationInTableview = [self.suggestedMeshTableView convertPoint:location fromView:self.view];
+//        NSIndexPath *indexPath = [self.suggestedMeshTableView indexPathForRowAtPoint:locationInTableview];
+//        if (indexPath)
+//            [self tableView:self.suggestedMeshTableView didSelectRowAtIndexPath:indexPath];
+//    }
+//}
+//
 
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self.meshCodeTextField resignFirstResponder];
 }
-
 - (IBAction)addButton:(UIButton *)sender {
 
 

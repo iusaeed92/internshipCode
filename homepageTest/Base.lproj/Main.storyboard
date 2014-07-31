@@ -178,9 +178,6 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="7jF-Aa-AUG" appends="YES" id="jHk-D3-nuY"/>
-                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yut-BH-OxP">
                                 <rect key="frame" x="256" y="74" width="30" height="30"/>
@@ -205,11 +202,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bGr-pH-A8k" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="7jF-Aa-AUG">
-                    <connections>
-                        <action selector="tapGestureOnTableView:" destination="PMg-Uy-UyX" id="oRZ-hj-3fP"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="392" y="-1610"/>
         </scene>
@@ -284,7 +276,8 @@
                         <barButtonItem width="141" style="plain" systemItem="fixedSpace" id="zKS-NW-QSR"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Chat As" id="MUe-sr-7xf">
-                        <barButtonItem key="rightBarButtonItem" title="Gear" id="bRc-8P-j0b">
+                        <barButtonItem key="rightBarButtonItem" image="gear_3_64_64.png" id="bRc-8P-j0b">
+                            <inset key="imageInsets" minX="32" minY="15" maxX="0.0" maxY="15"/>
                             <color key="tintColor" red="0.99829182829999996" green="0.95972952830000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="HelpButtonPressed:" destination="EoO-vS-MYx" id="7MV-9r-qC6"/>
@@ -300,7 +293,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CfF-Ad-rbp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1080" y="-199"/>
+            <point key="canvasLocation" x="1040" y="-192"/>
         </scene>
         <!--Conversation Table View Controller-->
         <scene sceneID="Kuq-PK-1rE">
@@ -505,6 +498,9 @@
             <point key="canvasLocation" x="178" y="204"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="gear_3_64_64.png" width="64" height="64"/>
+    </resources>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -512,7 +508,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gMK-c7-E5c"/>
-        <segue reference="fec-Mg-UjR"/>
+        <segue reference="cn7-Ok-05d"/>
+        <segue reference="Xl7-AQ-E3w"/>
     </inferredMetricsTieBreakers>
 </document>
