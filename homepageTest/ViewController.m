@@ -25,7 +25,7 @@
     
     self.view.backgroundColor = myGreen;
     
-  //  [self.navigationController setNavigationBarHidden:YES];
+  // [self.navigationController setNavigationBarHidden:YES];
     
     
     _pageImages = @[@"how_to_iOs_forIbs-06.png", @"how_to_iOs_forIbs-07.png", @"how_to_iOs_forIbs-08.png", @"how_to_iOs_forIbs-09.png", @"how_to_iOs_forIbs-10.png"];

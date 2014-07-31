@@ -28,10 +28,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
 
-    
-    
+
     //------------------------------------------------------------------------------------------------------------------
     
     UIColor *myGreen =
@@ -73,6 +71,20 @@
     [manager POST:@"http://54.89.45.91/app/api/user/agent"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              
+              
+              NSNumber *errorCode = [responseObject objectForKey:@"errorCode"];
+              NSLog(@"error:%@", errorCode);
+              if ([errorCode isEqual:[[NSNumber alloc] initWithInt:2]]) {
+                  [self logOut];
+              }
+
+              
+              
+              
+              
+              
+              
               
               if ([responseObject[@"agents"] isKindOfClass:[NSArray class]]) {
                   NSLog(@"its an array!");
@@ -283,8 +295,22 @@
 
 
 //this method is basically logout button for now 
-- (IBAction)backButton:(id)sender {
 
+- (IBAction)HelpButtonPressed:(UIBarButtonItem *)sender {
+
+    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:@"Select Sharing option:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:
+                            @"Help",
+                            @"Logout",
+                            nil];
+    popup.tag = 1;
+    [popup showInView:[UIApplication sharedApplication].keyWindow];
+    
+}
+
+
+
+-(void)logOut {
+    
     NSDictionary *parameters = @{@"accessToken": self.theAccessToken};
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -300,7 +326,7 @@
               NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
               [SSKeychain deletePasswordForService:@"Remesh" account:userName];
               
-             [self performSegueWithIdentifier:@"backToLogin" sender:self];
+              [self performSegueWithIdentifier:@"backToLogin" sender:self];
               
               
               
@@ -314,11 +340,42 @@
 
 
 
-- (IBAction)HelpButtonPressed:(UIBarButtonItem *)sender {
+- (void)actionSheet:(UIActionSheet *)popup clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    NSLog(@"Action Sheet"); 
+    
+    
+    switch (popup.tag) {
+        case 1: {
+            switch (buttonIndex) {
+                case 0:
+                    [self Help];
+                    break;
+                case 1:
+                    [self logOut];
+                    break;
+                default:
+                    break;
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
 
+
+-(void)Help{
+    
     [self performSegueWithIdentifier:@"toHelpView" sender:self];
+
     
 }
+
+
+
+
+
 @end
 
 

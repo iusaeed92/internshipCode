@@ -233,7 +233,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="67" id="dpk-WI-ulf" customClass="agentTableViewCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="67"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="67"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dpk-WI-ulf" id="cNI-nm-F1v">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="66"/>
@@ -284,13 +284,7 @@
                         <barButtonItem width="141" style="plain" systemItem="fixedSpace" id="zKS-NW-QSR"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Chat As" id="MUe-sr-7xf">
-                        <barButtonItem key="leftBarButtonItem" title="back" id="NeJ-M8-OOG">
-                            <color key="tintColor" red="0.95363305332448101" green="0.94588429802806906" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="backButton:" destination="EoO-vS-MYx" id="lQk-ow-AEE"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Help" id="bRc-8P-j0b">
+                        <barButtonItem key="rightBarButtonItem" title="Gear" id="bRc-8P-j0b">
                             <color key="tintColor" red="0.99829182829999996" green="0.95972952830000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="HelpButtonPressed:" destination="EoO-vS-MYx" id="7MV-9r-qC6"/>
@@ -318,7 +312,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="83" id="MI5-hH-FAx" customClass="conversationTableViewCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="83"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="83"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MI5-hH-FAx" id="UME-Na-xki">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="82"/>
@@ -386,7 +380,7 @@
                         <viewControllerLayoutGuide type="bottom" id="oRW-DY-Aej"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gj1-KZ-5mh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

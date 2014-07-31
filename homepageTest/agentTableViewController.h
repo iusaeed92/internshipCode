@@ -14,7 +14,7 @@
 #import "PageContentViewController.h"
 
 
-@interface agentTableViewController : UITableViewController <UITableViewDataSource>
+@interface agentTableViewController : UITableViewController <UITableViewDataSource, UIActionSheetDelegate>
 
 
 
