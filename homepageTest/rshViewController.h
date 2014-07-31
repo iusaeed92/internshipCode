@@ -27,6 +27,7 @@
 @property (strong, nonatomic) User *currentUser; //creating a current user object
 
 @property (strong, nonatomic) NSString *myAccessToken; //This is dangerous and uncalled for. 
+- (IBAction)tapGestureRecognizer:(UITapGestureRecognizer *)sender;
 
 - (IBAction)joinButton:(UIButton *)sender;
 

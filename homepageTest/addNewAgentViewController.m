@@ -143,8 +143,6 @@
     NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];
     NSString *code = [[self.suggestedMeshesArray objectAtIndex:indexPath.row] objectForKey:@"code"];
     
-    
-    
     NSDictionary *parameters = @{@"accessToken": token , @"code" : code};
     
     [manager POST:@"http://54.89.45.91/app/api/user/agent/join"

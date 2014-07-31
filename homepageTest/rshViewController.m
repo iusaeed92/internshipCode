@@ -28,12 +28,7 @@ int x = 1;
 	// Do any additional setup after loading the view, typically from a nib.
     
     
-    
-    UIColor *myGreen =
-    [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
-    
-    
-    
+  // self.view = [self.view initWithFrame:CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.width)];
     
     [self.navigationController setNavigationBarHidden:YES];
     
@@ -56,23 +51,17 @@ int x = 1;
     
     if ([sender isKindOfClass:[UIButton class]]) {
         if ([segue.destinationViewController isKindOfClass:[agentTableViewController class]]) {
-            
-            
-                      
-                      
-                 
-            
         }
     }
-    
-   NSLog(@"Last Test: %@", self.currentUser.accessToken);  
 }
 //-------------------------------------------------------------
 ////////////*******This chunk provides the scroll up****------
-
+//
 #define kOFFSET_FOR_KEYBOARD 220.0
 
 -(void)keyboardWillShow {
+    
+    NSLog(@"Keyboard will show");
     // Animate the current view out of the way
     if (self.view.frame.origin.y >= 0)
     {
@@ -85,6 +74,7 @@ int x = 1;
 }
 
 -(void)keyboardWillHide {
+    
     if (self.view.frame.origin.y >= 0)
     {
         [self setViewMovedUp:YES];
@@ -97,14 +87,12 @@ int x = 1;
 
 -(void)textFieldDidBeginEditing:(UITextField *)sender
 {
-  //  if ([sender isEqual:mailTf])
+    //move the main view, so that the keyboard does not hide it.
+    if  (self.view.frame.origin.y >= 0)
     {
-        //move the main view, so that the keyboard does not hide it.
-        if  (self.view.frame.origin.y >= 0)
-        {
-            [self setViewMovedUp:YES];
-        }
+        [self setViewMovedUp:YES];
     }
+    
 }
 
 //method to move the view up/down whenever the keyboard is shown/dismissed
@@ -170,12 +158,12 @@ int x = 1;
 
 #pragma implementing delegate method 
 
+- (IBAction)tapGestureRecognizer:(UITapGestureRecognizer *)sender {
 
-
-
-
-
-
+    [self.usernameTextfield resignFirstResponder];
+    [self.passwordTextfield resignFirstResponder];
+    
+}
 
 - (IBAction)joinButton:(UIButton *)sender { //segue's to Join page through storyboard
 }
