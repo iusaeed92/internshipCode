@@ -16,17 +16,12 @@
 
 @implementation agentTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+- (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.hidesBackButton = YES;
     
@@ -41,12 +36,11 @@
     self.tableViewFooter = [[UIView alloc] initWithFrame:CGRectMake(0, 430, self.view.frame.size.width, 80)];
     [self.tableViewFooter setBackgroundColor:[UIColor whiteColor]];
     
-    
     self.navigationController.toolbarHidden = NO;
     self.navigationController.navigationBar.barTintColor = myGreen;
     
     [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+        @{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     [self.navigationController setNavigationBarHidden:NO];
     [self.tableView setBackgroundColor:myGreen];
@@ -67,49 +61,35 @@
     [manager POST:@"http://54.89.45.91/app/api/user/agent"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
               NSNumber *errorCode = responseObject[@"errorCode"];
-              NSLog(@"error:%@", errorCode);
               if ([errorCode isEqual:@2]) {
                   [self logOut];
               }
               
               if ([responseObject[@"agents"] isKindOfClass:[NSArray class]]) {
-                  NSLog(@"its an array!");
                   NSArray *jsonArray = (NSArray *)responseObject[@"agents"];
-                  NSLog(@"Number of elements %i", [jsonArray count]);
                   self.agentArray = jsonArray;
                   [self.tableView reloadData];
               }
-              else {
-                  NSLog(@"its probably a dictionary");
-                  NSDictionary *jsonDictionary = (NSDictionary *)responseObject[@"agents"];
-                  NSLog(@"jsonDictionary - %@",jsonDictionary);
-              }
-              
-              NSLog(@"JSON:  %@", responseObject);
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
           }
      ];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setToolbarHidden:NO animated:YES];
     [self viewDidLoad];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+// self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
@@ -124,23 +104,19 @@
     return [self.agentArray count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+
     agentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[agentTableViewCell alloc] init];
     }
-    // Configure the cell...
-    UIColor *myGreen =
-    [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
+
+    UIColor *myGreen = [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
     cell.customMaskImageView.image = [UIImage imageNamed:@"mask_white_22x22-01.png"];
     [cell setBackgroundColor:myGreen];
     
     //if Mesh, display in green and display '<' before agent name.
-   
     if ([(self.agentArray)[indexPath.row][@"mind"]  isEqual: @"mesh"]) {
         
         cell.customMeshNameLabel.textColor = [UIColor whiteColor];
@@ -164,10 +140,9 @@
     return cell;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([sender isKindOfClass:[UITableViewCell class]])//introspection, making sure what kind of class it is.
-    {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    //introspection, making sure what kind of class it is
+    if ([sender isKindOfClass:[UITableViewCell class]]) {
         if ([segue.destinationViewController isKindOfClass:[conversationTableViewController class]]) {
             //passing details forward so AF call can be made in ConvoTableVC.
             conversationTableViewController *ConvoTableVC = segue.destinationViewController;
@@ -198,7 +173,7 @@
 }
 
 -(void)logOut {
-        NSDictionary *parameters = @{@"accessToken": self.theAccessToken};
+    NSDictionary *parameters = @{@"accessToken": self.theAccessToken};
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.responseSerializer setAcceptableContentTypes:
@@ -207,14 +182,10 @@
     [manager POST:@"http://54.89.45.91/app/api/user/logout"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              
-              NSLog(@"Success");
-              
               NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
               [SSKeychain deletePasswordForService:@"Remesh" account:userName];
               
               [self performSegueWithIdentifier:@"backToLogin" sender:self];
-              NSLog(@"JSON: %@", responseObject);
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
           }

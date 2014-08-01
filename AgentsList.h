@@ -10,11 +10,6 @@
 
 @interface AgentsList : NSObject
 
-
-
 @property (strong, nonatomic) NSMutableArray *agents;
-
-
-
 
 @end

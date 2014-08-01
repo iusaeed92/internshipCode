@@ -21,5 +21,4 @@
 @property (nonatomic) NSTimeInterval offset;
 @property (nonatomic) BOOL turnToSpeak;
 
-
 @end

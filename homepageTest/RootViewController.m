@@ -30,8 +30,7 @@
     
     if ([token length] != 0) {
         agentTableViewController *agentVC = [self.storyboard instantiateViewControllerWithIdentifier:@"agentVC"];
-        UINavigationController *navigationViewController =
-        [[UINavigationController alloc] initWithRootViewController:agentVC];
+        UINavigationController *navigationViewController = [[UINavigationController alloc] initWithRootViewController:agentVC];
         [self addChildViewController:navigationViewController];
         [navigationViewController didMoveToParentViewController:self];
         [self.view addSubview:navigationViewController.view];

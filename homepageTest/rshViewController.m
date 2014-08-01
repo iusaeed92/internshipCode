@@ -145,7 +145,6 @@ int x = 1;
     [manager POST:@"http://54.89.45.91/app/api/user/login"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              
               NSNumber *errorCode = responseObject[@"errorCode"];
               NSLog(@"error:%@", errorCode);
               if ([errorCode isEqual:@1]) {
@@ -161,15 +160,11 @@ int x = 1;
                   self.myAccessToken = responseObject[@"accessToken"];
                   [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
                   [SSKeychain setPassword:self.myAccessToken forService:@"Remesh" account:username];
-              NSLog(@"User name: %@", username);
-              NSLog(@"Access Token %@", self.myAccessToken);
                   [self performSegueWithIdentifier:@"toAgentsList" sender:self];
               }
-              
-              NSLog(@"JSON: %@", responseObject);
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
-            }
+          }
      ];
 }
 @end

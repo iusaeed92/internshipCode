@@ -15,15 +15,12 @@
 
 @implementation addNewAgentViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) { }
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     self.suggestedMeshTableView.dataSource = self;
@@ -59,10 +56,8 @@
     ];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -71,16 +66,13 @@
 
 //this function adds a mesh to the meshes an agents is in if they select row.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIColor *myGreen =
-    [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
+    UIColor *myGreen = [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
     
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell =
     
-    [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.textLabel.textColor = myGreen;
-    cell.textLabel.text =
-    [@"<" stringByAppendingString:(self.suggestedMeshesArray)[indexPath.row][@"name"]];
+    cell.textLabel.text = [@"<" stringByAppendingString:(self.suggestedMeshesArray)[indexPath.row][@"name"]];
     
     return cell;
 }
@@ -100,8 +92,6 @@
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSNumber *errorCode = responseObject[@"success"];
-              NSLog(@"error:%@", errorCode);
-              
               if ([errorCode isEqual:@1]) {
                   [self.suggestedMeshTableView reloadData];
                   [self viewDidLoad];
@@ -118,7 +108,7 @@
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
           }
-     ];
+    ];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

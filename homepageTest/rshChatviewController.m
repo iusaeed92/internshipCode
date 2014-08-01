@@ -18,25 +18,18 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     self.delegate = self;
     self.dataSource = self;
     
     countDown = self.transportCountDown;
     
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    //NSLog(@"Speaking Status :%@", self.speakingStatus);
     
     self.agentNameForLabel = [self.agentSign stringByAppendingString:self.OponentName];
     
@@ -76,26 +69,17 @@
     NSDictionary *parameters = @{@"accessToken": token, @"convoId" :self.thisConvoId, @"limit" : @"10"};
     [manager POST:@"http://54.89.45.91/app/api/convos/messages/real" parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSLog(@"messages %@", responseObject[@"messages"]);
-        
               if ([responseObject[@"messages"] isKindOfClass:[NSArray class]]) {
-                  NSLog(@"its an array!");
                   self.Messages = (NSArray *)responseObject[@"messages"];
-                  NSLog(@"jsonArray - %@", self.Messages[0]);
-                  NSLog(@"Number of elements are%i", [self.Messages count]);
                   [self.tableView reloadData];
               }
               else {
-                  NSLog(@"its probably a dictionary");
-                  // self.Messages = (NSDictionary *)responseObject[@"messages"];
-                  // NSLog(@"jsonDictionary - %@", self.Messages);
                   [self.tableView reloadData];
               }
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-        }
-     ];
+        }];
 }
 
 -(void)tick {
@@ -166,24 +150,16 @@
               NSLog(@"The choices are...  %@", responseObject[@"choices"]);
 
               if ([responseObject[@"choices"] isKindOfClass:[NSArray class]]) {
-                  NSLog(@"its an array!");
                   self.Choices = (NSArray *)responseObject[@"choices"];
-                  NSLog(@"jsonArray - %@",self.Choices[0]);
                   self.ChoicePair = self.Choices[0];
                   self.ChoiceOne = self.ChoicePair[@"choiceOne"];
                   self.ChoiceTwo = self.ChoicePair[@"choiceTwo"];
                   // self.numberOfChoices = [self.Choices count];
                   self.numberOfChoices = 1;
-                  NSLog(@"Choice Pair %@", self.ChoicePair);
-                  NSLog(@"Number of elements %i", [self.Choices count]);
                   // self.agentArray = jsonArray;
                   // [self.tableView reloadData];
               }
-              else {
-                  NSLog(@"its probably a dictionary");
-                  NSDictionary *jsonDictionary = (NSDictionary *)responseObject;
-                  NSLog(@"jsonDictionary - %@",jsonDictionary);
-              }
+
               [self.messageInputView resignFirstResponder];
               [self.tableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 245)];
               self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 245, self.view.frame.size.width, 260)];
@@ -205,8 +181,6 @@
               [self.headerView addSubview:self.choiceTwoButton];
         
               [self.view addSubview:self.headerView];
-        
-              NSLog(@"JSON: %@", responseObject);
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
           }
@@ -262,8 +236,7 @@
     }
 }
 
--(BOOL)shouldPreventScrollToBottomWhileUserScrolling
-{
+-(BOOL)shouldPreventScrollToBottomWhileUserScrolling {
     return YES;
 }
 
@@ -324,14 +297,12 @@
                       [self reloadInputViews];
                   }
                   self.numberOfChoices = 1;
-                  //NSLog(@"New thoughts are in with numPairs: %i", [self.Choices count]);
                   self.Choices = (NSArray *)responseObject[@"choices"];
                   self.ChoicePair = self.Choices[0];
                   self.ChoiceOne = self.ChoicePair[@"choiceOne"];
                   self.ChoiceTwo = self.ChoicePair[@"choiceTwo"];
                   [self.choiceOneButton setTitle:self.ChoiceOne[@"text"] forState:UIControlStateNormal];
                   [self.choiceTwoButton setTitle:self.ChoiceTwo[@"text"] forState:UIControlStateNormal];
-                  NSLog(@"New thoughts!  %@", responseObject);
               }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                   NSLog(@"Error: %@", error);
@@ -347,8 +318,6 @@
     
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
     NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];
-    
-    // NSLog(@"token ON DIFFERENT VIEW : %@", token);
     
     NSDictionary *parameters = @{@"accessToken": token, @"convoId" :self.thisConvoId, @"acceptId" : self.ChoiceTwo[@"id"], @"rejectId" : self.ChoiceOne[@"id"]};
     
@@ -374,26 +343,21 @@
            parameters:parametersTwo
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   self.numberOfChoices = 1;
-                  //NSLog(@"Pair Exists %@", responseObject[@"pairExists"]);
                   NSNumber *pairs = responseObject[@"pairExists"];
                   if([pairs isEqualToNumber:@1]) {
                       [self reloadInputViews];
                   }
                   self.Choices = (NSArray *)responseObject[@"choices"];
-              
-                  //NSLog(@"New thoughts are in with numPairs: %i", [self.Choices count]);
                   self.ChoicePair = self.Choices[0];
                   self.ChoiceOne = self.ChoicePair[@"choiceOne"];
                   self.ChoiceTwo = self.ChoicePair[@"choiceTwo"];
               
                   [self.choiceOneButton setTitle:self.ChoiceOne[@"text"] forState:UIControlStateNormal];
                   [self.choiceTwoButton setTitle:self.ChoiceTwo[@"text"] forState:UIControlStateNormal];
-                  // NSLog(@"New thoughts!  %@", responseObject);
               }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                   NSLog(@"Error: %@", error);
-              }
-         ];
+              } ];
     }
 }
 @end

@@ -17,14 +17,10 @@
 @interface Agent : NSObject
 
 @property (strong, nonatomic) NSString *agentId; // id unique to each agent
-
-@property (strong, nonatomic) NSString *agentName; // agent name
-
+@property (strong, nonatomic) NSString *agentName;
 @property (strong, nonatomic) NSString *agentMind; // mind, mesh or person
 
 @property (nonatomic) int agentSize;// size, how many people belong to it, this only matters if the agent is a mesh
-@property (nonatomic) int numberOfConversations; //number of activeConvos the agent is in
-
-
+@property (nonatomic) int numberOfConversations;
 
 @end
