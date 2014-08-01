@@ -14,7 +14,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *meshCodeTextField;
 @property (strong, nonatomic) IBOutlet UITableView *suggestedMeshTableView;
 @property (strong, nonatomic) NSArray *suggestedMeshesArray;
-//- (IBAction)tapGestureOnTableView:(UITapGestureRecognizer *)sender;
 
 - (IBAction)addButton:(UIButton *)sender;
 

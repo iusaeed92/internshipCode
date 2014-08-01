@@ -9,9 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface conversationTableViewController : UITableViewController {
-    
    NSTimer *timer;
-    int countDown;
+   int countDown;
 }
 
 @property (strong, nonatomic) NSArray *convosArray;

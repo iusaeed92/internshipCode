@@ -8,12 +8,7 @@
 
 #import "JSMessagesViewController.h"
 
-
-
-
-
 @interface rshChatViewController : JSMessagesViewController <JSMessagesViewDataSource , JSMessagesViewDelegate>{
-    
     int countDown;
     NSTimer *timer;
     
@@ -55,8 +50,6 @@
 
 @property (strong, nonatomic) NSString *agentNameForLabel;
 
-
 @property (strong, nonatomic) UILabel *yourLabel;
-
 
 @end

@@ -12,16 +12,9 @@
 
 @interface rshViewController : UIViewController 
 
-
 @property (strong, nonatomic) IBOutlet UILabel *logoLabel;
-
-
 @property (strong, nonatomic) IBOutlet UITextField *usernameTextfield;
-
-
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextfield;
-
-
 @property (strong, nonatomic) IBOutlet UIView *whiteView;
 
 @property (strong, nonatomic) User *currentUser; //creating a current user object
@@ -30,8 +23,5 @@
 - (IBAction)tapGestureRecognizer:(UITapGestureRecognizer *)sender;
 
 - (IBAction)joinButton:(UIButton *)sender;
-
-
 - (IBAction)loginButtonPressed:(UIButton *)sender;
-
 @end

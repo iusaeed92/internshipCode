@@ -13,7 +13,5 @@
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextfield;
 @property (strong, nonatomic) IBOutlet UITextField *emailTextfield;
 
-
 - (IBAction)joinButton:(UIButton *)sender;
-
 @end
