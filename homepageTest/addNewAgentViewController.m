@@ -80,7 +80,7 @@
     [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.textLabel.textColor = myGreen;
     cell.textLabel.text =
-    [@"<" stringByAppendingString:[[self.suggestedMeshesArray objectAtIndex:indexPath.row] objectForKey:@"name"]];
+    [@"<" stringByAppendingString:(self.suggestedMeshesArray)[indexPath.row][@"name"]];
     
     return cell;
 }
@@ -92,17 +92,17 @@
     
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
     NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];
-    NSString *code = [[self.suggestedMeshesArray objectAtIndex:indexPath.row] objectForKey:@"code"];
+    NSString *code = (self.suggestedMeshesArray)[indexPath.row][@"code"];
     
     NSDictionary *parameters = @{@"accessToken": token , @"code" : code};
     
     [manager POST:@"http://54.89.45.91/app/api/user/agent/join"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSNumber *errorCode = [responseObject objectForKey:@"success"];
+              NSNumber *errorCode = responseObject[@"success"];
               NSLog(@"error:%@", errorCode);
               
-              if ([errorCode isEqual:[[NSNumber alloc] initWithInt:1]]) {
+              if ([errorCode isEqual:@1]) {
                   [self.suggestedMeshTableView reloadData];
                   [self viewDidLoad];
               } else {
@@ -137,8 +137,8 @@
     [manager POST:@"http://54.89.45.91/app/api/user/agent/join"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSNumber *errorCode = [responseObject objectForKey:@"success"];
-              if ([errorCode isEqual:[[NSNumber alloc] initWithInt:1]]) {
+              NSNumber *errorCode = responseObject[@"success"];
+              if ([errorCode isEqual:@1]) {
                   [self.suggestedMeshTableView reloadData];
               }
               else {

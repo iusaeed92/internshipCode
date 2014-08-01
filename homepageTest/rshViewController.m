@@ -146,9 +146,9 @@ int x = 1;
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
-              NSNumber *errorCode = [responseObject objectForKey:@"errorCode"];
+              NSNumber *errorCode = responseObject[@"errorCode"];
               NSLog(@"error:%@", errorCode);
-              if ([errorCode isEqual:[[NSNumber alloc] initWithInt:1]]) {
+              if ([errorCode isEqual:@1]) {
                   [[[UIAlertView alloc]
                     initWithTitle:NSLocalizedString(@"Login Failed", @"")
                     message:NSLocalizedString(@"Username and or Password incorrect", @"")

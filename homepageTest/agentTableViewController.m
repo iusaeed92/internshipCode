@@ -68,9 +68,9 @@
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-              NSNumber *errorCode = [responseObject objectForKey:@"errorCode"];
+              NSNumber *errorCode = responseObject[@"errorCode"];
               NSLog(@"error:%@", errorCode);
-              if ([errorCode isEqual:[[NSNumber alloc] initWithInt:2]]) {
+              if ([errorCode isEqual:@2]) {
                   [self logOut];
               }
               
@@ -141,15 +141,15 @@
     
     //if Mesh, display in green and display '<' before agent name.
    
-    if ([[[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"mind"]  isEqual: @"mesh"]) {
+    if ([(self.agentArray)[indexPath.row][@"mind"]  isEqual: @"mesh"]) {
         
         cell.customMeshNameLabel.textColor = [UIColor whiteColor];
         NSString *meshSign = @"<";
-        NSString *meshName = [meshSign stringByAppendingString:[[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"name"]];
+        NSString *meshName = [meshSign stringByAppendingString:(self.agentArray)[indexPath.row][@"name"]];
 
         cell.customCountMeshLabel.textColor = [UIColor whiteColor];
         cell.customMeshNameLabel.text = meshName;
-        NSNumber *meshSize = [[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"size"];
+        NSNumber *meshSize = (self.agentArray)[indexPath.row][@"size"];
         
         NSString *textForSize = [NSString stringWithFormat:@"%@", meshSize, nil];
         NSLog(@"Size :%@", meshSize);
@@ -157,7 +157,7 @@
         NSLog(@"Agent: %@", self.agentArray[indexPath.row]);
     }
     else {
-        cell.customMeshNameLabel.text = [@"@" stringByAppendingString:[[self.agentArray objectAtIndex:indexPath.row] objectForKey:@"name"]];
+        cell.customMeshNameLabel.text = [@"@" stringByAppendingString:(self.agentArray)[indexPath.row][@"name"]];
         cell.customMeshNameLabel.textColor = [UIColor whiteColor];
         cell.customCountMeshLabel.text = nil;
     }
@@ -173,8 +173,8 @@
             conversationTableViewController *ConvoTableVC = segue.destinationViewController;
             ConvoTableVC.path = [self.tableView indexPathForCell:sender];
             ConvoTableVC.currentAgent = self.agentArray[ConvoTableVC.path.row];
-            ConvoTableVC.agentID = [[self.agentArray objectAtIndex:ConvoTableVC.path.row] objectForKey:@"id"];
-            ConvoTableVC.title = [[self.agentArray objectAtIndex:ConvoTableVC.path.row] objectForKey:@"name"];
+            ConvoTableVC.agentID = (self.agentArray)[ConvoTableVC.path.row][@"id"];
+            ConvoTableVC.title = (self.agentArray)[ConvoTableVC.path.row][@"name"];
         }
     }
 }

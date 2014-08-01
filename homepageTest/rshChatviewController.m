@@ -214,7 +214,7 @@
 }
 
 -(JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *messageSenderData = [[self.Messages objectAtIndex:indexPath.row] objectForKey:@"sender"];
+    NSDictionary *messageSenderData = (self.Messages)[indexPath.row][@"sender"];
 
     if ([self.OponentName isEqual:messageSenderData[@"name"]]) {
         return JSBubbleMessageTypeIncoming;
@@ -225,7 +225,7 @@
 }
 
 -(UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type forRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *messageSenderData = [[self.Messages objectAtIndex:indexPath.row] objectForKey:@"sender"];
+    NSDictionary *messageSenderData = (self.Messages)[indexPath.row][@"sender"];
     if ([self.OponentName isEqual:messageSenderData[@"name"]]) {
         return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleLightGrayColor]];
     }
@@ -269,7 +269,7 @@
 
 #pragma mark - Messages View Data Source REQUIRED
 -(NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *message; message = [[self.Messages objectAtIndex:indexPath.row] objectForKey:@"text"];
+    NSString *message; message = (self.Messages)[indexPath.row][@"text"];
     return message;
 }
 
@@ -320,7 +320,7 @@
            parameters:parametersTwo
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   NSNumber *pairs = responseObject[@"pairExists"];
-                  if([pairs isEqualToNumber:[[NSNumber alloc] initWithInt:1]]) {
+                  if([pairs isEqualToNumber:@1]) {
                       [self reloadInputViews];
                   }
                   self.numberOfChoices = 1;
@@ -376,7 +376,7 @@
                   self.numberOfChoices = 1;
                   //NSLog(@"Pair Exists %@", responseObject[@"pairExists"]);
                   NSNumber *pairs = responseObject[@"pairExists"];
-                  if([pairs isEqualToNumber:[[NSNumber alloc] initWithInt:1]]) {
+                  if([pairs isEqualToNumber:@1]) {
                       [self reloadInputViews];
                   }
                   self.Choices = (NSArray *)responseObject[@"choices"];

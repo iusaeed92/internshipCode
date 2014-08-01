@@ -72,7 +72,7 @@
     [manage POST:@"http://54.89.45.91/app/api/time/sync" parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSString *serverTime =
-        [[responseObject objectForKey:@"serverTime"] stringByAppendingString:@" +0300"];
+        [responseObject[@"serverTime"] stringByAppendingString:@" +0300"];
         NSLog(@"serveTime : %@", serverTime);
         NSDateFormatter *oDateFormatter = [[NSDateFormatter alloc] init];
         [oDateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"EST"]];
@@ -132,18 +132,18 @@
     //Configuring topic label
     NSString *topicSign = @"#";
     NSString *topicName = [topicSign stringByAppendingString:
-                           [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"topic"]];
+                           (self.convosArray)[indexPath.row][@"topic"]];
     cell.customStoryTitleLabel.text = topicName;
     
     //Conversation data retrieval from Array
     NSDictionary *thisConvoDetails =
-    [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"lastMessage"];
-    NSDictionary *oponentData = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"opponent"];
+    (self.convosArray)[indexPath.row][@"lastMessage"];
+    NSDictionary *oponentData = (self.convosArray)[indexPath.row][@"opponent"];
     
     
     //Deducing who's turn to speak it is
-    NSNumber *speakingStatus = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"speaking"];
-    if ([speakingStatus isEqual:[[NSNumber alloc] initWithInt:1]]) {
+    NSNumber *speakingStatus = (self.convosArray)[indexPath.row][@"speaking"];
+    if ([speakingStatus isEqual:@1]) {
         cell.customImageView.image = greenCircleImage;
         cell.customTimeLabel.textColor = myGreen;
         self.turnToSpeak = TRUE;
@@ -178,7 +178,7 @@
     
     //NMT(S)
     NSString *nextMessageTime =
-    [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"nextMessageTime"];
+    (self.convosArray)[indexPath.row][@"nextMessageTime"];
     NSDate *nextMessageDate = [objDateFormatter dateFromString:nextMessageTime];
     NSLog(@"serverDate %@", self.serverCurrentDate);
     NSLog(@"NMD Server %@", nextMessageDate);
@@ -290,10 +290,10 @@
     
     rshChatViewController *chatVC = segue.destinationViewController;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    chatVC.thisConversation = [self.convosArray objectAtIndex:indexPath.row];
-    chatVC.thisConvoId = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"convoId"];
+    chatVC.thisConversation = (self.convosArray)[indexPath.row];
+    chatVC.thisConvoId = (self.convosArray)[indexPath.row][@"convoId"];
     NSLog(@"To chat: %@", chatVC.thisConversation);
-    NSDictionary *oponentData = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"opponent"];
+    NSDictionary *oponentData = (self.convosArray)[indexPath.row][@"opponent"];
     chatVC.OponentName = oponentData[@"name"];
     chatVC.transportCountDown = CellForSegue.customCellCountdown;
     
@@ -306,8 +306,8 @@
     }
     
     
-    NSNumber *speakingStatus = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"speaking"];
-    if ([speakingStatus isEqual:[[NSNumber alloc] initWithInt:1]]) {
+    NSNumber *speakingStatus = (self.convosArray)[indexPath.row][@"speaking"];
+    if ([speakingStatus isEqual:@1]) {
         
         self.turnToSpeak = TRUE;
     }
@@ -315,9 +315,9 @@
         self.turnToSpeak = FALSE;
     }
     
-    chatVC.title = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"topic"];
+    chatVC.title = (self.convosArray)[indexPath.row][@"topic"];
     chatVC.turnToSpeak = self.turnToSpeak;
-    chatVC.speakingStatus = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"speaking"] ;
+    chatVC.speakingStatus = (self.convosArray)[indexPath.row][@"speaking"] ;
     NSLog(@"Convo ID is %@", chatVC.thisConvoId);
     
     
