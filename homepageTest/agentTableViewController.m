@@ -62,11 +62,11 @@ self.navigationItem.hidesBackButton = YES;    //--------------------------------
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
-    self.theAccessToken = [SSKeychain passwordForService:@"Remesh" account:userName];
+    self.accessToken = [SSKeychain passwordForService:@"Remesh" account:userName];
     
     
     NSLog(@"Username %@", userName);
-    NSDictionary *parameters = @{@"accessToken": self.theAccessToken , @"isIn" : @"1"};
+    NSDictionary *parameters = @{@"accessToken": self.accessToken , @"isIn" : @"1"};
     [manager POST:@"http://54.89.45.91/app/api/user/agent"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -75,7 +75,7 @@ self.navigationItem.hidesBackButton = YES;    //--------------------------------
               NSNumber *errorCode = [responseObject objectForKey:@"errorCode"];
               NSLog(@"error:%@", errorCode);
               if ([errorCode isEqual:[[NSNumber alloc] initWithInt:2]]) {
-                  [self logOut];
+                  [self newAccesToken];
               }
               
               if ([responseObject[@"agents"] isKindOfClass:[NSArray class]]) {
@@ -303,7 +303,7 @@ self.navigationItem.hidesBackButton = YES;    //--------------------------------
 
 -(void)logOut {
     
-    NSDictionary *parameters = @{@"accessToken": self.theAccessToken};
+    NSDictionary *parameters = @{@"accessToken": self.accessToken};
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.responseSerializer setAcceptableContentTypes:
@@ -319,10 +319,7 @@ self.navigationItem.hidesBackButton = YES;    //--------------------------------
               [SSKeychain deletePasswordForService:@"Remesh" account:userName];
               
               [self performSegueWithIdentifier:@"backToLogin" sender:self];
-              
-              
-              
-              
+    
               NSLog(@"JSON: %@", responseObject);
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
@@ -362,6 +359,28 @@ self.navigationItem.hidesBackButton = YES;    //--------------------------------
     [self performSegueWithIdentifier:@"toHelpView" sender:self];
 
     
+}
+
+-(void)newAccesToken {
+    
+    NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
+    NSString *password = [SSKeychain passwordForService:@"Error_2" account:username];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.responseSerializer setAcceptableContentTypes:
+     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+    
+    NSDictionary *parameters = @{@"username": username, @"password" : password};
+    [manager POST:@"http://54.89.45.91/app/api/user/login"
+       parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              self.accessToken = responseObject[@"accessToken"];
+              [SSKeychain setPassword:password forService:@"Error_2" account:username];
+              [SSKeychain setPassword:self.accessToken forService:@"Remesh" account:username];
+              [self viewDidLoad];
+              NSLog(@"JSON: %@", responseObject);
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+          }];
 }
 
 

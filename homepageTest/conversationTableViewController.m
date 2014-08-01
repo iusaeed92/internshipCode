@@ -11,6 +11,7 @@
 #import <SSKeychain/SSKeychain.h>
 #import <AFNetworking/AFNetworking.h>
 #import "rshChatViewController.h"
+#import <SSKeychain/SSKeychain.h>
 
 @interface conversationTableViewController ()
 
@@ -43,7 +44,7 @@
     
     
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
-    NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];
+    self.accessToken = [SSKeychain passwordForService:@"Remesh" account:userName];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.responseSerializer setAcceptableContentTypes:
@@ -51,24 +52,24 @@
     
     //loads convos a given agent is in. 
     
-    NSDictionary *parameters = @{@"accessToken": token, @"agentId" :self.agentID};
+    NSDictionary *parameters = @{@"accessToken": self.accessToken, @"agentId" :self.agentID};
     [manager POST:@"http://54.89.45.91/app/api/convos/agent" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"Convos %@", responseObject[@"convos"]);
-        
-        //checking if it's an array or dictionary
-        if ([responseObject[@"convos"] isKindOfClass:[NSArray class]]) {
-            NSLog(@"its an array!");
-            NSArray *jsonArray = (NSArray *)responseObject[@"convos"];
-            NSLog(@"Number of elements %i", [jsonArray count]);
-            self.convosArray = jsonArray;
-            [self.tableView reloadData];
+        NSNumber *errorCode = [responseObject objectForKey:@"errorCode"];
+        NSLog(@"error:%@", errorCode);
+        if ([errorCode isEqual:[[NSNumber alloc] initWithInt:2]]) {
+            [self newAccesToken];
         }
         else {
-            NSLog(@"its probably a dictionary");
-            NSDictionary *jsonDictionary = (NSDictionary *)responseObject[@"convos"];
-            NSLog(@"jsonDictionary - %@",jsonDictionary);
-        }
+            NSLog(@"Convos %@", responseObject[@"convos"]);
+            if ([responseObject[@"convos"] isKindOfClass:[NSArray class]]) {
+                NSLog(@"its an array!");
+                NSArray *jsonArray = (NSArray *)responseObject[@"convos"];
+                NSLog(@"Number of elements %i", [jsonArray count]);
+                self.convosArray = jsonArray;
+                [self.tableView reloadData];
+            }
+      }
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -363,6 +364,34 @@ int mins = countDown / 60;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
+
+
+-(void)newAccesToken {
+   
+    NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
+    NSString *password = [SSKeychain passwordForService:@"Error_2" account:username];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.responseSerializer setAcceptableContentTypes:
+     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+    
+    NSDictionary *parameters = @{@"username": username, @"password" : password};
+    [manager POST:@"http://54.89.45.91/app/api/user/login"
+       parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  self.accessToken = responseObject[@"accessToken"];
+                  [SSKeychain setPassword:password forService:@"Error_2" account:username];
+                  [SSKeychain setPassword:self.accessToken forService:@"Remesh" account:username];
+                  [self viewDidLoad];
+              NSLog(@"JSON: %@", responseObject);
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+          }];
+}
+
+    
+
+
+
 
 @end
 

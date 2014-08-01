@@ -198,6 +198,7 @@ int x = 1;
                   self.currentUser.accessToken = responseObject[@"accessToken"];
                   self.myAccessToken = responseObject[@"accessToken"];
                   [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
+                  [SSKeychain setPassword:password forService:@"Error_2" account:username];
                   [SSKeychain setPassword:self.myAccessToken forService:@"Remesh" account:username];
               NSLog(@"User name: %@", username);
               NSLog(@"Access Token %@", self.myAccessToken);
