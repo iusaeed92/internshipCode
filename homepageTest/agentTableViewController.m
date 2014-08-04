@@ -56,52 +56,14 @@ self.navigationItem.hidesBackButton = YES;    //--------------------------------
     self.thisUser = [[User alloc] init];
     
     [self.tableView reloadData];
-    
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.responseSerializer setAcceptableContentTypes:
-     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
-    
-    NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
-    self.accessToken = [SSKeychain passwordForService:@"Remesh" account:userName];
-    
-    
-    NSLog(@"Username %@", userName);
-    NSDictionary *parameters = @{@"accessToken": self.accessToken , @"isIn" : @"1"};
-    [manager POST:@"http://54.89.45.91/app/api/user/agent"
-       parameters:parameters
-          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              
-              
-              NSNumber *errorCode = [responseObject objectForKey:@"errorCode"];
-              NSLog(@"error:%@", errorCode);
-              if ([errorCode isEqual:[[NSNumber alloc] initWithInt:2]]) {
-                  [self newAccesToken];
-              }
-              
-              if ([responseObject[@"agents"] isKindOfClass:[NSArray class]]) {
-                  NSLog(@"its an array!");
-                  NSArray *jsonArray = (NSArray *)responseObject[@"agents"];
-                  NSLog(@"Number of elements %i", [jsonArray count]);
-                  self.agentArray = jsonArray;
-                  [self.tableView reloadData];
-              }
-              else {
-                  NSLog(@"its probably a dictionary");
-                  NSDictionary *jsonDictionary = (NSDictionary *)responseObject[@"agents"];
-                  NSLog(@"jsonDictionary - %@",jsonDictionary);
-              }
-              
-              NSLog(@"JSON:  %@", responseObject);
-          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              NSLog(@"Error: %@", error);
-          }];
-    }
+    [self loadAgents];
+
+}
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.navigationController setToolbarHidden:NO animated:YES];
-    [self viewDidLoad];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -376,14 +338,57 @@ self.navigationItem.hidesBackButton = YES;    //--------------------------------
               self.accessToken = responseObject[@"accessToken"];
               [SSKeychain setPassword:password forService:@"Error_2" account:username];
               [SSKeychain setPassword:self.accessToken forService:@"Remesh" account:username];
-              [self viewDidLoad];
+             
+              [self loadAgents];
+              //[self.tableView reloadData];
               NSLog(@"JSON: %@", responseObject);
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
           }];
 }
 
+-(void)loadAgents {
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.responseSerializer setAcceptableContentTypes:
+     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+    
+    NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
+    self.accessToken = [SSKeychain passwordForService:@"Remesh" account:userName];
+    
+    
+    NSLog(@"Username %@", userName);
+    NSDictionary *parameters = @{@"accessToken": self.accessToken , @"isIn" : @"1"};
+    [manager POST:@"http://54.89.45.91/app/api/user/agent"
+       parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              
+              
+              NSNumber *errorCode = [responseObject objectForKey:@"errorCode"];
+              NSLog(@"error:%@", errorCode);
+              if ([errorCode isEqual:[[NSNumber alloc] initWithInt:2]]) {
+                  [self newAccesToken];
+              }
+              
+              if ([responseObject[@"agents"] isKindOfClass:[NSArray class]]) {
+                  NSLog(@"its an array!");
+                  NSArray *jsonArray = (NSArray *)responseObject[@"agents"];
+                  NSLog(@"Number of elements %i", [jsonArray count]);
+                  self.agentArray = jsonArray;
+                  [self.tableView reloadData];
+              }
+              else {
+                  NSLog(@"its probably a dictionary");
+                  NSDictionary *jsonDictionary = (NSDictionary *)responseObject[@"agents"];
+                  NSLog(@"jsonDictionary - %@",jsonDictionary);
+              }
+              NSLog(@"JSON:  %@", responseObject);
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+          }];
 
+    
+}
 
 
 
