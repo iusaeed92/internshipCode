@@ -71,11 +71,8 @@
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               if ([responseObject[@"messages"] isKindOfClass:[NSArray class]]) {
                   self.Messages = (NSArray *)responseObject[@"messages"];
-                  [self.tableView reloadData];
               }
-              else {
-                  [self.tableView reloadData];
-              }
+              [self.tableView reloadData];
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
@@ -211,7 +208,6 @@
 -(JSMessagesViewTimestampPolicy)timestampPolicy {
     return JSMessagesViewTimestampPolicyAll;
 }
-
 
 -(JSMessagesViewAvatarPolicy)avatarPolicy {
     return JSMessagesViewAvatarPolicyNone;
