@@ -51,7 +51,7 @@
            }
            NSLog(@"JSON Loaded: %@", responseObject);
        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"Error: %@", error);
+           NSLog(@"Error: %@", error);
        }
     ];
 }
