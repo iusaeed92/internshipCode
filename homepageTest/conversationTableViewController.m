@@ -211,20 +211,10 @@
     chatVC.OponentName = oponentData[@"name"];
     chatVC.transportCountDown = CellForSegue.customCellCountdown;
     
-    if ([oponentData[@"mind"] isEqual: @"mesh"]) {
-        chatVC.agentSign = @"<";
-    }
-    else {
-        chatVC.agentSign = @"@";
-    }
+    chatVC.agentSign = [oponentData[@"mind"] isEqual: @"mesh"] ? @"<" : @"@";
 
     NSNumber *speakingStatus = (self.convosArray)[indexPath.row][@"speaking"];
-    if ([speakingStatus isEqual:@1]) {
-        self.turnToSpeak = TRUE;
-    }
-    else {
-        self.turnToSpeak = FALSE;
-    }
+    self.turnToSpeak = [speakingStatus isEqual:@1];
     
     chatVC.title = (self.convosArray)[indexPath.row][@"topic"];
     chatVC.turnToSpeak = self.turnToSpeak;
