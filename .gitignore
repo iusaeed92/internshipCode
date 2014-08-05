@@ -1,5 +1,6 @@
 *.swp
-homepageTest.xcodeproj
+homepageTest.xcodeproj/project.pbxproj
 homepageTest.xcworkspace/xcshareddata/
 homepageTest.xcworkspace/xcuserdata/Link.xcuserdatad/
 Pods/Pods.xcodeproj/xcuserdata/Link.xcuserdatad/
+homepageTest.xcodeproj/xcuserdata/Link.xcuserdatad/
