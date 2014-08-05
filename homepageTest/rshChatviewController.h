@@ -47,7 +47,9 @@
 
 @property (strong, nonatomic) UIView *headerView;
 
-@property (strong, nonatomic) NSNumber *speakingStatus; 
+@property (strong, nonatomic) NSNumber *speakingStatus;
+
+@property (nonatomic) int deltaT;
 
 @property (nonatomic) id cellFromAgent;
 
@@ -55,8 +57,10 @@
 
 @property (strong, nonatomic) NSString *agentNameForLabel;
 
+@property (strong, nonatomic) UIView *blockUser;
 
 @property (strong, nonatomic) UILabel *yourLabel;
 
+@property (strong, nonatomic) UILabel *timeLabel; 
 
 @end

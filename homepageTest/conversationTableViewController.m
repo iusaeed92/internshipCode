@@ -106,7 +106,7 @@
 {
     countDown = 0;
     [timer invalidate];
-
+    [self viewDidLoad];
 }
 
 
@@ -359,8 +359,7 @@ int mins = countDown / 60;
     chatVC.turnToSpeak = self.turnToSpeak; 
     chatVC.speakingStatus = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"speaking"] ;
     NSLog(@"Convo ID is %@", chatVC.thisConvoId);
-    
-    
+    chatVC.deltaT = [[[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"deltaT"] intValue];
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
