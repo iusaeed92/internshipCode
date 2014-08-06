@@ -51,29 +51,36 @@
     
     self.agentNameForLabel = [self.agentSign stringByAppendingString:self.OponentName];
     
-    
+    timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
     
     
    if (self.turnToSpeak == FALSE) {
         NSLog(@"It's not your turn to speak right now");
-        UIView *blockUser = [[UIView alloc] initWithFrame:CGRectMake(0, 430, self.view.frame.size.width, 260)];
+        self.blockUser = [[UIView alloc] initWithFrame:CGRectMake(0, 430, self.view.frame.size.width, 260)];
         
-        blockUser.backgroundColor = [UIColor remesh_GreenColor];
-        [self.view addSubview:blockUser];
+        self.blockUser.backgroundColor = [UIColor remesh_GreenColor];
+        [self.view addSubview:self.blockUser];
         
         [self.messageInputView resignFirstResponder];
         self.yourLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, self.view.frame.size.width, 60)];
         [self.yourLabel setTextColor:[UIColor whiteColor]];
         [self.yourLabel setBackgroundColor:[UIColor clearColor]];
         [self.yourLabel setFont:[UIFont fontWithName: @"Trebuchet MS" size: 18.0f]];
-        [blockUser addSubview:self.yourLabel];
-       timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+        [self.blockUser addSubview:self.yourLabel];
+       
        // yourLabel.text = [@"Awaiting response from " stringByAppendingString:self.OponentName];
        self.yourLabel.numberOfLines = 0;
        [self.tableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 490)];
     }
     
-   
+   else {
+       
+       self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(260,8,280,30)];
+       [self.timeLabel setTextColor:[UIColor whiteColor]];
+       [self.navigationController.navigationBar addSubview:self.timeLabel];
+       
+       
+   }
     
     
     
@@ -94,7 +101,7 @@
     //loads convos a given agent is in.
     
     NSDictionary *parameters = @{@"accessToken": token, @"convoId" :self.thisConvoId, @"limit" : @"10"};
-    [manager POST:@"http://54.89.45.91/app/api/convos/messages/real" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:@"http://54.210.29.136/api/convos/messages/real" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"messages %@", responseObject[@"messages"]);
         
@@ -128,8 +135,8 @@
 -(void)tick {
 
     countDown--;
-    
-       if (countDown > 0) {
+    if (self.turnToSpeak == FALSE) {
+        if (countDown > 0) {
            if (countDown < 60) {
                self.yourLabel.text = [self.agentNameForLabel stringByAppendingString:
                [[NSString stringWithFormat:@ " has %i", countDown]
@@ -149,14 +156,53 @@
                 stringByAppendingString:@"h to respond"]];
            }
        }
-        
-    if (countDown == 0){
+       
+        if (countDown == 0){
             [timer invalidate];
-        self.turnToSpeak = TRUE; 
-        [self viewDidLoad];
-        [self viewDidAppear:YES];
-        [self.headerView removeFromSuperview];
+            self.transportCountDown = self.deltaT;
+            self.turnToSpeak = TRUE;
+            [self viewDidLoad];
+            [self viewDidAppear:YES];
+            [self.headerView removeFromSuperview];
+                   }
+        
+        
+        
     }
+    else {
+        
+        if (countDown > 0) {
+            if (countDown < 60) {
+                self.timeLabel.text = [[NSString stringWithFormat:@ " %i", countDown]
+                                        stringByAppendingString:@"s"];
+            }
+            else if (countDown > 60.0 && countDown < 3600.0){
+                int mins = countDown / 60;
+                self.timeLabel.text = [[NSString stringWithFormat:@ " %i", mins]
+                                       stringByAppendingString:@"m"];            }
+            else {
+                int hours = countDown / 3600;
+                self.timeLabel.text = [[NSString stringWithFormat:@ " %i", hours]
+                                       stringByAppendingString:@"h"];;
+            }
+        }
+        
+        if (countDown == 0){
+            [timer invalidate];
+               self.transportCountDown = self.deltaT; //messy, but i don't have any better ideas.
+            self.turnToSpeak = FALSE;
+            [self.messageInputView resignFirstResponder];
+            [self viewDidLoad];
+            [self viewDidAppear:YES];
+            [self.view addSubview:self.blockUser];
+            ; 
+            [self.timeLabel removeFromSuperview];
+        }
+        
+        
+    }
+    
+    
         if (countDown < 0) {
             self.yourLabel.text = @"Loading"; 
         }
@@ -173,7 +219,9 @@
     //number of rows in previous table would be the number of conversations. 
     
     
-
+-(void)viewDidDisappear:(BOOL)animated{
+    [self.timeLabel removeFromSuperview];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -219,7 +267,7 @@
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
     NSDictionary *parameters = @{@"accessToken": token, @"convoId" :self.thisConvoId, @"thought" : text};
-    [manager POST:@"http://54.89.45.91/app/api/convos/thoughts/send" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:@"http://54.210.29.136/api/convos/thoughts/send" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"The choices are...  %@", responseObject[@"choices"]);
         
@@ -464,7 +512,7 @@
     
     NSDictionary *parameters = @{@"accessToken": token, @"convoId" :self.thisConvoId, @"acceptId" : self.ChoiceOne[@"id"], @"rejectId" : self.ChoiceTwo[@"id"]};
     
-    [manager POST:@"http://54.89.45.91/app/api/convos/thoughts/choose"
+    [manager POST:@"http://54.210.29.136/api/convos/thoughts/choose"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSLog(@"JSON: %@", responseObject);
@@ -492,7 +540,7 @@
     
     NSDictionary *parametersTwo = @{@"accessToken": token, @"convoId" :self.thisConvoId };
     
-    [manager POST:@"http://54.89.45.91/app/api/convos/thoughts"
+    [manager POST:@"http://54.210.29.136/api/convos/thoughts"
        parameters:parametersTwo
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
@@ -513,7 +561,7 @@
               self.ChoiceOne = self.ChoicePair[@"choiceOne"];
               self.ChoiceTwo = self.ChoicePair[@"choiceTwo"];
               
-              NSLog(@"New thoughts are in with numPairs: %i", [self.Choices count]);
+           //   NSLog(@"New thoughts are in with numPairs: %i", [self.Choices count]);
               
               [self.choiceOneButton setTitle:self.ChoiceOne[@"text"] forState:UIControlStateNormal];
               [self.choiceTwoButton setTitle:self.ChoiceTwo[@"text"] forState:UIControlStateNormal];
@@ -548,7 +596,7 @@
     
     NSDictionary *parameters = @{@"accessToken": token, @"convoId" :self.thisConvoId, @"acceptId" : self.ChoiceTwo[@"id"], @"rejectId" : self.ChoiceOne[@"id"]};
     
-    [manager POST:@"http://54.89.45.91/app/api/convos/thoughts/choose"
+    [manager POST:@"http://54.210.29.136/api/convos/thoughts/choose"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSLog(@"JSON: %@", responseObject);
@@ -576,7 +624,7 @@
     
     NSDictionary *parametersTwo = @{@"accessToken": token, @"convoId" :self.thisConvoId };
     
-    [manager POST:@"http://54.89.45.91/app/api/convos/thoughts"
+    [manager POST:@"http://54.210.29.136/api/convos/thoughts"
        parameters:parametersTwo
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               self.numberOfChoices = 1;

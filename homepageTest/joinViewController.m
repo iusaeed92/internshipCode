@@ -56,7 +56,7 @@
     
     NSDictionary *parameters = @{@"username": username, @"password" : password, @"email": email};
     
-    [manager POST:@"http://54.89.45.91/app/api/user/join"
+    [manager POST:@"http://54.210.29.136/api/user/join"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               

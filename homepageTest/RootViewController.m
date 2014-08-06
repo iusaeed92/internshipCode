@@ -37,8 +37,9 @@
  
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
     NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];
+    NSString *password = [SSKeychain passwordForService:@"Error_2" account:userName];
     
-    if ([token length] != 0) {
+    if (([token length] != 0) && ([password length] != 0)) {
         
         agentTableViewController *agentVC = [self.storyboard instantiateViewControllerWithIdentifier:@"agentVC"];
         UINavigationController *navigationViewController =

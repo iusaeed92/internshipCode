@@ -179,7 +179,7 @@ int x = 1;
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
     NSDictionary *parameters = @{@"username": username, @"password" : password};
-    [manager POST:@"http://54.89.45.91/app/api/user/login"
+    [manager POST:@"http://54.210.29.136/api/user/login"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
@@ -198,6 +198,7 @@ int x = 1;
                   self.currentUser.accessToken = responseObject[@"accessToken"];
                   self.myAccessToken = responseObject[@"accessToken"];
                   [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
+                  [SSKeychain setPassword:password forService:@"Error_2" account:username];
                   [SSKeychain setPassword:self.myAccessToken forService:@"Remesh" account:username];
               NSLog(@"User name: %@", username);
               NSLog(@"Access Token %@", self.myAccessToken);
