@@ -561,7 +561,7 @@
               self.ChoiceOne = self.ChoicePair[@"choiceOne"];
               self.ChoiceTwo = self.ChoicePair[@"choiceTwo"];
               
-              NSLog(@"New thoughts are in with numPairs: %i", [self.Choices count]);
+           //   NSLog(@"New thoughts are in with numPairs: %i", [self.Choices count]);
               
               [self.choiceOneButton setTitle:self.ChoiceOne[@"text"] forState:UIControlStateNormal];
               [self.choiceTwoButton setTitle:self.ChoiceTwo[@"text"] forState:UIControlStateNormal];
@@ -596,7 +596,7 @@
     
     NSDictionary *parameters = @{@"accessToken": token, @"convoId" :self.thisConvoId, @"acceptId" : self.ChoiceTwo[@"id"], @"rejectId" : self.ChoiceOne[@"id"]};
     
-    [manager POST:@"http://54.89.45.91/app/api/convos/thoughts/choose"
+    [manager POST:@"http://54.210.29.136/api/convos/thoughts/choose"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSLog(@"JSON: %@", responseObject);
