@@ -101,7 +101,7 @@
     //loads convos a given agent is in.
     
     NSDictionary *parameters = @{@"accessToken": token, @"convoId" :self.thisConvoId, @"limit" : @"10"};
-    [manager POST:@"http://54.89.45.91/app/api/convos/messages/real" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:@"http://54.210.29.136/api/convos/messages/real" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"messages %@", responseObject[@"messages"]);
         
@@ -267,7 +267,7 @@
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
     NSDictionary *parameters = @{@"accessToken": token, @"convoId" :self.thisConvoId, @"thought" : text};
-    [manager POST:@"http://54.89.45.91/app/api/convos/thoughts/send" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:@"http://54.210.29.136/api/convos/thoughts/send" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"The choices are...  %@", responseObject[@"choices"]);
         
@@ -512,7 +512,7 @@
     
     NSDictionary *parameters = @{@"accessToken": token, @"convoId" :self.thisConvoId, @"acceptId" : self.ChoiceOne[@"id"], @"rejectId" : self.ChoiceTwo[@"id"]};
     
-    [manager POST:@"http://54.89.45.91/app/api/convos/thoughts/choose"
+    [manager POST:@"http://54.210.29.136/api/convos/thoughts/choose"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSLog(@"JSON: %@", responseObject);
@@ -540,7 +540,7 @@
     
     NSDictionary *parametersTwo = @{@"accessToken": token, @"convoId" :self.thisConvoId };
     
-    [manager POST:@"http://54.89.45.91/app/api/convos/thoughts"
+    [manager POST:@"http://54.210.29.136/api/convos/thoughts"
        parameters:parametersTwo
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
@@ -624,7 +624,7 @@
     
     NSDictionary *parametersTwo = @{@"accessToken": token, @"convoId" :self.thisConvoId };
     
-    [manager POST:@"http://54.89.45.91/app/api/convos/thoughts"
+    [manager POST:@"http://54.210.29.136/api/convos/thoughts"
        parameters:parametersTwo
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               self.numberOfChoices = 1;

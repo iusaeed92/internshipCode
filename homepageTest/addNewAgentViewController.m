@@ -48,7 +48,7 @@
     
     NSDictionary *parameters = @{@"accessToken": token , @"isIn" : @"0"};
     
-    [manager POST:@"http://54.89.45.91/app/api/user/agent"
+    [manager POST:@"http://54.210.29.136/api/user/agent"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
@@ -145,7 +145,7 @@
     
     NSDictionary *parameters = @{@"accessToken": token , @"code" : code};
     
-    [manager POST:@"http://54.89.45.91/app/api/user/agent/join"
+    [manager POST:@"http://54.210.29.136/api/user/agent/join"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
@@ -207,7 +207,7 @@
     NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];
     NSString *code = self.meshCodeTextField.text;
     NSDictionary *parameters = @{@"accessToken": token , @"code" : code};
-    [manager POST:@"http://54.89.45.91/app/api/user/agent/join"
+    [manager POST:@"http://54.210.29.136/api/user/agent/join"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               

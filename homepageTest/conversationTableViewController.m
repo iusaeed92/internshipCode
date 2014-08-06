@@ -53,7 +53,7 @@
     //loads convos a given agent is in. 
     
     NSDictionary *parameters = @{@"accessToken": self.accessToken, @"agentId" :self.agentID};
-    [manager POST:@"http://54.89.45.91/app/api/convos/agent" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:@"http://54.210.29.136/api/convos/agent" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSNumber *errorCode = [responseObject objectForKey:@"errorCode"];
         NSLog(@"error:%@", errorCode);
@@ -83,7 +83,7 @@
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
     NSDictionary *parameter = @{};
-    [manage POST:@"http://54.89.45.91/app/api/time/sync" parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manage POST:@"http://54.210.29.136/api/time/sync" parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSString *serverTime =
         [[responseObject objectForKey:@"serverTime"] stringByAppendingString:@" +0300"];
@@ -374,7 +374,7 @@ int mins = countDown / 60;
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
     NSDictionary *parameters = @{@"username": username, @"password" : password};
-    [manager POST:@"http://54.89.45.91/app/api/user/login"
+    [manager POST:@"http://54.210.29.136/api/user/login"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   self.accessToken = responseObject[@"accessToken"];
@@ -386,11 +386,6 @@ int mins = countDown / 60;
               NSLog(@"Error: %@", error);
           }];
 }
-
-    
-
-
-
 
 @end
 

@@ -271,7 +271,7 @@ self.navigationItem.hidesBackButton = YES;    //--------------------------------
     [manager.responseSerializer setAcceptableContentTypes:
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
-    [manager POST:@"http://54.89.45.91/app/api/user/logout"
+    [manager POST:@"http://54.210.29.136/api/user/logout"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
@@ -332,7 +332,7 @@ self.navigationItem.hidesBackButton = YES;    //--------------------------------
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
     NSDictionary *parameters = @{@"username": username, @"password" : password};
-    [manager POST:@"http://54.89.45.91/app/api/user/login"
+    [manager POST:@"http://54.210.29.136/api/user/login"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               self.accessToken = responseObject[@"accessToken"];
@@ -359,7 +359,7 @@ self.navigationItem.hidesBackButton = YES;    //--------------------------------
     
     NSLog(@"Username %@", userName);
     NSDictionary *parameters = @{@"accessToken": self.accessToken , @"isIn" : @"1"};
-    [manager POST:@"http://54.89.45.91/app/api/user/agent"
+    [manager POST:@"http://54.210.29.136/api/user/agent"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
