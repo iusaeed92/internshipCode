@@ -16,22 +16,15 @@
 
 @implementation joinViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     
-    UIColor *myGreen =
-    [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
+    UIColor *myGreen = [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
     self.navigationController.navigationBar.barTintColor = myGreen;
     [self.navigationController setNavigationBarHidden:NO];
     [self.passwordTextfield becomeFirstResponder]; 
@@ -40,15 +33,12 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)joinButton:(UIButton *)sender {
     NSString *username = self.usernameTextField.text;
     NSString *password = self.passwordTextfield.text;
     NSString *email = self.emailTextfield.text;
-
-    //user join API call
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.responseSerializer setAcceptableContentTypes:
@@ -59,22 +49,13 @@
     [manager POST:@"http://54.210.29.136/api/user/join"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              
-              
-            NSString *accessToken = responseObject[@"accessToken"];
-              
-              
+              NSString *accessToken = responseObject[@"accessToken"];
               [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
-              
               [SSKeychain setPassword:accessToken forService:@"Remesh" account:username];
               [self performSegueWithIdentifier:@"joinToAgent" sender:self];
-              
-              NSLog(@"JSON: %@", responseObject);
-          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
           }];
-    
-    
-
 }
 @end

@@ -11,9 +11,8 @@
 
 
 @interface conversationTableViewController : UITableViewController {
-    
    NSTimer *timer;
-    int countDown;
+   int countDown;
 }
 
 @property (strong, nonatomic) NSArray *convosArray;
@@ -24,6 +23,5 @@
 @property (strong, nonatomic) NSDate *serverCurrentDate;
 @property (nonatomic) NSTimeInterval offset;
 @property (nonatomic) BOOL turnToSpeak;
-
 
 @end

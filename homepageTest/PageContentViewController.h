@@ -10,14 +10,10 @@
 
 @interface PageContentViewController : UIViewController
 
-
-
 @property NSUInteger pageIndex;
 @property NSString *imageFile;
-
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 - (IBAction)returnButton:(UIButton *)sender;
-
 
 @end

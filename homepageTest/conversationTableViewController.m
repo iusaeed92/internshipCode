@@ -14,24 +14,16 @@
 #import <SSKeychain/SSKeychain.h>
 
 @interface conversationTableViewController ()
-
 @end
 
 @implementation conversationTableViewController
 
-
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
+- (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -39,9 +31,6 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
-
-    
     
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
     self.accessToken = [SSKeychain passwordForService:@"Remesh" account:userName];
@@ -49,7 +38,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.responseSerializer setAcceptableContentTypes:
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
-    
+
     //loads convos a given agent is in. 
     
     NSDictionary *parameters = @{@"accessToken": self.accessToken, @"agentId" :self.agentID};
@@ -77,13 +66,12 @@
 
     
     //getting server time from API
-    
     AFHTTPRequestOperationManager *manage = [AFHTTPRequestOperationManager manager];
     [manage.responseSerializer setAcceptableContentTypes:
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
     NSDictionary *parameter = @{};
-    [manage POST:@"http://54.210.29.136/api/time/sync" parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
+   [manage POST:@"http://54.210.29.136/api/time/sync" parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSString *serverTime =
         [[responseObject objectForKey:@"serverTime"] stringByAppendingString:@" +0300"];
@@ -97,149 +85,111 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
-    
-
+  
 }
 
-
--(void)viewWillAppear:(BOOL)animated
-{
+-(void)viewWillAppear:(BOOL)animated {
     countDown = 0;
     [timer invalidate];
     [self viewDidLoad];
 }
 
-
-
--(void)viewWillDisappear:(BOOL)animated
-{
-
+-(void)viewWillDisappear:(BOOL)animated {
     countDown = 0;
     [timer invalidate];
 }
 
-
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    
-   
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.convosArray count];
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-
-{
-    //Cell initialization
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     conversationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[conversationTableViewCell alloc] init];
-        }
+    }
     
-    //Creating image icons
     UIImage *greenCircleImage = [UIImage imageNamed:@"GreenCircle.png"];
-    UIImage *redCircleImage = [UIImage imageNamed:@"RedCircle.png"];
+    UIImage *redCircleImage   = [UIImage imageNamed:@"RedCircle.png"];
     
-    //Creating colors
-    UIColor *myGreen =
-    [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
-    UIColor *myRed =
-    [UIColor colorWithRed:(238.0/255.0) green:(61.0/255.0) blue:(14.0/255.0) alpha:1.0];
+    UIColor *myGreen = [UIColor colorWithRed:(57.0/255.0) green:(181.0/255.0) blue:(74.0/255.0) alpha:1.0];
+    UIColor *myRed   = [UIColor colorWithRed:(238.0/255.0) green:(61.0/255.0) blue:(14.0/255.0) alpha:1.0];
     
     //Configuring topic label
     NSString *topicSign = @"#";
     NSString *topicName = [topicSign stringByAppendingString:
-                [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"topic"]];
+                           (self.convosArray)[indexPath.row][@"topic"]];
     cell.customStoryTitleLabel.text = topicName;
     
     //Conversation data retrieval from Array
     NSDictionary *thisConvoDetails =
-    [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"lastMessage"];
-    NSDictionary *oponentData = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"opponent"];
-
+    (self.convosArray)[indexPath.row][@"lastMessage"];
+    NSDictionary *oponentData = (self.convosArray)[indexPath.row][@"opponent"];
     
     //Deducing who's turn to speak it is
-     NSNumber *speakingStatus = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"speaking"];
-    if ([speakingStatus isEqual:[[NSNumber alloc] initWithInt:1]]) {
+    NSNumber *speakingStatus = (self.convosArray)[indexPath.row][@"speaking"];
+    if ([speakingStatus isEqual:@1]) {
         cell.customImageView.image = greenCircleImage;
         cell.customTimeLabel.textColor = myGreen;
         self.turnToSpeak = TRUE;
-        }
+    }
     else {
         cell.customImageView.image = redCircleImage;
         cell.customTimeLabel.textColor = myRed;
         self.turnToSpeak = FALSE;
     }
-    //determining if opponent is mesh or user and
-    //configuring Agent Name label.
+
     if ([oponentData[@"mind"] isEqual: @"mesh"]) {
         NSString *meshSign = @"<";
         NSString *meshName = oponentData[@"name"];
         cell.customAgentNameLabel.text =
         [meshSign stringByAppendingString:meshName];
-        }
+    }
     else {
         NSString *userSign = @"@";
         NSString *userName = oponentData[@"name"];
         cell.customAgentNameLabel.text =
         [userSign stringByAppendingString:userName];
-        }
+    }
     
     //configuring most recent messahe view
     cell.customTextLabelView.text = thisConvoDetails[@"text"];
-    
-    
-        //TIME--------------------------------------------------------------------------------
-        //#####################################################################################
-        //*************************************************************************************
-        //*************************************************** New Time Logic
     
     NSDateFormatter *objDateFormatter = [[NSDateFormatter alloc] init];
     [objDateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"EST"]];
     [objDateFormatter setDateFormat:@"yyyy - MM - dd HH:mm:ss Z"];
     
-    //NMT(S)
     NSString *nextMessageTime =
-    [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"nextMessageTime"];
+    (self.convosArray)[indexPath.row][@"nextMessageTime"];
     NSDate *nextMessageDate = [objDateFormatter dateFromString:nextMessageTime];
     NSLog(@"serverDate %@", self.serverCurrentDate);
     NSLog(@"NMD Server %@", nextMessageDate);
     
-    // O = S - L
-    NSDate *newNextMessageDate =
-    [nextMessageDate dateByAddingTimeInterval:(-1*self.offset)];
+    NSDate *newNextMessageDate = [nextMessageDate dateByAddingTimeInterval:(-1*self.offset)];
     NSTimeInterval secondsBetween = [newNextMessageDate timeIntervalSinceNow];
     countDown = secondsBetween;
     cell.customCellCountdown = secondsBetween;
     
     timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
     
-    if (countDown >  0) {
+    if (countDown > 0) {
         if (countDown < 60) {
             cell.customTimeLabel.text = [[NSString stringWithFormat:@"%i", countDown] stringByAppendingString:@"s"];
-            }
+        }
         else if (secondsBetween > 60.0 && secondsBetween < 3600.0){
-            
-int mins = countDown / 60;
+            int mins = countDown / 60;
             cell.customTimeLabel.text =
             [[NSString stringWithFormat:@"%i", mins] stringByAppendingString:@"m"];
-            }
+        }
         else {
             int hours = countDown / 3600;
             cell.customTimeLabel.text =
@@ -248,113 +198,35 @@ int mins = countDown / 60;
     }
     else {
         cell.customTimeLabel.text = nil;
-        }
-    
-        return cell;
-    
+    }
+    return cell;
 }
 
-    
-
-
-
 -(void)tick {
-    
-       countDown--;
+    countDown--;
     [self.tableView reloadData];
     if (countDown < 0)
         [timer invalidate];
-
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    
-  //[self performSegueWithIdentifier:@"ConvosToChat" sender:indexPath];
-
-    NSLog(@"Meow"); 
-}
-
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{ }
 
 #pragma mark - Navigation
-
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
     conversationTableViewCell *CellForSegue = sender;
 
-    
-    
     rshChatViewController *chatVC = segue.destinationViewController;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-   chatVC.thisConversation = [self.convosArray objectAtIndex:indexPath.row];
-    chatVC.thisConvoId = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"convoId"];
+    chatVC.thisConversation = (self.convosArray)[indexPath.row];
+    chatVC.thisConvoId = (self.convosArray)[indexPath.row][@"convoId"];
     NSLog(@"To chat: %@", chatVC.thisConversation);
-    NSDictionary *oponentData = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"opponent"];
+    NSDictionary *oponentData = (self.convosArray)[indexPath.row][@"opponent"];
     chatVC.OponentName = oponentData[@"name"];
     chatVC.transportCountDown = CellForSegue.customCellCountdown;
     
-    if ([oponentData[@"mind"] isEqual: @"mesh"]) {
-        chatVC.agentSign = @"<";
-    }
-    else
-    {
-        chatVC.agentSign = @"@";
-    }
-    
-    
-    NSNumber *speakingStatus = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"speaking"];
-    if ([speakingStatus isEqual:[[NSNumber alloc] initWithInt:1]]) {
- 
-        self.turnToSpeak = TRUE;
-    }
-    else {
-        self.turnToSpeak = FALSE;
-    }
-
+    chatVC.agentSign = [oponentData[@"mind"] isEqual: @"mesh"] ? @"<" : @"@";
     chatVC.title = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"topic"];
     chatVC.turnToSpeak = self.turnToSpeak; 
     chatVC.speakingStatus = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"speaking"] ;
@@ -388,6 +260,3 @@ int mins = countDown / 60;
 }
 
 @end
-
-
-

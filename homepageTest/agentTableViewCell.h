@@ -14,5 +14,4 @@
 @property (strong, nonatomic) IBOutlet UILabel *customMeshNameLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *customMaskImageView;
 
-
 @end
