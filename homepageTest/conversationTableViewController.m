@@ -226,6 +226,8 @@
     chatVC.OponentName = oponentData[@"name"];
     chatVC.transportCountDown = CellForSegue.customCellCountdown;
     
+    NSNumber *speakingStatus = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"speaking"];
+    self.turnToSpeak = ([speakingStatus isEqual:[[NSNumber alloc] initWithInt:1]]) ? TRUE : FALSE;
     chatVC.agentSign = [oponentData[@"mind"] isEqual: @"mesh"] ? @"<" : @"@";
     chatVC.title = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"topic"];
     chatVC.turnToSpeak = self.turnToSpeak; 

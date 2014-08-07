@@ -150,7 +150,7 @@ if (self.turnToSpeak == FALSE) {
             [self viewDidLoad];
             [self viewDidAppear:YES];
             [self.view addSubview:self.blockUser];
-            ; 
+            [self.tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
             [self.timeLabel removeFromSuperview];
         }
         
