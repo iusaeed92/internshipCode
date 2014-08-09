@@ -11,12 +11,14 @@
 @implementation URLs
 
 - (id)init {
-    self.base_url = @"http://54.210.29.136";
+    self.baseUrl = @"http://54.210.29.136/";
+    self.apiTimeSyncUrl = [NSString stringWithFormat:@"%@%@", self.baseUrl, @"api/time/sync"];
+    //    self.api_time_sync_url = [NSString stringWithFormat:@"%@%@", self.base_url, @"http://54.210.29.136/api/time/sync"];
     return self;
 }
 
 //
-//@"http://54.210.29.136/api/time/sync"
+//
 
 //@"http://54.210.29.136/api/user/agent"
 //@"http://54.210.29.136/api/user/agent/join"

@@ -10,6 +10,7 @@
 
 @interface URLs : NSObject
 
-@property (strong, nonatomic) NSString *base_url;
+@property (strong, nonatomic) NSString *baseUrl;
+@property (strong, nonatomic) NSString *apiTimeSyncUrl;
 
 @end
