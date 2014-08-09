@@ -29,13 +29,26 @@
 }
 
 - (void)testremeshBaseURL {
-    XCTAssertTrue([self.remeshUrls.baseUrl isEqualToString: self.testBaseUrl], @"base URLs should have matched");
+    XCTAssertTrue([self.remeshUrls.baseUrl isEqualToString: self.testBaseUrl],
+                  @"base URLs should have matched");
 }
 
 - (void)testApiSyncTimeUrl {
-    NSString *apiSyncTimeUrl = [NSString stringWithFormat:@"%@%@", self.remeshUrls.baseUrl, @"api/time/sync"];
+    NSString *apiSyncTimeUrl = [NSString stringWithFormat:@"%@%@", self.testBaseUrl, @"api/time/sync"];
     XCTAssertTrue([self.remeshUrls.apiTimeSyncUrl isEqualToString: apiSyncTimeUrl],
                   @"URLs should have matched [%@][%@]", self.remeshUrls.apiTimeSyncUrl, apiSyncTimeUrl);
+}
+
+- (void)testApiUserAgent {
+    NSString *apiUserAgent = [NSString stringWithFormat:@"%@%@", self.testBaseUrl, @"api/user/agent"];
+    XCTAssertTrue([self.remeshUrls.apiUserAgent isEqualToString: apiUserAgent],
+                  @"URLs should have matched [%@][%@]", self.remeshUrls.apiUserAgent, apiUserAgent);
+}
+
+- (void)testApiUserAgentJoin {
+    NSString *apiUserAgentJoin = [NSString stringWithFormat:@"%@%@", self.testBaseUrl, @"api/user/agent/join"];
+    XCTAssertTrue([self.remeshUrls.apiUserAgentJoin isEqualToString: apiUserAgentJoin],
+                  @"URLs should have matched [%@][%@]", self.remeshUrls.apiUserAgentJoin, apiUserAgentJoin);
 }
 
 @end

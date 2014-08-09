@@ -12,5 +12,7 @@
 
 @property (strong, nonatomic) NSString *baseUrl;
 @property (strong, nonatomic) NSString *apiTimeSyncUrl;
+@property (strong, nonatomic) NSString *apiUserAgent;
+@property (strong, nonatomic) NSString *apiUserAgentJoin;
 
 @end

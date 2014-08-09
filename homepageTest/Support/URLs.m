@@ -12,17 +12,12 @@
 
 - (id)init {
     self.baseUrl = @"http://54.210.29.136/";
-    self.apiTimeSyncUrl = [NSString stringWithFormat:@"%@%@", self.baseUrl, @"api/time/sync"];
-    //    self.api_time_sync_url = [NSString stringWithFormat:@"%@%@", self.base_url, @"http://54.210.29.136/api/time/sync"];
+    self.apiTimeSyncUrl   = [NSString stringWithFormat:@"%@%@", self.baseUrl, @"api/time/sync" ];
+    self.apiUserAgent     = [NSString stringWithFormat:@"%@%@", self.baseUrl, @"api/user/agent"];
+    self.apiUserAgentJoin = [NSString stringWithFormat:@"%@%@", self.baseUrl, @"api/user/agent/join"];
+    //    self. = [NSString stringWithFormat:@"%@%@", self.baseUrl, @""];
     return self;
 }
-
-//
-//
-
-//@"http://54.210.29.136/api/user/agent"
-//@"http://54.210.29.136/api/user/agent/join"
-
 //@"http://54.210.29.136/api/user/join"
 //@"http://54.210.29.136/api/user/login"
 //@"http://54.210.29.136/api/user/logout"
@@ -33,6 +28,4 @@
 //@"http://54.210.29.136/api/convos/thoughts"
 //@"http://54.210.29.136/api/convos/thoughts/choose"
 //@"http://54.210.29.136/api/convos/thoughts/send"
-//
-
 @end
