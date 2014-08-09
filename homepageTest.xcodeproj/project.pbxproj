@@ -374,7 +374,7 @@
 				ORGANIZATIONNAME = "Ibrahim Saeed";
 				TargetAttributes = {
 					8EECB435193CE7D2003BA82E = {
-						DevelopmentTeam = S79ZH842CG;
+						DevelopmentTeam = W4W3T44BFU;
 					};
 					8EECB456193CE7D2003BA82E = {
 						TestTargetID = 8EECB435193CE7D2003BA82E;
