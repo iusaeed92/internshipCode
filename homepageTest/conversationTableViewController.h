@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+
+
 @interface conversationTableViewController : UITableViewController {
    NSTimer *timer;
    int countDown;
@@ -17,6 +19,7 @@
 @property (strong, nonatomic) NSArray *currentAgent;
 @property (strong, nonatomic) NSIndexPath *path;
 @property (strong, nonatomic) NSString *agentID;
+@property (strong, nonatomic) NSString *accessToken;
 @property (strong, nonatomic) NSDate *serverCurrentDate;
 @property (nonatomic) NSTimeInterval offset;
 @property (nonatomic) BOOL turnToSpeak;

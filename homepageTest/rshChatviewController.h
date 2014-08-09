@@ -21,9 +21,9 @@
 @property (nonatomic) int transportCountDown;
 
 @property (strong, nonatomic) UIView *headerView;
+@property (strong, nonatomic) NSNumber *speakingStatus;
 
-@property (strong, nonatomic) UILabel *yourLabel;
-
+@property (nonatomic) int deltaT;
 @property (strong, nonatomic) NSArray *thisConversation;
 @property (strong, nonatomic) NSArray *Messages;
 @property (strong, nonatomic) NSArray *Choices;
@@ -36,10 +36,11 @@
 @property (strong, nonatomic) NSString *agentSign;
 @property (strong, nonatomic) NSString *agentNameForLabel;
 
-@property (strong, nonatomic) NSNumber *speakingStatus;
-
 @property (strong, nonatomic) NSDictionary *ChoicePair;
 @property (strong, nonatomic) NSDictionary *ChoiceOne;
-@property (strong, nonatomic) NSDictionary *ChoiceTwo; 
+@property (strong, nonatomic) NSDictionary *ChoiceTwo;
+@property (strong, nonatomic) UIView *blockUser;
+@property (strong, nonatomic) UILabel *yourLabel;
+@property (strong, nonatomic) UILabel *timeLabel;
 
 @end

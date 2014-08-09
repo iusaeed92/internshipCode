@@ -11,6 +11,7 @@
 #import <SSKeychain/SSKeychain.h>
 #import <AFNetworking/AFNetworking.h>
 #import "rshChatViewController.h"
+#import <SSKeychain/SSKeychain.h>
 
 @interface conversationTableViewController ()
 @end
@@ -32,50 +33,65 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
-    NSString *token = [SSKeychain passwordForService:@"Remesh" account:userName];
+    self.accessToken = [SSKeychain passwordForService:@"Remesh" account:userName];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.responseSerializer setAcceptableContentTypes:
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+
+    //loads convos a given agent is in. 
     
-    NSDictionary *parameters = @{@"accessToken": token, @"agentId" :self.agentID};
-    [manager POST:@"http://54.89.45.91/app/api/convos/agent" parameters:parameters
-          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              if ([responseObject[@"convos"] isKindOfClass:[NSArray class]]) {
-                  NSArray *jsonArray = (NSArray *)responseObject[@"convos"];
-                  self.convosArray = jsonArray;
-                  [self.tableView reloadData];
-              }
-          }
-          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              NSLog(@"Error: %@", error);
-          }
-     ];
+    NSDictionary *parameters = @{@"accessToken": self.accessToken, @"agentId" :self.agentID};
+    [manager POST:@"http://54.210.29.136/api/convos/agent" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSNumber *errorCode = [responseObject objectForKey:@"errorCode"];
+        NSLog(@"error:%@", errorCode);
+        if ([errorCode isEqual:[[NSNumber alloc] initWithInt:2]]) {
+            [self newAccesToken];
+        }
+        else {
+            NSLog(@"Convos %@", responseObject[@"convos"]);
+            if ([responseObject[@"convos"] isKindOfClass:[NSArray class]]) {
+                NSLog(@"its an array!");
+                NSArray *jsonArray = (NSArray *)responseObject[@"convos"];
+                NSLog(@"Number of elements %i", [jsonArray count]);
+                self.convosArray = jsonArray;
+                [self.tableView reloadData];
+            }
+      }
     
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+
+    
+    //getting server time from API
     AFHTTPRequestOperationManager *manage = [AFHTTPRequestOperationManager manager];
     [manage.responseSerializer setAcceptableContentTypes:
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
     NSDictionary *parameter = @{};
-    [manage POST:@"http://54.89.45.91/app/api/time/sync" parameters:parameter
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             NSString *serverTime = [responseObject[@"serverTime"] stringByAppendingString:@" +0300"];
-             NSLog(@"serveTime : %@", serverTime);
-             NSDateFormatter *oDateFormatter = [[NSDateFormatter alloc] init];
-             [oDateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"EST"]];
-             [oDateFormatter setDateFormat:@"yyyy - MM - dd HH:mm:ss Z"];
-             self.serverCurrentDate = [oDateFormatter dateFromString:serverTime];
-             self.offset = [self.serverCurrentDate timeIntervalSinceNow];
-         }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             NSLog(@"Error: %@", error);
-       }
-     ];
+   [manage POST:@"http://54.210.29.136/api/time/sync" parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSString *serverTime =
+        [[responseObject objectForKey:@"serverTime"] stringByAppendingString:@" +0300"];
+        NSLog(@"serveTime : %@", serverTime);
+        NSDateFormatter *oDateFormatter = [[NSDateFormatter alloc] init];
+        [oDateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"EST"]];
+        [oDateFormatter setDateFormat:@"yyyy - MM - dd HH:mm:ss Z"];
+        self.serverCurrentDate = [oDateFormatter dateFromString:serverTime];
+        self.offset = [self.serverCurrentDate timeIntervalSinceNow];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+  
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     countDown = 0;
     [timer invalidate];
+    [self viewDidLoad];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -87,7 +103,6 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -211,15 +226,39 @@
     chatVC.OponentName = oponentData[@"name"];
     chatVC.transportCountDown = CellForSegue.customCellCountdown;
     
+    NSNumber *speakingStatus = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"speaking"];
+    self.turnToSpeak = ([speakingStatus isEqual:[[NSNumber alloc] initWithInt:1]]) ? TRUE : FALSE;
     chatVC.agentSign = [oponentData[@"mind"] isEqual: @"mesh"] ? @"<" : @"@";
-
-    NSNumber *speakingStatus = (self.convosArray)[indexPath.row][@"speaking"];
-    self.turnToSpeak = [speakingStatus isEqual:@1];
-    
-    chatVC.title = (self.convosArray)[indexPath.row][@"topic"];
-    chatVC.turnToSpeak = self.turnToSpeak;
-    chatVC.speakingStatus = (self.convosArray)[indexPath.row][@"speaking"] ;
+    chatVC.title = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"topic"];
+    chatVC.turnToSpeak = self.turnToSpeak; 
+    chatVC.speakingStatus = [[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"speaking"] ;
     NSLog(@"Convo ID is %@", chatVC.thisConvoId);
+    chatVC.deltaT = [[[self.convosArray objectAtIndex:indexPath.row] objectForKey:@"deltaT"] intValue];
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+
+
+-(void)newAccesToken {
+   
+    NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
+    NSString *password = [SSKeychain passwordForService:@"Error_2" account:username];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.responseSerializer setAcceptableContentTypes:
+     [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
+    
+    NSDictionary *parameters = @{@"username": username, @"password" : password};
+    [manager POST:@"http://54.210.29.136/api/user/login"
+       parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  self.accessToken = responseObject[@"accessToken"];
+                  [SSKeychain setPassword:password forService:@"Error_2" account:username];
+                  [SSKeychain setPassword:self.accessToken forService:@"Remesh" account:username];
+                  [self viewDidLoad];
+              NSLog(@"JSON: %@", responseObject);
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+          }];
 }
 
 @end
