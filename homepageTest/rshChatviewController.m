@@ -40,7 +40,6 @@
         self.blockUser = [[UIView alloc] initWithFrame:CGRectMake(0, 430, self.view.frame.size.width, 260)];
         self.blockUser.backgroundColor = [UIColor remesh_GreenColor];
         [self.view addSubview:self.blockUser];
-        
         [self.messageInputView resignFirstResponder];
         self.yourLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, self.view.frame.size.width, 60)];
         [self.yourLabel setTextColor:[UIColor whiteColor]];
@@ -147,11 +146,13 @@ if (self.turnToSpeak == FALSE) {
                self.transportCountDown = self.deltaT; //messy, but i don't have any better ideas.
             self.turnToSpeak = FALSE;
             [self.messageInputView resignFirstResponder];
+            [self.view addSubview:self.blockUser];
             [self viewDidLoad];
             [self viewDidAppear:YES];
-            [self.view addSubview:self.blockUser];
-            [self.tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
+            [self.tableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 430)];
+            [self scrollTableViewToBottom]; 
             [self.timeLabel removeFromSuperview];
+
         }
         
         
@@ -176,6 +177,12 @@ if (self.turnToSpeak == FALSE) {
     
 -(void)viewDidDisappear:(BOOL)animated{
     [self.timeLabel removeFromSuperview];
+    
+}
+
+
+-(void)viewDidAppear:(BOOL)animated {
+    [self scrollTableViewToBottom];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -416,4 +423,9 @@ if (self.turnToSpeak == FALSE) {
               } ];
     }
 }
+
+-(void)scrollTableViewToBottom {
+    [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - self.tableView.bounds.size.height, self.tableView.bounds.size.width, self.tableView.bounds.size.height) animated:YES];
+}
+
 @end
