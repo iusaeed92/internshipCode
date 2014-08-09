@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface URLs : NSObject
+
 @property (strong, nonatomic) NSString *base_url;
 
 @end

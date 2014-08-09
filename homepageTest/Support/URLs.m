@@ -14,27 +14,23 @@
     self.base_url = @"http://54.210.29.136";
     return self;
 }
+
 //
-//@"http://54.210.29.136/api/user/agent"
-//@"http://54.210.29.136/api/user/agent/join"
-//@"http://54.210.29.136/api/user/agent/join"
-//@"http://54.210.29.136/api/user/logout"
-//@"http://54.210.29.136/api/user/login"
-//@"http://54.210.29.136/api/user/agent"
-//@"http://54.210.29.136/api/convos/agent"
 //@"http://54.210.29.136/api/time/sync"
-//@"http://54.210.29.136/api/user/login"
+
+//@"http://54.210.29.136/api/user/agent"
+//@"http://54.210.29.136/api/user/agent/join"
+
 //@"http://54.210.29.136/api/user/join"
-//@"http://54.210.29.136/api/convos/messages/real"
-//@"http://54.210.29.136/api/convos/thoughts/send"
-//@"http://54.210.29.136/api/convos/thoughts/choose"
-//@"http://54.210.29.136/api/convos/thoughts"
-//@"http://54.210.29.136/api/convos/thoughts/choose"
-//@"http://54.210.29.136/api/convos/thoughts"
 //@"http://54.210.29.136/api/user/login"
+//@"http://54.210.29.136/api/user/logout"
+
+//@"http://54.210.29.136/api/convos/messages/real"
+
+//@"http://54.210.29.136/api/convos/agent"
+//@"http://54.210.29.136/api/convos/thoughts"
+//@"http://54.210.29.136/api/convos/thoughts/choose"
+//@"http://54.210.29.136/api/convos/thoughts/send"
 //
-- (NSString *)remeshBaseURL {
-    return self.base_url;
-}
 
 @end

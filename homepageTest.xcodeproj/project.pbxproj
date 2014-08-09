@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2EA98F10F9B14165B09E5587 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A04F3944E09F40609282EF7C /* libPods.a */; };
+		3B004C981996B2CB00F51BEF /* URLsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B004C971996B2CB00F51BEF /* URLsTests.m */; };
 		3B0CE4011995B210004972CC /* URLs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B0CE4001995B210004972CC /* URLs.m */; };
 		3B0CE4021995B210004972CC /* URLs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B0CE4001995B210004972CC /* URLs.m */; };
 		600F71B01976C22500DA77EE /* mask_green_60x60-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 600F71AF1976C22500DA77EE /* mask_green_60x60-01.png */; };
@@ -72,6 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B004C971996B2CB00F51BEF /* URLsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLsTests.m; sourceTree = "<group>"; };
 		3B0CE3FF1995B210004972CC /* URLs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLs.h; sourceTree = "<group>"; };
 		3B0CE4001995B210004972CC /* URLs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLs.m; sourceTree = "<group>"; };
 		600F71AF1976C22500DA77EE /* mask_green_60x60-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask_green_60x60-01.png"; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				8EECB464193CE7D2003BA82E /* homepageTestTests.m */,
+				3B004C971996B2CB00F51BEF /* URLsTests.m */,
 				8EECB45F193CE7D2003BA82E /* Supporting Files */,
 			);
 			path = homepageTestTests;
@@ -388,10 +391,7 @@
 				ORGANIZATIONNAME = "Ibrahim Saeed";
 				TargetAttributes = {
 					8EECB435193CE7D2003BA82E = {
-						DevelopmentTeam = S79ZH842CG;
-					};
-					8EECB456193CE7D2003BA82E = {
-						TestTargetID = 8EECB435193CE7D2003BA82E;
+						DevelopmentTeam = W4W3T44BFU;
 					};
 				};
 			};
@@ -520,6 +520,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EECB465193CE7D2003BA82E /* homepageTestTests.m in Sources */,
+				3B004C981996B2CB00F51BEF /* URLsTests.m in Sources */,
 				3B0CE4021995B210004972CC /* URLs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -671,7 +672,6 @@
 		8EECB46C193CE7D2003BA82E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/homepageTest.app/homepageTest";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -686,7 +686,6 @@
 				);
 				INFOPLIST_FILE = "homepageTestTests/homepageTestTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -694,7 +693,6 @@
 		8EECB46D193CE7D2003BA82E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/homepageTest.app/homepageTest";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -705,7 +703,6 @@
 				GCC_PREFIX_HEADER = "homepageTest/homepageTest-Prefix.pch";
 				INFOPLIST_FILE = "homepageTestTests/homepageTestTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
