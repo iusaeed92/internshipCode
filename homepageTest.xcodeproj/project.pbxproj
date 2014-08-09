@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2EA98F10F9B14165B09E5587 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A04F3944E09F40609282EF7C /* libPods.a */; };
+		3B0CE4011995B210004972CC /* URLs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B0CE4001995B210004972CC /* URLs.m */; };
+		3B0CE4021995B210004972CC /* URLs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B0CE4001995B210004972CC /* URLs.m */; };
 		600F71B01976C22500DA77EE /* mask_green_60x60-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 600F71AF1976C22500DA77EE /* mask_green_60x60-01.png */; };
 		600F71B21976C45200DA77EE /* mask_white_60x60-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 600F71B11976C45200DA77EE /* mask_white_60x60-01.png */; };
 		600F71B61976CCF200DA77EE /* mask_white_40x40.ai in Resources */ = {isa = PBXBuildFile; fileRef = 600F71B51976CCF200DA77EE /* mask_white_40x40.ai */; };
@@ -70,6 +72,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B0CE3FF1995B210004972CC /* URLs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLs.h; sourceTree = "<group>"; };
+		3B0CE4001995B210004972CC /* URLs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLs.m; sourceTree = "<group>"; };
 		600F71AF1976C22500DA77EE /* mask_green_60x60-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask_green_60x60-01.png"; sourceTree = "<group>"; };
 		600F71B11976C45200DA77EE /* mask_white_60x60-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask_white_60x60-01.png"; sourceTree = "<group>"; };
 		600F71B51976CCF200DA77EE /* mask_white_40x40.ai */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mask_white_40x40.ai; sourceTree = "<group>"; };
@@ -166,6 +170,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B0CE3FE1995B1AA004972CC /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				3B0CE3FF1995B210004972CC /* URLs.h */,
+				3B0CE4001995B210004972CC /* URLs.m */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 		60280778197DA79700FA0D1B /* Helo Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +258,7 @@
 		8EECB43F193CE7D2003BA82E /* homepageTest */ = {
 			isa = PBXGroup;
 			children = (
+				3B0CE3FE1995B1AA004972CC /* Support */,
 				60280778197DA79700FA0D1B /* Helo Controllers */,
 				607EC9F21961B71A00E73FD0 /* Custom Cell */,
 				8EECB448193CE7D2003BA82E /* rshAppDelegate.h */,
@@ -481,6 +495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B0CE4011995B210004972CC /* URLs.m in Sources */,
 				60DE419A195898C500F3E4A2 /* Agent.m in Sources */,
 				8EECB44A193CE7D2003BA82E /* rshAppDelegate.m in Sources */,
 				8E3CEFFD19637465001F3DB9 /* RootViewController.m in Sources */,
@@ -505,6 +520,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EECB465193CE7D2003BA82E /* homepageTestTests.m in Sources */,
+				3B0CE4021995B210004972CC /* URLs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

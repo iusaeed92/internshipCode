@@ -54,7 +54,7 @@
             if ([responseObject[@"convos"] isKindOfClass:[NSArray class]]) {
                 NSLog(@"its an array!");
                 NSArray *jsonArray = (NSArray *)responseObject[@"convos"];
-                NSLog(@"Number of elements %i", [jsonArray count]);
+                NSLog(@"Number of elements %lu", (unsigned long)[jsonArray count]);
                 self.convosArray = jsonArray;
                 [self.tableView reloadData];
             }
