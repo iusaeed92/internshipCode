@@ -51,4 +51,28 @@
                   @"URLs should have matched [%@][%@]", self.remeshUrls.apiUserAgentJoin, apiUserAgentJoin);
 }
 
+- (void)testApiUserJoin {
+    NSString *apiUserJoin = [NSString stringWithFormat:@"%@%@", self.testBaseUrl, @"api/user/join"];
+    XCTAssertTrue([self.remeshUrls.apiUserJoin isEqualToString: apiUserJoin],
+                  @"URLs should have matched [%@][%@]", self.remeshUrls.apiUserJoin, apiUserJoin);
+}
+
+- (void)testApiUserLogin {
+    NSString *apiUserLogin = [NSString stringWithFormat:@"%@%@", self.testBaseUrl, @"api/user/login"];
+    XCTAssertTrue([self.remeshUrls.apiUserLogin isEqualToString: apiUserLogin],
+                  @"URLs should have matched [%@][%@]", self.remeshUrls.apiUserLogin, apiUserLogin);
+}
+
+- (void)testApiUserLogout {
+    NSString *apiUserLogout = [NSString stringWithFormat:@"%@%@", self.testBaseUrl, @"api/user/logout"];
+    XCTAssertTrue([self.remeshUrls.apiUserLogout isEqualToString: apiUserLogout],
+                  @"URLs should have matched [%@][%@]", self.remeshUrls.apiUserLogout, apiUserLogout);
+}
+
+//self.apiConvosAgent          = [NSString stringWithFormat:@"%@%@", self.baseUrl, @"api/convos/agent"];
+//self.apiConvosMessagesReal   = [NSString stringWithFormat:@"%@%@", self.baseUrl, @"api/convos/messages/real"];
+//self.apiConvosThoughts       = [NSString stringWithFormat:@"%@%@", self.baseUrl, @"api/convos/thoughts"];
+//self.apiConvosThoughtsChoose = [NSString stringWithFormat:@"%@%@", self.baseUrl, @"api/convos/thoughts/choose"];
+//self.apiConvosThoughtsSend   = [NSString stringWithFormat:@"%@%@", self.baseUrl, @"api/convos/thoughts/send"];
+
 @end

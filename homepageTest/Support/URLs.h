@@ -15,4 +15,14 @@
 @property (strong, nonatomic) NSString *apiUserAgent;
 @property (strong, nonatomic) NSString *apiUserAgentJoin;
 
+@property (strong, nonatomic) NSString *apiUserJoin;
+@property (strong, nonatomic) NSString *apiUserLogin;
+@property (strong, nonatomic) NSString *apiUserLogout;
+
+@property (strong, nonatomic) NSString *apiConvosAgent;
+@property (strong, nonatomic) NSString *apiConvosMessagesReal;
+@property (strong, nonatomic) NSString *apiConvosThoughts;
+@property (strong, nonatomic) NSString *apiConvosThoughtsChoose;
+@property (strong, nonatomic) NSString *apiConvosThoughtsSend;
+
 @end
