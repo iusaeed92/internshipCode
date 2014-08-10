@@ -69,10 +69,34 @@
                   @"URLs should have matched [%@][%@]", self.remeshUrls.apiUserLogout, apiUserLogout);
 }
 
-//self.apiConvosAgent          = [NSString stringWithFormat:@"%@%@", self.baseUrl, @"api/convos/agent"];
-//self.apiConvosMessagesReal   = [NSString stringWithFormat:@"%@%@", self.baseUrl, @"api/convos/messages/real"];
-//self.apiConvosThoughts       = [NSString stringWithFormat:@"%@%@", self.baseUrl, @"api/convos/thoughts"];
-//self.apiConvosThoughtsChoose = [NSString stringWithFormat:@"%@%@", self.baseUrl, @"api/convos/thoughts/choose"];
-//self.apiConvosThoughtsSend   = [NSString stringWithFormat:@"%@%@", self.baseUrl, @"api/convos/thoughts/send"];
+- (void)testApiConvosAgent {
+    NSString *apiConvosAgent = [NSString stringWithFormat:@"%@%@", self.testBaseUrl, @"api/convos/agent"];
+    XCTAssertTrue([self.remeshUrls.apiConvosAgent isEqualToString: apiConvosAgent],
+                  @"URLs should have matched [%@][%@]", self.remeshUrls.apiConvosAgent, apiConvosAgent);
+}
+
+- (void)testApiConvosMesssagesReal {
+    NSString *apiConvosMessagesReal = [NSString stringWithFormat:@"%@%@", self.testBaseUrl, @"api/convos/messages/real"];
+    XCTAssertTrue([self.remeshUrls.apiConvosMessagesReal isEqualToString: apiConvosMessagesReal],
+                  @"URLs should have matched [%@][%@]", self.remeshUrls.apiConvosMessagesReal, apiConvosMessagesReal);
+}
+
+- (void)testApiConvosThoughts {
+    NSString *apiConvosThoughts = [NSString stringWithFormat:@"%@%@", self.testBaseUrl, @"api/convos/thoughts"];
+    XCTAssertTrue([self.remeshUrls.apiConvosThoughts isEqualToString: apiConvosThoughts],
+                  @"URLs should have matched [%@][%@]", self.remeshUrls.apiConvosThoughts, apiConvosThoughts);
+}
+
+- (void)testApiConvosThoughtsChoose {
+    NSString *apiConvosThoughtsChoose = [NSString stringWithFormat:@"%@%@", self.testBaseUrl, @"api/convos/thoughts/choose"];
+    XCTAssertTrue([self.remeshUrls.apiConvosThoughtsChoose isEqualToString: apiConvosThoughtsChoose],
+                  @"URLs should have matched [%@][%@]", self.remeshUrls.apiConvosThoughtsChoose, apiConvosThoughtsChoose);
+}
+
+- (void)testApiConvosThoughtsSend {
+    NSString *apiConvosThoughtsSend = [NSString stringWithFormat:@"%@%@", self.testBaseUrl, @"api/convos/thoughts/send"];
+    XCTAssertTrue([self.remeshUrls.apiConvosThoughtsSend isEqualToString: apiConvosThoughtsSend],
+                  @"URLs should have matched [%@][%@]", self.remeshUrls.apiConvosThoughtsSend, apiConvosThoughtsSend);
+}
 
 @end
