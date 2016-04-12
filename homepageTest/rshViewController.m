@@ -141,8 +141,12 @@ int x = 1;
     [manager.responseSerializer setAcceptableContentTypes:
      [NSSet setWithObjects:@"application/json", @"application/xml", @"text/html", nil]];
     
+    //  [manager POST:@"http://54.210.29.136/api/user/login"
+    //https://remesh.xyz/api/user/login
+    
+    
     NSDictionary *parameters = @{@"username": username, @"password" : password};
-    [manager POST:@"http://54.210.29.136/api/user/login"
+    [manager POST:@"https://remesh.xyz/api/org/user/login"
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSNumber *errorCode = responseObject[@"errorCode"];

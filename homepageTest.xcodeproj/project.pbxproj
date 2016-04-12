@@ -645,6 +645,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "homepageTest/homepageTest-Prefix.pch";
 				INFOPLIST_FILE = "homepageTest/homepageTest-Info.plist";
+				New_Setting = "";
 				PRODUCT_NAME = Remesh;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -663,6 +664,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "homepageTest/homepageTest-Prefix.pch";
 				INFOPLIST_FILE = "homepageTest/homepageTest-Info.plist";
+				New_Setting = "";
 				PRODUCT_NAME = Remesh;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

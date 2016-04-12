@@ -10,29 +10,29 @@
 	<string>homepageTest</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>38A3F475-9CB2-4C8F-9023-C214C76EA226</key>
+		<key>98C715535285ECB481C8974F5E3CAC0E864AD022</key>
 		<string>https://github.com/Remesh/ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>homepageTest.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>38A3F475-9CB2-4C8F-9023-C214C76EA226</key>
+		<key>98C715535285ECB481C8974F5E3CAC0E864AD022</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/Remesh/ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>38A3F475-9CB2-4C8F-9023-C214C76EA226</string>
+	<string>98C715535285ECB481C8974F5E3CAC0E864AD022</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>38A3F475-9CB2-4C8F-9023-C214C76EA226</string>
+			<string>98C715535285ECB481C8974F5E3CAC0E864AD022</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ios</string>
 		</dict>
